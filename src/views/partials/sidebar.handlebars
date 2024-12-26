@@ -1,0 +1,86 @@
+{{!-- menu lateral - sidebar --}}
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <img src="/assets/images/logotipoECHODetails.png" height="100px" alt="">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr>
+  <div class="offcanvas-body">
+    {{!-- Funcionalidades de administradores --}}
+    <div class="tools-admin">
+      <a href="/admin/dashboard">
+        <div class="tool">
+        <div>
+            <span class="material-symbols-outlined">
+                monitoring
+            </span>
+        </div>
+        <div class="link">
+          <h4>Dashboard</h4>
+        </div>
+      </div>
+      </a>
+      <a href="/admin/manageUsers">
+      <div class="tool">
+          <div>
+            <span class="material-symbols-outlined">
+                manage_accounts
+            </span>
+          </div>
+          <div class="link">
+            <h4>Gerenciar Usuários</h4>
+          </div>
+      </div>
+      </a>
+      <a href="/admin/managePosts">
+        <div class="tool">
+            <div>
+              <span class="material-symbols-outlined">
+                  post_add
+              </span>
+            </div>
+            <div class="link">
+              <h4>Gerenciar Publicações</h4>
+            </div>
+        </div>
+      </a>
+      <a href="/admin/generalVision">
+        <div class="tool">
+            <div>
+              <span class="material-symbols-outlined">
+                  visibility
+              </span>
+            </div>
+            <div class="link">
+              <h4>Visão geral da aplicação</h4>
+            </div>
+        </div>
+      </a>
+    </div>
+    <hr>
+    {{!-- Sessão de lista de admins --}}
+    <div class="admin-list">
+        <div class="">
+            <span class="material-symbols-outlined icon">
+                groups
+            </span>
+        </div>
+        <div>
+            <h4>Lista de Administradores</h4>
+        </div>
+    </div>
+    {{!-- Lista de admins no sistema --}}
+    <div class="list Admins">
+        <div class="tool">
+            <div>
+                <span class="material-symbols-outlined">
+                    local_police
+                </span>
+            </div>
+            <div>
+                <h4>Nome do admin</h4>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

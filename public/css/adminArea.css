@@ -1,0 +1,104 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #0a6bc0;
+}
+.sidebar{
+    color: rgb(255, 255, 255);
+    font-size: 3vw;
+    cursor: pointer;
+}
+.headerAdm{
+    background-color: #035AA6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 15vh;
+    padding: 5px;
+    box-shadow: 0px 3px 9px #041321;
+}
+.btnExit{
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+    background-color: #123F67;
+    color: white;
+    border: 1px solid white;
+    font-size: 1.5vw;
+    border-radius: 10px;
+}
+.btnExit:hover{
+    box-shadow: -1px 2px 6px;
+    transition: .4s;
+}
+.leftContent{
+    display: flex;
+    align-items: center;
+}
+.adminName h2{
+    color: white;
+}
+#content-main{
+    margin-top: 40px;
+}
+.tool{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: .4s ease-in-out;
+}
+.tools-admin a{
+    text-decoration: none;
+    color: white;
+}
+.tool:hover{
+    background-color: #0a6bc0;
+}
+.offcanvas{
+    background-color: #00203D;
+    color: white;
+}
+.tools-admin{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.btn-close{
+    background-color: red;
+}
+.admin-list{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    flex-direction: column;
+}
+.admin-list .icon{
+    font-size: 4vw;
+}
+.list{
+    background-color: #123F67;
+    border-radius: 5px;
+}
+
+/* tools de admin */
+.containerTop{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: white;
+    padding: 10px;
+}
+.textContainer h4{
+    font-size: 4vw;
+}
+.iconContainer .iconDash{
+    font-size: 3vw;
+}

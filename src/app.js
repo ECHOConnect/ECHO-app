@@ -56,7 +56,7 @@
         app.set('views', path.resolve('src', 'views'));
 
     //Config. de caminho padrão para pastas estáticas
-        app.use(express.static(path.join(__dirname, 'public')))
+        app.use(express.static(path.join(__dirname, '../public')))
 
     //Config. de conexão com o banco de dados
         mongoose.Promise = global.Promise
