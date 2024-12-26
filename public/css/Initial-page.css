@@ -10,9 +10,11 @@ body{
     display: flex;
     justify-content: space-between;
     width: auto;
-    height: auto;
     background-color: #035AA6;
     margin-bottom: 5px;
+    height: 15vh;
+    position: sticky;
+    top: 0;
 }
 #Logo{
     display: flex;
@@ -121,7 +123,7 @@ body{
     flex-direction: column;
     align-items: center;
 }
-span{
+.line{
     display: flex;
     background-color: white;
     width: 0.1vw;
@@ -177,7 +179,7 @@ span{
         flex-direction: row;
         gap: 4vw;
     }
-    span{
+    .line{
         height: 0.1vw;
         Width: 80vw;
         margin: 20px;

@@ -16,7 +16,7 @@
     //Rotas de usuários
     import userRouter from './routes/userRoutes/userRoutes.js'
 
-//Importando configurações
+//Importando configurações e middlewares
 
     //Acessando as configurações do dotenv
         dotenv.config()
@@ -26,6 +26,9 @@
     
     //Configurações de conexão com o banco de dados
         import configDB from './config/db.js'
+    
+    //Middleware de condição de header
+        import conditionHeader from './middleware/condition.js'
 
 //Configurações
 
@@ -62,6 +65,9 @@
         mongoose.Promise = global.Promise
         configDB()
 
+    //Middleware de condição de header
+        conditionHeader(app)
+        
 //ROTAS
     //Rotas de administradores
         app.use('/admin', adminRoute)
