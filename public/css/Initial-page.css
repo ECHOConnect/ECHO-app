@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Maitree:wght@200;300;400;500;600;700&display=swap');
+
+body{
+    object-fit: cover;
+    background-color: #6F9FC9;
+    margin: 0%;
+    font-family: 'Inter';
+}
+#Header{
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+    background-color: #035AA6;
+    margin-bottom: 5px;
+}
+#Logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3vw ;
+    padding-left: 30px;
+}
+#Options{
+    display: flex;
+    gap: 4vw;
+    padding-right: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5vw;
+}
+#Login_signin_btn{
+    width: 10.5vw;
+    height:3vw;
+    background-color: #0475D9;
+    color: white;
+    border-radius: 13px;
+    border: solid 1px white;
+    font-size: 1.25vw;;
+}
+#Register{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    background-color: #035AA6;
+    align-items: center;
+    justify-content: center;
+}
+#Register h1{
+    color: white;
+    font-size: 3vw;
+    margin: 100px 0 0 0;
+}
+#Btns{
+    display: flex;
+    align-items: center;
+    gap: 140px;
+    margin: 90px 0 50px 0;
+}
+.Btn_register{
+    background-color: #B65A96;
+    color: white;
+    font-size: 1.4vw;
+    width: 10vw;
+    height: 3vw;
+    border: none;
+}
+#Descrition{
+    display: flex;
+    flex-grow: 1;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../assets/images/Background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 1vw;
+}
+#Descrition #img_desc{
+    width: 40vw;
+    height: auto;
+}
+
+
+
+
+
+@media (max-width: 550px){
+    #Options .Text_Options{
+        display: none;
+    }
+    #Logo{
+        font: 7vw Solid;
+    }
+    #Login_signin_btn{
+        width: 25vw;
+        height: 10vw;
+        font-size: 3vw;
+        margin: 10px 0 10px 0;
+    }
+    #Register h1{
+        font-size: 4vw;
+    }
+    .Btn_register{
+        width: 20vw;
+        height: 6vw;
+        font-size: 3vw;
+    }
+    #Descrition{
+        flex-direction: column;
+    }
+    #Descrition h1{
+        margin: 20px;
+        font-size: 3.5  vw;
+    }
+    
+
+}
