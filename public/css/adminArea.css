@@ -102,3 +102,16 @@ body{
 .iconContainer .iconDash{
     font-size: 3vw;
 }
+.card-body{
+    position: relative;
+}
+.iconSearch{
+    position: absolute;
+    top: 48px;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    font-size: 2vw;
+    background-color: transparent;
+    border: 0;
+}
