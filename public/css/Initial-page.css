@@ -87,7 +87,46 @@ body{
     width: 40vw;
     height: auto;
 }
+#Footer{
+    background-color:#035AA6;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 1vw;
+}
+#Footer h2{
+    font-size: 1.5vw;
+    color: white;
+    margin:0.7vw 0 0.7vw 0;
+}
+#Footer h3{
+    font-size: 0.9vw;
+    color: white;
+}
+#Informations{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+#imgs-follow{
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
 
+#Links, #Developers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+span{
+    display: flex;
+    background-color: white;
+    width: 0.1vw;
+    height: 13vw;
+}
 
 
 
@@ -117,9 +156,43 @@ body{
         flex-direction: column;
     }
     #Descrition h1{
-        margin: 20px;
-        font-size: 3.5  vw;
+        margin: 15px;
+        font-size: 3vw;
+        text-align: center;
     }
-    
+    #Footer{
+        flex-direction: column;
+        padding-top: 4vw;
+    }
+    #Footer h2{
+        font-size: 5vw;
+        color: white;
+        margin:0.7vw 0 0.7vw 0;
+    }
+    #Footer h3{
+        font-size: 3.5vw;
+        color: white;
+    }
+    #Links{
+        flex-direction: row;
+        gap: 4vw;
+    }
+    span{
+        height: 0.1vw;
+        Width: 80vw;
+        margin: 20px;
+    }
+    #Follow img{
+        width: 7vw;
+    }
+    #Developers img{
+        width: 25vw;
+    }
+    #Informations, #About, h3{
+        text-align: center;
+    }
+    #imgs-follow{
+        justify-content: center;
+    }
 
 }
