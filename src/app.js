@@ -11,7 +11,11 @@
 //Importando rotas
 
     //Rotas de administradores
-    import adminRoute from './routes/adminRoutes/mainRoute.js'
+        //Rota de painel de admin
+            import adminRoute from './routes/adminRoutes/mainRoute.js'
+        //Rota de forúm
+            import forumRouter from './routes/adminRoutes/forumRoute.js'
+
 
     //Rotas de usuários
     import userRouter from './routes/userRoutes/userRoutes.js'
@@ -51,7 +55,12 @@
         app.use(urlencoded({extended: true}))
     
     //Config. do handlebars para páginas dinâmicas
-        app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
+        app.engine('handlebars', handlebars.engine({defaultLayout: 'main', 
+            runtimeOptions: {
+                allowProtoPropertiesByDefault: true,
+                allowProtoMethodsByDefault: true,
+            }
+        }))
         app.set('view engine', 'handlebars')
         app.set('views', path.resolve('src', 'views'));
 
@@ -64,7 +73,10 @@
 
 //ROTAS
     //Rotas de administradores
-        app.use('/admin', adminRoute)
+        //Rotas de painel de admin
+            app.use('/admin', adminRoute)
+        //Rota de forúm
+            app.use('/admin', forumRouter)
     
     //Rotas de usuários
         app.use('/user', userRouter)

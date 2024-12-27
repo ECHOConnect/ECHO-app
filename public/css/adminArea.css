@@ -19,6 +19,9 @@ body{
     height: 15vh;
     padding: 5px;
     box-shadow: 0px 3px 9px #041321;
+    position: sticky;
+    top: 0;
+    z-index: 9;
 }
 .btnExit{
     cursor: pointer;
@@ -114,4 +117,74 @@ body{
     font-size: 2vw;
     background-color: transparent;
     border: 0;
+}
+
+/*Forúm echo*/
+.containerForum{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px
+}
+.containerForum .iconForum{
+    font-size: 3vw;
+    animation: animateIconForum infinite 2s;
+}
+.cardSTopic{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+}
+.iconSearchTopic{
+    position: absolute;
+    top: 0;
+    left: -30px;
+    cursor: pointer;
+}
+.containerMsgForm{
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden;
+    visibility: hidden;
+    transition: .4s ease-in-out;
+    font-size: 0;
+}
+.containerMsgForm.openChat{
+    height: 30vh !important;
+    width: 100% !important;
+    overflow: visible;
+    visibility: visible;
+    font-size: 2vw;
+}
+.cardMsg{
+    z-index: 9;
+}
+/* .cardPostForm{
+    background-color: #035AA6;
+    color: white;
+}
+.post{
+    background-color: #123F67;
+}
+.contentResponses{
+    background-color: #123F67;
+    color: white;
+    border: 1px solid white;
+}
+.cardDigitResp{
+    background-color: #123F67;
+} */
+.textarea ::placeholder{
+    color: white;
+}
+@keyframes animateIconForum {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
 }
