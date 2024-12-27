@@ -21,7 +21,7 @@ body{
     box-shadow: 0px 3px 9px #041321;
     position: sticky;
     top: 0;
-    z-index: 9;
+    z-index: 99;
 }
 .btnExit{
     cursor: pointer;
@@ -159,9 +159,10 @@ body{
 .cardMsg{
     z-index: 9;
 }
-/* .cardPostForm{
+ .cardPostForm{
     background-color: #035AA6;
     color: white;
+    border-bottom: 2px solid #000;
 }
 .post{
     background-color: #123F67;
@@ -173,10 +174,49 @@ body{
 }
 .cardDigitResp{
     background-color: #123F67;
-} */
-.textarea ::placeholder{
-    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+.textR{
+    color: rgb(255, 255, 255)3F67;
+    width: 100%;
 }
+.textR::placeholder{
+    color: rgb(255, 255, 255);
+}
+.resp, .textR{
+    padding: 0px 15px 25px;
+}
+.resps{
+    height: 0;
+    overflow: hidden;
+    transition: .4s ease-in-out;
+}
+.resps.ativeResps{
+    height: 55vh;
+    overflow: visible;
+    overflow-y: scroll;
+}
+.reps.ativeResps .resp{
+    height: 300px;
+    overflow: visible;
+}
+.reps .resp{
+    height: 0;
+    overflow: hidden;
+}
+.iconSend{
+    font-size: 3vw;
+}
+.btnResp:hover .iconResp{
+    animation: animateIconForum .4s ease-in-out;
+}
+.responses-container{
+    z-index: 9;
+    position: relative;
+}
+
 @keyframes animateIconForum {
     0%{
         transform: translateY(0px);

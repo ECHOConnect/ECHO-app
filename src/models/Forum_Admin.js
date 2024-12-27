@@ -13,8 +13,12 @@ const ForumPostSchema = new Schema({
     dataCriacao: {
         type: Date,
         default: Date.now
-    }
+    }, 
+    respostas: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'responsesForum'
+    }]
 })
 
-const forumPost = mongoose.model('ForumPost', ForumPostSchema)
-export default forumPost
+const ForumPost = mongoose.model('ForumPost', ForumPostSchema)
+export default ForumPost

@@ -4,6 +4,7 @@
     import handlebars from 'express-handlebars'
     import { fileURLToPath } from 'url'
     import path from 'path'
+    import hbs from 'handlebars'
     import mongoose from 'mongoose'
     import flash from 'connect-flash'
     const app = express()
@@ -70,6 +71,11 @@
     //Config. de conexão com o banco de dados
         mongoose.Promise = global.Promise
         configDB()
+
+    //helper de condições complexas para o handlebars
+    hbs.registerHelper('eq', function (a, b) {
+        return a.toString() === b.toString();
+    });
 
 //ROTAS
     //Rotas de administradores
