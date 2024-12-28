@@ -4,6 +4,7 @@
     import handlebars from 'express-handlebars'
     import { fileURLToPath } from 'url'
     import path from 'path'
+    import hbs from 'handlebars'
     import mongoose from 'mongoose'
     import flash from 'connect-flash'
     const app = express()
@@ -11,7 +12,11 @@
 //Importando rotas
 
     //Rotas de administradores
-    import adminRoute from './routes/adminRoutes/mainRoute.js'
+        //Rota de painel de admin
+            import adminRoute from './routes/adminRoutes/mainRoute.js'
+        //Rota de forúm
+            import forumRouter from './routes/adminRoutes/forumRoute.js'
+
 
     //Rotas de usuários
     import userRouter from './routes/userRoutes/userRoutes.js'
@@ -57,7 +62,12 @@
         app.use(urlencoded({extended: true}))
     
     //Config. do handlebars para páginas dinâmicas
-        app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
+        app.engine('handlebars', handlebars.engine({defaultLayout: 'main', 
+            runtimeOptions: {
+                allowProtoPropertiesByDefault: true,
+                allowProtoMethodsByDefault: true,
+            }
+        }))
         app.set('view engine', 'handlebars')
         app.set('views', path.resolve('src', 'views'));
 
@@ -71,9 +81,17 @@
     //Middleware de condição de header
         conditionHeader(app)
         
+    //helper de condições complexas para o handlebars
+    hbs.registerHelper('eq', function (a, b) {
+        return a.toString() === b.toString();
+    });
+
 //ROTAS
     //Rotas de administradores
-        app.use('/admin', adminRoute)
+        //Rotas de painel de admin
+            app.use('/admin', adminRoute)
+        //Rota de forúm
+            app.use('/admin', forumRouter)
     
     //Rotas de usuários
         app.use('/user', userRouter)

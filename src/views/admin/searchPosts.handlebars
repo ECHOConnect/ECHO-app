@@ -1,0 +1,119 @@
+{{! Topo com o nome e o ícone animado }}
+<div class="container containerForum mt-4 text-light w-100">
+  <div>
+    <span class="material-symbols-outlined iconForum">forum</span>
+  </div>
+  <div>
+    <h3>ECHO Forúm</h3>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <form action="/admin/forumAdmin/search" method="get">
+    <div class="card cardSTopic d-flex w-100 p-3">
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="searchTopic">Buscar por tópico</label>
+          <input type="text" name="q" id="searchTopic" class="form-control" />
+        </div>
+        <button class="iconSearch" type="submit">
+          <span class="material-symbols-outlined iconSearchTopic">search</span>
+        </button>
+      </div>
+      <div>
+        <button type="button" onclick="ativeChat()" class="btn btn-success">Novo Tópico?</button>
+      </div>
+    </div>
+  </form>
+  <div class="container containerMsgForm" id="containerMsgForum">
+    <form action="/admin/forumAdmin/search" method="get">
+      <div class="card cardMsg p-3">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="topic">Escreva o Tópico</label>
+            <input type="text" placeholder="Assunto da mensagem..." class="form-control" name="titulo" id="msg" />
+          </div>
+          <div class="mb-3">
+            <label for="msg">Escreva a mensagem</label>
+            <textarea name="conteudo" class="form-control" placeholder="Mensagem..." id="msg"></textarea>
+          </div>
+        </div>
+        <div class="w-100 d-flex justify-content-center">
+          <button type="submit" class="btn btn-success">Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container mt-4 text-light w-100 d-flex justify-content-center">
+  <h2>Mensagens</h2>
+</div>
+
+{{#if hasResults}}
+  <div class="container">
+    {{#each posts}}
+      <div class="card post mt-4 gap-3">
+        <div class="card cardPostForm">
+          <div class="card-header">
+            <h3>{{this.titulo}}</h3>
+          </div>
+          <div class="body p-3">
+            <p>{{this.conteudo}}</p>
+          </div>
+          <div class="card-footer">
+            <small>{{this.dataCriacao}}</small>
+          </div>
+        </div>
+
+        {{! Respostas }}
+        <div class="container btnResp d-flex w-100 d-flex justify-content-center">
+          <button onclick="openResps('{{this._id}}')" class="text-light bg-transparent btn">
+            <span class="material-symbols-outlined iconResp">mode_comment</span>
+            <h3>Respostas...</h3>
+          </button>
+          <div class="text-light container">
+            <form action="/admin/forumAdmin/{{this._id}}/respostas" method="post">
+              <div class="responses-container">
+                <div class="container border-secondary cardDigitResp">
+                  <div class="textarea w-100">
+                    <textarea name="conteudo" placeholder="Responda algo sobre isso..." class="form-control text-light bg-dark textR" id="resposta"></textarea>
+                  </div>
+                  <div class="btnSend">
+                    <button type="submit" class="btn text-light">
+                      <span title="Enviar" class="material-symbols-outlined iconSend">send</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="resps" id="resp-{{this._id}}">
+          {{#each respostas}}
+            <hr class="text-light">
+             
+            {{#if  (eq this.postId this.postId)}}  <!-- Comparação entre postId da resposta e _id do post -->
+              <div class="container resp mt-4 w-90">
+                <div class="card border-primary contentResponses">
+                  <div class="card-header">
+                    Nome de quem respondeu
+                  </div>
+                  <div class="card-body">
+                    Resposta ao post: {{this.conteudo}}
+                  </div>
+                  <div class="card-footer">
+                    <small>Data: {{this.dataCriacao}}</small>
+                  </div>
+                </div>
+              </div>
+            {{else}}
+                ...
+            {{/if}}
+          {{/each}}
+        </div>
+    {{else}}
+  {{/each}}
+  <p>........</p>
+{{/if}}
