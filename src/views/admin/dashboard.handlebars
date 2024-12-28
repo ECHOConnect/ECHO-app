@@ -15,8 +15,61 @@
         <div class="card-header">
             <h4>Dados de Usuários cadastrados no sistema</h4>
         </div>
-        <div class="card-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam quia ratione facere porro corrupti perferendis unde assumenda. Autem tempore, facere in deleniti, laudantium commodi, sunt facilis cum ducimus sit laborum!
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Quantidade de usuários cadastrados no ECHO: {{quantUser}}</h4>
+            </div>
+        </div>
+        <div class="container containerDataUser">
+            {{#each usuarios}}
+                {{#if (eq this.role 'admin')}}
+                    <div class="card-body admins">
+                        <ul class="list-group">
+                            <li class="list-group-item"><h4>{{this.role}}</h4></li>
+                            <li class="list-group-item"><strong>Nome Completo:</strong> {{this.username}}</li>
+                        <li class="list-group-item"><strong>E-mail:</strong> {{this.useremail}}</li>
+
+                        {{#if this.emailVerificado}}
+                        <li class="list-group-item"><strong>Status de validação:</strong> 
+                            <span class="text-success">
+                                E-mail verificado
+                            </span>
+
+                        {{else}}
+                        <li class="list-group-item"><strong>Status de validação:</strong>
+                            <span class="text-danger">
+                                E-mail não verificado
+                            </span>
+                        {{/if}}
+                        </li>
+                        </ul>
+                    </div>
+                {{else if (eq this.role 'user')}}
+                    <div class="card-body users">
+                        <ul class="list-group">
+                            <li class="list-group-item"><h4>{{this.role}}</h4></li>
+                            <li class="list-group-item"><strong>Nome Completo:</strong> {{this.username}}</li>
+                            <li class="list-group-item"><strong>E-mail:</strong> {{this.useremail}}</li>
+
+                            {{#if this.emailVerificado}}
+                            <li class="list-group-item"><strong>Status de validação:</strong> 
+                                <span class="text-success">
+                                    E-mail verificado
+                                </span>
+
+                            {{else}}
+                            <li class="list-group-item"><strong>Status de validação:</strong>
+                                <span class="text-danger">
+                                    E-mail não verificado
+                                </span>
+                            {{/if}}
+                            </li>
+                        </ul>
+                    </div>
+                {{else}}
+                    <p>Ninguém por aqui ):</p>
+                {{/if}}
+            {{/each}}
         </div>
     </div>
     <div class="card mt-4">

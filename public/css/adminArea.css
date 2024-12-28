@@ -241,6 +241,13 @@ body{
     height: 100vh;
 }
 
+/*Dasboard*/
+.containerDataUser{
+    overflow-y: scroll;
+    height: 50vh;
+}
+
+
 @keyframes animateIconForum {
     0%{
         transform: translateY(0px);

@@ -8,12 +8,20 @@ import User from '../../models/User.js'
     adminRoute.get('/dashboard', isAuthenticated, isAdmin, (req, res) => {
         User.find()
         .then((usuarios) => {
-            res.render('admin/dashboard', {
-                layout: 'main',
-                usuarios:usuarios
+            User.countDocuments()
+            .then((quantUser) => {
+                res.render('admin/dashboard', {
+                    layout: 'main',
+                    usuarios: usuarios,
+                    quantUser: quantUser
+                })
             })
         })
-        .catch()
+        .catch((error) => {
+            console.log('error' + error)
+            req.flash('error_msg', 'Erro ao exibir dashboard')
+            res.redirect('/user/home')
+        })
     })
 
 //Rota para o painel de gerenciamento de usuários
