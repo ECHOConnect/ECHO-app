@@ -16,6 +16,9 @@
     //Rotas de usuários
     import userRouter from './routes/userRoutes/userRoutes.js'
 
+    //Rota de login e cadastro
+    import loginRouter from './routes/userRoutes/Login_register.js'
+
 //Importando configurações e middlewares
 
     //Acessando as configurações do dotenv
@@ -74,6 +77,8 @@
     
     //Rotas de usuários
         app.use('/user', userRouter)
+
+        app.use('/user', loginRouter)
 
 //Conectando o servidor
     const PORT = process.env.PORT

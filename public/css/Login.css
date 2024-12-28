@@ -70,6 +70,7 @@ label{
     border-radius: 7px;
     width: 14vw;
     height: 2.5vw;
+    margin: 5px;
     font-size: 1.2vw;
     cursor: pointer;
 }
