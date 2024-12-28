@@ -8,7 +8,8 @@
     import mongoose from 'mongoose'
     import flash from 'connect-flash'
     const app = express()
-
+    import passport from 'passport'
+    import { passportConfig } from './config/auth.js'
 //Importando rotas
 
     //Rotas de administradores
@@ -47,12 +48,19 @@
     //Config. do session
         configSession(app)
 
+    //Config. do passport
+        passportConfig(passport)
+        app.use(passport.initialize())
+        app.use(passport.session())
+
     //Config. de variáveis globais e mensagens flash
         app.use(flash())
 
         app.use((req, res, next) =>{
             res.locals.success_msg = req.flash('success_msg')
             res.locals.error_msg = req.flash('error_msg')
+            res.locals.error = req.flash('error')
+            res.locals.User = req.user || null
 
             next()
         })
@@ -83,7 +91,7 @@
         
     //helper de condições complexas para o handlebars
     hbs.registerHelper('eq', function (a, b) {
-        return a.toString() === b.toString();
+        return a === b;
     });
 
 //ROTAS

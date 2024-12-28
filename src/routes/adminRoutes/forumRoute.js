@@ -25,7 +25,7 @@ forumRouter.get('/forumAdmin', (req, res) => {
         //Quando tudo estiver pronto mandar as respostas para o arquivo dinâmico
         Promise.all(postsWithResponsesPromises)
         .then((postsWithResponses) => {
-            res.render('admin/forumAdmin', {postagem: postsWithResponses})
+            res.render('admin/forumAdmin', {postagem: postsWithResponses, layout: 'main'})
         })
         .catch((error) => {
             console.log('erro: '+ error)
@@ -64,7 +64,7 @@ forumRouter.post('/forumAdmin', (req, res) => {
 //Rota para as respostas
 
     //Processamento de dados das respostas
-    forumRouter.post('/forumAdmin/:postId/respostas', (req, res) => {
+    forumRouter.post('/forumAdmin/:postId', (req, res) => {
         //Pegando dados de respostas
         const {postId} = req.params
         const {conteudo, dataCriacao} = req.body
@@ -87,7 +87,7 @@ forumRouter.post('/forumAdmin', (req, res) => {
     })
 
 //Rota para buscar por tópicos
-    forumRouter.get('/forumAdmin/search', (req, res) => {
+    forumRouter.get('/forumAdminSearch', (req, res) => {
         const query = req.query.q || ''
 
         const regex = new RegExp(query, 'i')
@@ -97,7 +97,7 @@ forumRouter.post('/forumAdmin', (req, res) => {
             const postIds = posts.map((post) => post._id.toString())
             responsesForum.find({postId: {$in: postIds}})
             .then((respostas) => {
-                res.render('admin/searchPosts', {posts, query, hasResults: posts.length, respostas})
+                res.render('admin/searchPosts', {posts, query, hasResults: posts.length, respostas, layout: 'main'})
             }).catch((error) => {
                 console.log('erro: ' + error)
                 req.flash('error_msg', 'Erro ao tentar buscar postss')

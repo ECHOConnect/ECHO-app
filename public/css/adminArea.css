@@ -55,7 +55,6 @@ body{
 }
 .tool{
     display: flex;
-    align-items: center;
     gap: 10px;
     cursor: pointer;
     padding: 10px;
@@ -135,6 +134,121 @@ body{
     background-color: transparent;
     border: 0;
 }
-.container{
+.home{
     height: 100vh;
+}
+/*Forúm echo*/
+.containerForum{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px
+}
+.containerForum .iconForum{
+    font-size: 3vw;
+    animation: animateIconForum infinite 2s;
+}
+.cardSTopic{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+}
+.iconSearchTopic{
+    position: absolute;
+    top: 0;
+    left: -30px;
+    cursor: pointer;
+}
+.containerMsgForm{
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden;
+    visibility: hidden;
+    transition: .4s ease-in-out;
+    font-size: 0;
+}
+.containerMsgForm.openChat{
+    height: 30vh !important;
+    width: 100% !important;
+    overflow: visible;
+    visibility: visible;
+    font-size: 2vw;
+}
+.cardMsg{
+    z-index: 9;
+}
+ .cardPostForm{
+    background-color: #035AA6;
+    color: white;
+    border-bottom: 2px solid #000;
+}
+.post{
+    background-color: #123F67;
+}
+.contentResponses{
+    background-color: #123F67;
+    color: white;
+    border: 1px solid white;
+}
+.cardDigitResp{
+    background-color: #123F67;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+.textR{
+    color: rgb(255, 255, 255)3F67;
+    width: 100%;
+}
+.textR::placeholder{
+    color: rgb(255, 255, 255);
+}
+.resp, .textR{
+    padding: 0px 15px 25px;
+}
+.resps{
+    height: 0;
+    overflow: hidden;
+    transition: .4s ease-in-out;
+}
+.resps.ativeResps{
+    height: 55vh;
+    overflow: visible;
+    overflow-y: scroll;
+}
+.reps.ativeResps .resp{
+    height: 300px;
+    overflow: visible;
+}
+.reps .resp{
+    height: 0;
+    overflow: hidden;
+}
+.iconSend{
+    font-size: 3vw;
+}
+.btnResp:hover .iconResp{
+    animation: animateIconForum .4s ease-in-out;
+}
+.responses-container{
+    z-index: 9;
+    position: relative;
+}
+.container-cont, .container-post{
+    margin-bottom: 50px;
+}
+.container-cont{
+    height: 100vh;
+}
+
+@keyframes animateIconForum {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
 }

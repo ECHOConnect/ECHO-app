@@ -17,3 +17,9 @@ function openResps(id){
     const respDiv = document.getElementById(`resp-${id}`)
     respDiv.classList.toggle('ativeResps')
 }
+
+//Funcionalidades de escolha de admin (forma temporária)
+function verificar(element){
+   console.log(element.value)
+}
+

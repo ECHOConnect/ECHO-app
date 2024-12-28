@@ -21,6 +21,20 @@ const User = new Schema({
     birthdayuser: {
         type: Date,
         required: true
+    },
+    role:{
+        type: String,
+        enum: ['admin', 'user']
+    },
+    tokenVerificacao: {
+        type: String
+    },
+    emailVerificado: {
+        type: Boolean,
+        default: false
+    },
+    tokenVerificado: {
+        type: String,
     }
 })
 

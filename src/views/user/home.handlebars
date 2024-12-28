@@ -1,1 +1,10 @@
-<h1>Tela principal da aplicação</h1>
+<div class="container home">
+    <h1>Tela principal da aplicação</h1>
+    <small>usuario: {{nomeuser.nameuser}}</small><br>
+    <small>função: {{nomeuser.role}}</small>
+    {{#if (eq nomeuser.role "admin")}}
+        <p>É admin</p>
+    {{else}}
+        <p>Não é admin</p>
+    {{/if}}    
+</div>

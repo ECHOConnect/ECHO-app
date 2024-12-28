@@ -1,17 +1,14 @@
 //Middleware de condição para o header de admin
 const conditionHeader = (app) => {
     app.use((req, res, next) => {
-        if(req.path === '/user/landingPage' || req.path === '/user/home' || req.path === '/user/login'){
-            res.locals.showHeader = true
-            res.locals.showFooter = true
+        if(req.path === '/user/landingPage' || req.path === '/user/home'){
+            res.locals.showHeader = false
         }
         else{
-            res.locals.showHeader = false
-            res.locals.showFooter = false
+            res.locals.showHeader = true
         }
         next()
     })
 }
-
 
 export default conditionHeader

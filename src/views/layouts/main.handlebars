@@ -13,14 +13,11 @@
   <body>
     {{!-- Condição de header entre default e o de admin --}}
     {{#if showHeader}}
-      {{> headerDefault}}
-    {{else}}
       {{> headerAdmins}}
-    <div class="container mt-4">
-      {{>msg}}
-    </div>
+    {{else}}
+      {{> headerDefault}}
     {{/if}}
-    
+    {{>msg}}
     {{{body}}}
     {{>footer}}
     

@@ -97,6 +97,8 @@ body{
     align-items: center;
     justify-content: space-around;
     padding-top: 1vw;
+    z-index: 999;
+    position: relative
 }
 #Footer h2{
     font-size: 1.5vw;

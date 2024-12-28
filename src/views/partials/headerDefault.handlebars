@@ -4,6 +4,12 @@
         <h3 class="Text_Options">Sobre</h3>
         <h3 class="Text_Options">Recursos</h3>
         <h3 class="Text_Options">Contato</h3>
-        <a href="/user/login"><button id="Login_signin_btn">Log in / Sign in</button></a>
+        {{#if (eq nomeuser.role "admin")}}
+            <a href="/admin/dashboard"><button id="Login_signin_btn">Perfil</button></a>
+        {{else if (eq nomeuser.role "user")}}
+            <a href="/user/perfil"><button id="Login_signin_btn">Perfil</button></a>
+        {{else}}
+            <a href="/user/login"><button id="Login_signin_btn">Login/Sign in</button></a>
+        {{/if}}
     </div>
 </header>

@@ -14,10 +14,10 @@
     </div>
     {{!-- Nome do admin logado no sistma --}}
     <div class="adminName">
-        <h2>Seja bem vindo (admin)</h2>
+        <h2>Seja bem vindo {{User.nameuser}} <span class="text-dark">({{User.role}})</span></h2>
     </div>
     {{!-- Botão para sair da área de admin --}}
     <div class="rightContent">
-        <a href="/user/landingPage"><button class="btnExit">Sair</button></a>
+        <a href="/user/home"><button class="btnExit">Sair</button></a>
     </div>
 </header>
