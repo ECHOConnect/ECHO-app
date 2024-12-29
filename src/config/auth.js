@@ -18,7 +18,7 @@ export function passportConfig(passport){
             }
             // Verifica se o e-mail foi verificado
             if (!usuario.emailVerificado) {
-                return done(null, false, { message: 'E-mail não verificado! Por favor, verifique seu e-mail antes de fazer login.' })
+                return done(null, false, { message: 'Você está sem acesso no momento!😞' })
             }
             bcrypt.compare(userpass, usuario.userpass, (error, isMatch) => {
                 if(isMatch){

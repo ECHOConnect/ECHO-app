@@ -63,8 +63,8 @@ loginRouter.post('/register', (req, res) => {
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: 'echoconnect472@gmail.com',
-                        pass: process.env.PASS
+                        user: process.env.EMAIL_USER,
+                        pass: process.env.EMAIL_PASS
                     }
                 })
                 //Gerando o link de verificação
@@ -94,7 +94,7 @@ loginRouter.post('/register', (req, res) => {
             res.send('Erro ao gerar hash de senha erro: ' + error)
         })
    }).catch((error) => {
-        res.send('Erro ao tentar buscar usuario')
+        res.send('Erro ao tentar buscar usuário')
    })
 })
 

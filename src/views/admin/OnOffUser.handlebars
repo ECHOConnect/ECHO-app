@@ -1,0 +1,34 @@
+<div class="container mt-4 container-ban-user">
+    {{#if user}}
+    <div class="card cardBanUser">
+        <div class="card-header">
+            {{#if user.emailVerificado}}
+                <h2>Tem certeza que quer Desativar o usuário {{user.nameuser}}?</h2>
+            {{else}}
+                <h2>Tem certeza que quer Ativar o usuário {{user.nameuser}}?</h2>
+            {{/if}}
+        </div>
+        <div class="card-body">
+            <h4>O que acontece ao desativar/ativar um usuário?</h4>
+            <ul class="list-group">
+                <li class="list-group-item">O seu acesso será suspenso até que seja ativado novamente</li>
+                <li class="list-group-item">Não removerá os dados do sistema e nem as publicações</li>
+                <li class="list-group-item">A desativação ou ativação será notificada ao usuário por E-mail, para que o mesmo fique ciente</li>
+            </ul>
+        </div>
+        {{!-- form de ativação de conta --}}
+        <form action="/admin/OnOffUser/{{user._id}}" method="post">
+            <input type="hidden" name="action"
+        value="{{#if user.emailVerificado}}desactivate{{else}}activate{{/if}}">
+            <div class="card-footer d-flex justify-content-center gap-4">
+                {{#if user.emailVerificado}}
+                    <button type="submit" class="btn btn-danger">Desativar</button>
+                {{else}}
+                    <button type="submit" class="btn btn-success">Ativar</button>
+                {{/if}}
+            </div>
+        </form>
+        
+        {{/if}}
+    </div>
+</div>

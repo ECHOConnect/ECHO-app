@@ -234,7 +234,7 @@ body{
     z-index: 9;
     position: relative;
 }
-.container-cont, .container-post{
+.container-cont, .container-post, .container-Dash{
     margin-bottom: 50px;
 }
 .container-cont{
@@ -246,8 +246,40 @@ body{
     overflow-y: scroll;
     height: 50vh;
 }
-
-
+.listBtn{
+    display: flex;
+    gap: 5px;
+}
+.listBtn a{
+    text-decoration: none;
+}
+.btn-Admin-Tool{
+    display: flex;
+    gap: 5px;
+}
+.form-search-person-admin{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+}
+.container-edit-user{
+    margin-bottom: 50px;
+}
+.container-ban-user{
+    height: 80vh;
+}
+.cardBanUser{
+    animation: borderDanger infinite .8s ease-in-out;
+}
+@keyframes borderDanger {
+    from{
+        border: 3px solid red;
+    }
+    to{
+        border: 3px solid white;
+    }
+}
 @keyframes animateIconForum {
     0%{
         transform: translateY(0px);

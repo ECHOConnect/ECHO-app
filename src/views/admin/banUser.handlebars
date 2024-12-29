@@ -1,0 +1,26 @@
+<div class="container mt-4 container-ban-user">
+    <div class="card cardBanUser">
+        <div class="card-header">
+            <h2>Tem certeza que quer banir o usuário {{user.nameuser}}?</h2>
+        </div>
+        <div class="card-body">
+            <h4>O que acontece ao banir um usuário?</h4>
+            <ul class="list-group">
+                <li class="list-group-item">O seu acesso será completamente removido do sistema</li>
+                <li class="list-group-item">O banimento é notificado por e-mail ao usuário Banido</li>
+            </ul>
+        </div>
+        {{#if user}}
+        <small>{{user._id}}</small>
+        <form action="/admin/dashboard/{{user._id}}" method="post">
+            <div class="card-footer d-flex justify-content-center gap-4">
+                <button type="submit" class="btn btn-success">Sim</button>
+            </div>
+        </form>
+        <div class="card-footer d-flex justify-content-center gap-4">
+            <a href="/admin/dashboard"><button class="btn btn-danger">Não</button></a>
+        </div>
+        
+        {{/if}}
+    </div>
+</div>

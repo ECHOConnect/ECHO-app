@@ -23,3 +23,12 @@ function verificar(element){
    console.log(element.value)
 }
 
+//Funcionalidade de janela de confirmação
+
+function banConfirm(){
+    const confirm = window.confirm('Tem certeza que deseja banir este usuário?')
+    if(confirm){
+        alert('Usuário banido com sucesso!')
+    }
+}
+
