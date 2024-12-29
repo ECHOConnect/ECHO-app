@@ -1,0 +1,23 @@
+<div class="container content-reset-pass">
+    <div class="card">
+        <div class="card-header">
+            <h3>Redefinição de senha</h3>
+        </div>
+        <form action="/user/newPass" method="post">
+        <input type="hidden" name="token" value="{{token}}">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="newPass">Nova senha</label>
+                    <input type="password" placeholder="Nova senha" id="newPass" name="userpass" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="useremail">Repita a senha</label>
+                    <input type="password" placeholder="Repetir nova senha" name="repeatpass" class="form-control">
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>

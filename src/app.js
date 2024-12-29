@@ -25,6 +25,9 @@
     //Rota de login e cadastro
     import loginRouter from './routes/userRoutes/Login_register.js'
 
+    //Rota de redefinição de senha
+    import routeReset from './routes/userRoutes/resetPassword.js'
+
 //Importando configurações e middlewares
 
     //Acessando as configurações do dotenv
@@ -105,6 +108,8 @@
         app.use('/user', userRouter)
 
         app.use('/user', loginRouter)
+
+        app.use('/user', routeReset)
 
 //Conectando o servidor
     const PORT = process.env.PORT
