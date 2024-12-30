@@ -30,7 +30,7 @@ loginRouter.get('/register', (req, res) => {
 
 loginRouter.post('/register', (req, res) => {
     //Pegando dados do formulário de cadastro
-   const {username, nameuser, useremail, userpass, birthdayuser, role, emailVerificado} = req.body
+   const {username, nameuser, useremail, userpass, repeatPassword, birthdayuser, role, emailVerificado} = req.body
 
    //Verificando se o email já existe 
    User.findOne({useremail})
@@ -38,6 +38,14 @@ loginRouter.post('/register', (req, res) => {
         if(user){
            req.flash('error_msg', 'E-mail já existe')
            return res.redirect('/user/register')
+        }
+        if(!useremail || !nameuser || !userpass || !repeatPassword || !username || !birthdayuser){
+            req.flash('error_msg', 'Preencha TODOS os campos e tente novamente!')
+            return res.redirect('/user/register')
+        }
+        if(userpass != repeatPassword){
+            req.flash('error_msg', 'As senhas não coincidem')
+            return res.redirect('/user/register')
         }
 
         //Gerando token de autenticação

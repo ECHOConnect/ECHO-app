@@ -6,6 +6,8 @@
         <h3 class="Text_Options">Contato</h3>
         {{#if (eq nomeuser.role "admin")}}
             <a href="/admin/dashboard"><button id="Login_signin_btn">Perfil</button></a>
+        {{else if (eq nomeuser.role "SUPER_ADMIN")}}
+            <a href="/admin/dashboard"><button id="Login_signin_btn">Perfil</button></a>
         {{else if (eq nomeuser.role "user")}}
             <a href="/user/perfil"><button id="Login_signin_btn">Perfil</button></a>
         {{else}}

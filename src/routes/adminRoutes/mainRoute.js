@@ -38,6 +38,7 @@ dotenv.config()
                 req.flash('error_msg', 'Usuário não encontrado!')
                 res.redirect('/admin/dashboard')
             }
+
             res.render('admin/banUser', {
                 layout: 'main', 
                 user: user
@@ -83,22 +84,53 @@ dotenv.config()
     //Rota para receber os dados de banimento
     adminRoute.post('/dashboard/:id', (req, res) => {
         const userId = req.params.id
-        User.findByIdAndDelete(userId)
-        .then((user) => {
-            if(!user){
-                req.flash('error_msg', 'Usuário não encontrado')
-                res.redirect('/admin/dashboard')
+        const curretAdminId = req.user.id
+
+        //Promisse que retorna condições para o banimento
+        Promise.all([
+            User.findById(userId),
+            User.findById(curretAdminId)
+        ])
+        .then(([adminToban, curretAdmin]) => {
+            //Condições para banimentos
+            if(!adminToban || !curretAdmin){
+                req.flash('error_msg', 'Admin não encontrado')
+                return res.redirect('/admin/dashboard')
+            }
+            if(adminToban.id === curretAdmin.id){
+                req.flash('error_msg', 'Você não pode banir a própria conta')
+                return res.redirect('/admin/dashboard')
+            }
+            if(adminToban.role === 'SUPER_ADMIN'){
+                req.flash('error_msg', 'Você não pode banir um Super Admin')
+                return res.redirect('/admin/dashboard')
+            }
+            if(curretAdmin.role !== 'SUPER_ADMIN'){
+                req.flash('error_msg', 'Você não tem permissões suficientes para banir outro admin')
+                return res.redirect('/admin/dashboard')
             }
 
-            return sendMail(user.username, user.useremail)
-            .then(() => {
-                req.flash('success_msg', 'Usuário banido com sucesso e E-mail de notificação enviados!')
-                res.redirect('/admin/dashboard')
-            })
+            //Banindo caso não entrar em nenhuma das condições
+            return User.findByIdAndDelete(adminToban.id)
+                .then((deleteUser) => {
+                    if(!deleteUser){
+                        req.flash('error_msg', 'Usuário não encontrado')
+                        return res.redirect('/admin/dashboard')
+                    }
+                    return sendMail(deleteUser.username, deleteUser.useremail)
+                    .then(() => {
+                        req.flash('success_msg', 'Usuário banido com sucesso e E-mail de notificação enviados!')
+                        res.redirect('/admin/dashboard')
+                    })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    req.flash('error_msg', 'Ocorreu um erro ao tentar banir o usuário')
+                    return res.redirect('/admin/dashboard')
+                })
         })
         .catch((error) => {
-            console.log(error)
-            req.flash('error_msg', 'Ocorreu um erro ao tentar banir o usuário')
+            req.flash('error_msg', 'Erro ao excluir usuário' + error)
             res.redirect('/admin/dashboard')
         })
     })
@@ -132,58 +164,82 @@ dotenv.config()
     adminRoute.post('/OnOffUser/:id', (req, res) => {
         const userId = req.params.id
         const action = req.body.action
+        const curretAdminId = req.user.id
     
         console.log(`[DEBUG] Início da rota /OnOffUser. ID do usuário: ${userId}, Ação: ${action}`)
-    
-        User.findById(userId)
-            .then((user) => {
-                if (!user) {
+
+        console.log(`[DEBUG]: id do admin que quer fazer a ação: ${curretAdminId}`)
+        //Promisse para usar as condições
+            Promise.all([
+                User.findById(userId),
+                User.findById(curretAdminId)
+            ])
+            .then(([userToOnOff, curretAdmin]) => {
+                //Condições de proibição para ativação e desativação
+                if (!userToOnOff || !curretAdmin) {
                     console.log('[DEBUG] Usuário não encontrado.')
                     req.flash('error_msg', 'Usuário não encontrado')
                     throw new Error('Usuário não encontrado') // Lança erro para o `catch`
                 }
-                //Pegando estado atual do email
-                const oldStatus = user.emailVerificado
+                if(userToOnOff.id === curretAdmin.id){
+                    req.flash('error_msg', 'Você não pode ATIVAR ou DESATIVAR a sua própria conta')
+                    return res.redirect('/admin/dashboard')
+                }
+                if(userToOnOff.role === 'SUPER_ADMIN'){
+                    req.flash('error_msg', 'Você não pode ATIVAR OU DESATIVAR um Super Admin')
+                    return res.redirect('/admin/dashboard')
+                }
+                if(userToOnOff.role === 'admin' && curretAdmin.role === 'admin'){
+                    req.flash('error_msg', 'Você não tem permições suficientes para ATIVAR ou DESATIVAR um admin')
+                    return res.redirect('/admin/dashboard')
+                }
+                //Retornando a desativação da conta caso as condições anteriores forem falsas
+                return User.findById(userToOnOff.id)
+                .then((user) => {
+                    //Pegando estado atual do email
+                    const oldStatus = user.emailVerificado
 
-                if (action === 'desactivate') {
-                    console.log('[DEBUG] Desativando usuário.')
-                    user.emailVerificado = false
-                    //Se caso o email estava ativado e for desativado envia esse email
-                    notifyUser(
-                        user.useremail,
-                        `Desativação de Conta`,
-                        `Olá, ${user.nameuser}. Você está recebendo esse E-mail pois sua conta ECHO Connect foi desativada!\n\nSe caso tiver alguma dúvida sobre o motivo da desativação, entre em contato com o nosso suporte que responderemos o mais rápido possível.`
-                    )
-                    req.flash('success_msg', `O usuário, ${user.nameuser}, foi DESATIVADO do sistema com sucesso!`)
-                } 
-                else if (action === 'activate') {
-                    console.log('[DEBUG] Ativando usuário.')
-                    user.emailVerificado = true
-                    notifyUser(
-                        user.useremail,
-                        `Ativação de Conta`,
-                        `Olá, ${user.nameuser}. Você está recebendo esse E-mail pois sua conta ECHO Connect foi Ativada!\n\nSeja bem vindo de volta!.`
-                    )
-                    req.flash('success_msg', `O usuário, ${user.nameuser}, foi ATIVADO no sistema com sucesso!`)
-                } else {
-                    console.log('[DEBUG] Ação inválida recebida.')
-                    req.flash('error_msg', 'Ação inválida!')
-                    throw new Error('Ação inválida') // Lança erro para o `catch`
-                }
+                    if (action === 'desactivate') {
+                        console.log('[DEBUG] Desativando usuário.')
+                        user.emailVerificado = false
+                        //Se caso o email estava ativado e for desativado envia esse email
+                        notifyUser(
+                            user.useremail,
+                            `Desativação de Conta`,
+                            `Olá, ${user.nameuser}. Você está recebendo esse E-mail pois sua conta ECHO Connect foi desativada!\n\nSe caso tiver alguma dúvida sobre o motivo da desativação, entre em contato com o nosso suporte que responderemos o mais rápido possível.`
+                        )
+                        req.flash('success_msg', `O usuário, ${user.nameuser}, foi DESATIVADO do sistema com sucesso!`)
+                    } 
+                    else if (action === 'activate') {
+                        console.log('[DEBUG] Ativando usuário.')
+                        user.emailVerificado = true
+                        notifyUser(
+                            user.useremail,
+                            `Ativação de Conta`,
+                            `Olá, ${user.nameuser}. Você está recebendo esse E-mail pois sua conta ECHO Connect foi Ativada!\n\nSeja bem vindo de volta!.`
+                        )
+                        req.flash('success_msg', `O usuário, ${user.nameuser}, foi ATIVADO no sistema com sucesso!`)
+                    } else {
+                        console.log('[DEBUG] Ação inválida recebida.')
+                        req.flash('error_msg', 'Ação inválida!')
+                        throw new Error('Ação inválida') // Lança erro para o `catch`
+                    }
+        
+                    console.log('[DEBUG] Salvando alterações no banco de dados...')
+                    return user.save()
+                })
+                .then(() => {
+                    console.log('[DEBUG] Alterações salvas com sucesso.')
+                    res.redirect('/admin/dashboard') // Redireciona após sucesso
+                })
+                .catch((error) => {
+                    console.error(`[DEBUG] Erro no processamento: ${error.message}`)
+                    req.flash('error_msg', 'Houve um erro ao processar a solicitação.')
+                    if (!res.headersSent) {
+                        res.redirect('/admin/dashboard') // Certifica-se de não redirecionar duas vezes
+                    }
+                })
     
-                console.log('[DEBUG] Salvando alterações no banco de dados...')
-                return user.save()
-            })
-            .then(() => {
-                console.log('[DEBUG] Alterações salvas com sucesso.')
-                res.redirect('/admin/dashboard') // Redireciona após sucesso
-            })
-            .catch((error) => {
-                console.error(`[DEBUG] Erro no processamento: ${error.message}`)
-                req.flash('error_msg', 'Houve um erro ao processar a solicitação.')
-                if (!res.headersSent) {
-                    res.redirect('/admin/dashboard') // Certifica-se de não redirecionar duas vezes
-                }
             })
     })
     

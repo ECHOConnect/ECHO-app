@@ -73,16 +73,33 @@
     </div>
     {{!-- Lista de admins no sistema --}}
     <div class="list Admins">
-        <div class="tool">
-            <div>
-                <span class="material-symbols-outlined">
-                    local_police
-                </span>
-            </div>
-            <div>
-                <h4>{{User.nameuser}}</h4>
-            </div>
-        </div>
+          {{#each usuarios}} 
+            {{#if (eq this.role 'admin')}}
+              <div class="tool">
+                  <div>
+                      <span class="material-symbols-outlined">
+                          local_police
+                      </span>
+                  </div>
+                  <div>
+                      <h4>{{this.nameuser}}</h4>
+                  </div>
+              </div>
+              {{else if (eq this.role 'SUPER_ADMIN')}}
+                <div class="tool">
+                    <div>
+                        <span class="material-symbols-outlined">
+                            local_police
+                        </span>
+                    </div>
+                    <div>
+                        <h4>{{this.nameuser}}</h4>
+                    </div>
+                </div>
+            {{/if}}
+          {{else}}
+            <p>Não há administradores no momento...</p>
+          {{/each}}
     </div>
   </div>
 </div>

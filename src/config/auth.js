@@ -58,7 +58,7 @@ export function isAuthenticated(req, res, next){
 
 //Função que verifica se o usuário autenticado é admin
 export function isAdmin(req, res, next){
-    if(req.isAuthenticated() && req.user.role === 'admin'){
+    if(req.isAuthenticated() && req.user.role === 'admin' || req.user.role === 'SUPER_ADMIN'){
         return next()
     }
     else{
@@ -66,3 +66,14 @@ export function isAdmin(req, res, next){
         res.redirect('/user/home')
     }
 }
+
+//Função que verifica se o usuário autenticado é um super admin
+// export function isSuperAdmin(req, res, next){
+//     if(req.isAuthenticated() && req.user.role === 'SUPER_ADMIN'){
+//         return next()
+//     }
+//     else{
+//         req.flash('error_msg', 'Acesso negado')
+//         res.redirect('/user/home')
+//     }
+// }

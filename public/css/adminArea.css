@@ -272,6 +272,11 @@ body{
 .cardBanUser{
     animation: borderDanger infinite .8s ease-in-out;
 }
+.Admins{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 @keyframes borderDanger {
     from{
         border: 3px solid red;

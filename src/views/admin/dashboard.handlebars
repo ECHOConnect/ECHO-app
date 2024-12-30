@@ -41,9 +41,59 @@
                 {{#if (eq this.role 'admin')}}
                     <div class="card-body admins">
                         <ul class="list-group">
-                            <li class="list-group-item"><h4>{{this.role}}</h4></li>
+                            <li class="list-group-item"><h4 class="text-success">{{this.role}}</h4></li>
                             <li class="list-group-item"><p>{{this._id}}</p></li>
                             <li class="list-group-item"><strong>Nome Completo:</strong> {{this.username}}</li>
+                            <li class="list-group-item"><strong>Nome de usuário:</strong> {{this.nameuser}}</li>
+                        <li class="list-group-item"><strong>E-mail:</strong> {{this.useremail}}</li>
+
+                        {{#if this.emailVerificado}}
+                        <li class="list-group-item"><strong>Status de validação:</strong> 
+                            <span class="text-success">
+                                E-mail verificado
+                            </span>
+
+                        {{else}}
+                        <li class="list-group-item"><strong>Status de validação:</strong>
+                            <span class="text-danger">
+                                E-mail não verificado
+                            </span>
+                        {{/if}}
+                        </li>
+                        <li class="list-group-item listBtn">
+                            <a href="/admin/editUser/{{this._id}}">
+                                <button class="btn btn-Admin-Tool btn-primary btnEdit">
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>Editar usuário
+                                </button>
+                            </a>
+                            <a href="/admin/dashboard/{{this._id}}">
+                                <button class="btn btn-Admin-Tool btn-danger">
+                                    <span class="material-symbols-outlined">
+                                        gpp_bad
+                                    </span>
+                                    Banir usuário
+                                </button>
+                            </a>
+                            <a href="/admin/OnOffUser/{{this._id}}">
+                                <button class="btn btn-Admin-Tool btn-success">
+                                    <span class="material-symbols-outlined">
+                                        power_settings_new
+                                    </span>
+                                    Ativar/Desativar usuário
+                                </button>
+                            </a>
+                        </li>
+                        </ul>
+                    </div>
+                {{else if (eq this.role 'SUPER_ADMIN')}}
+                    <div class="card-body admins">
+                        <ul class="list-group">
+                            <li class="list-group-item"><h4 class="text-danger">{{this.role}}</h4></li>
+                            <li class="list-group-item"><p>{{this._id}}</p></li>
+                            <li class="list-group-item"><strong>Nome Completo:</strong> {{this.username}}</li>
+                            <li class="list-group-item"><strong>Nome de usuário:</strong> {{this.nameuser}}</li>
                         <li class="list-group-item"><strong>E-mail:</strong> {{this.useremail}}</li>
 
                         {{#if this.emailVerificado}}
