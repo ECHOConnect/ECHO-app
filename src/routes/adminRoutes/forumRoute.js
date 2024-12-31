@@ -1,15 +1,23 @@
 import { Router } from 'express'
 import mongoose from 'mongoose'
+import nodemailer from 'nodemailer'
 import forumPost from '../../models/Forum_Admin.js'
 import responsesForum from '../../models/RespForum_Admin.js'
+import User from '../../models/User.js'
+import { isAdmin, isAuthenticated } from '../../config/auth.js'
 const forumRouter = Router()
 
+//Configuração das variáveis de ambiente
+    import dotenv, { populate } from 'dotenv'
+    dotenv.config()
+
 //Rota para o forúm 
-forumRouter.get('/forumAdmin', (req, res) => {
+forumRouter.get('/forumAdmin', isAuthenticated, isAdmin, (req, res) => {
     //Buscando mensagens no banco de dados
     forumPost.find()
     .sort({dataCriacao: -1})
     //Buscando as postagens de forma individual
+    .populate('author', 'nameuser')
     .then((postagem) => {
         //Buscando respostas da respectiva postagem
         const postsWithResponsesPromises = postagem.map((postagem) => {
@@ -17,6 +25,7 @@ forumRouter.get('/forumAdmin', (req, res) => {
             return responsesForum.find({postId: postagem._id})
             //Ordenando da resposta mais recente
             .sort({dataCriacao: - 1})
+            .populate('author', 'nameuser')
             .then((respostas) => {
                 postagem.respostas = respostas
                 return postagem
@@ -39,20 +48,61 @@ forumRouter.get('/forumAdmin', (req, res) => {
     })
 })
 
+//Configuração do nodemailer para envio de emails
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS  
+        }
+    })
+
+//Função para o envio do email
+    const sendEmail = (to, subject, text) => {
+        const mailOption = {
+            from: process.env.EMAIL_USER,
+            to: to,
+            subject: subject,
+            text: text
+        }
+
+        return transporter.sendMail(mailOption)
+    }
+
 //Rota para processamento de dados do forúm
 forumRouter.post('/forumAdmin', (req, res) => {
     //Pegando dados do forms do post 
     const {titulo, conteudo, dataCriacao} = req.body
+    const author = req.body.author
 
     //Inserindo dados da postagem no banco de dados
     const novaPostagem = new forumPost({
         titulo: titulo,
         conteudo: conteudo,
-        dataCriacao: dataCriacao
+        dataCriacao: dataCriacao,
+        author: author
     })
 
     //Salvando no banco de dados
-    novaPostagem.save().then(() => {
+    novaPostagem
+    .save()
+    //Buscando os roles específicos
+    .then(() => {
+        return User.find({role: {$in: ['admin', 'SUPER_ADMIN'] }})
+    })
+    //Buscando os emails de todos os admins e Super Admins
+    .then((admins) => {
+        const adminsEmail = admins.map(admins => admins.useremail)
+
+        //Enviando E-mail
+        sendEmail(
+            `${adminsEmail.join(',')}`,
+            `Nova postagem no Forúm (${titulo})`,
+            `Uma nova postagem foi criada no fórum.\n\nTítulo: ${titulo}\nConteúdo: ${conteudo}`
+        )
+    })
+    .then(() => {
+        console.log(`[debug]: usuário: ${author}`)
         req.flash('success_msg', 'Mensagem enviada com sucesso!')
         res.redirect('/admin/forumAdmin')
     }).catch((error) => {
@@ -64,24 +114,42 @@ forumRouter.post('/forumAdmin', (req, res) => {
 //Rota para as respostas
 
     //Processamento de dados das respostas
-    forumRouter.post('/forumAdmin/:postId', (req, res) => {
+    forumRouter.post('/forumAdmin/:postId', isAuthenticated, isAdmin, (req, res) => {
         //Pegando dados de respostas
         const {postId} = req.params
-        const {conteudo, dataCriacao} = req.body
+        const {conteudo, dataCriacao, author} = req.body
+
+        console.log('[debug]: id do usuário da resposta: ', author)
 
         //Criando resposta no banco de dados
         const novaResposta = new responsesForum({
             conteudo: conteudo,
             postId: postId,
-            dataCriacao: dataCriacao
+            dataCriacao: dataCriacao,
+            author: author
         })
 
         //Salvando resposta no banco de dados
-        novaResposta.save().then(() => {
+        novaResposta
+        .save()
+        .then(() => {
+            return User.find({role: {$in: ['admin', 'SUPER_ADMIN'] }})
+        })
+        .then((admins) => {
+            const adminsEmail = admins.map(admins => admins.useremail)
+            //Enviando o email
+            sendEmail(
+                `${adminsEmail}`,
+                `Nova resposta no Forúm`,
+                `Uma nova resposta foi criada no fórum.\n\nConteúdo: ${conteudo}`
+            )
+        })
+        .then(() => {
             req.flash('success_msg', 'Resposta enviada com sucesso!')
             res.redirect('/admin/forumAdmin')
         }).catch((error) => {
-            res.flash('error_msg', 'Erro ao enviar mensagem')
+            console.log('[debug]: erro: ', error)
+            req.flash('error_msg', 'Erro ao enviar mensagem' + error)
             res.redirect('/admin/forumAdmin')
         })
     })

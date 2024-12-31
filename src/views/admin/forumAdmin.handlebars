@@ -6,6 +6,7 @@
     </span>
   </div>
   <div>
+    
     <h3>ECHO Forúm</h3>
   </div>
 </div>
@@ -34,8 +35,10 @@
       </div>
     </div>
   </form>
+  
   <div class="container containerMsgForm" id="containerMsgForum">
     <form action="/admin/forumAdmin" method="post">
+    <input type="hidden" value="{{User._id}}" name="author">
       <div class="card cardMsg p-3">
         <div class="card-body">
           <div class="mb-3">
@@ -69,18 +72,20 @@
   <h2>Mensagens</h2>
 </div>
 {{! Postagem }}
-<div class="container container-cont container-post">
+<div class="container container-post">
   {{#each postagem}}
     <div class="card post mt-4 gap-3">
       <div class="card cardPostForm">
         <div class="card-header">
-          <h3>{{this.titulo}}</h3>
-        </div>
+            <h3>{{this.titulo}}</h3>
+            <small>Autor: {{this.author.nameuser}}</small>
+          </div>
         <div class="body p-3">
           <p>{{this.conteudo}}</p>
         </div>
         <div class="card-footer">
           <small>{{this.dataCriacao}}</small>
+          
         </div>
       </div>
       {{! Respostas }}
@@ -95,7 +100,8 @@
           <h3>Respostas...</h3>
         </button>
         <div class="text-light container">
-          <form action="/admin/forumAdmin/{{this._id}}/respostas" method="post">
+          <form action="/admin/forumAdmin/{{this._id}}" method="post">
+          <input type="hidden" value="{{author._id}}" name="author">
             <div class="responses-container">
               <div class="container border-secondary cardDigitResp">
                 <div class="textarea w-100">
@@ -124,10 +130,11 @@
           <div class="container resp mt-4 w-90">
             <div class="card border-primary contentResponses">
               <div class="card-header">
-                nome de quem respondeu
+                <small>Autor: </small>
+                {{this.author.nameuser}}
               </div>
               <div class="card-body">
-                Resposta ao post:
+                <small>Resposta ao post: </small>
                 {{this.conteudo}}
               </div>
               <div class="card-footer">

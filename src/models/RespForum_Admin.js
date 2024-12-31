@@ -15,6 +15,10 @@ const ResponsesForum_admin = new Schema({
         type: String,
         ref: 'ForumPost',
         required: true
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User'
     }
 })
 

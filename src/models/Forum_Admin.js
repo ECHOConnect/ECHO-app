@@ -14,6 +14,10 @@ const ForumPostSchema = new Schema({
         type: Date,
         default: Date.now
     }, 
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     respostas: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'responsesForum'

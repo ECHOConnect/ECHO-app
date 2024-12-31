@@ -26,6 +26,7 @@ body{
     right: 0;
     z-index: 99;
     position: sticky;
+    gap: 25px;
     top: 0;
     z-index: 99;
 }
@@ -225,7 +226,7 @@ body{
     overflow: hidden;
 }
 .iconSend{
-    font-size: 3vw;
+    font-size: 30px;
 }
 .btnResp:hover .iconResp{
     animation: animateIconForum .4s ease-in-out;
@@ -294,5 +295,47 @@ body{
     }
     100%{
         transform: translateY(0px);
+    }
+}
+@media(max-width: 670px){
+    .iconSend{
+        font-size: 5vw !important;
+    }
+}
+
+@media(max-width: 640px){
+    .btnExit{
+        width: 80px;
+        font-size: 6vw;
+    }
+    .sidebar{
+        font-size: 13vw
+    }
+    .adminName h2{
+        font-size: 5vw;
+    }
+    .iconLogo{
+        display: none;
+    }
+    .iconContainer .iconDash {
+        font-size: 8vw;
+    }
+    .textContainer h4 {
+        font-size: 8vw;
+    }
+    .resps.ativeResps {
+        height: 50vh;
+    }
+    .containerForum .iconForum {
+        font-size: 10vw;
+    }
+    .btnResp{
+        display: flex !important;
+        flex-direction: column-reverse;
+    }
+    .iconSend{
+        font-size: 8vw !important;
+        position: absolute;
+        top: 15px;
     }
 }
