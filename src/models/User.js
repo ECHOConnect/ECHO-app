@@ -24,7 +24,8 @@ const User = new Schema({
     },
     role:{
         type: String,
-        enum: ['SUPER_ADMIN','admin', 'user']
+        enum: ['SUPER_ADMIN','admin', 'user'],
+        default: 'user'
     },
     tokenVerificacao: {
         type: String

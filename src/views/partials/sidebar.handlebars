@@ -72,34 +72,41 @@
         </div>
     </div>
     {{!-- Lista de admins no sistema --}}
+    {{#each usuarios}} 
     <div class="list Admins">
-          {{#each usuarios}} 
-            {{#if (eq this.role 'admin')}}
-              <div class="tool">
-                  <div>
-                      <span class="material-symbols-outlined">
-                          local_police
-                      </span>
-                  </div>
-                  <div>
-                      <h4>{{this.nameuser}}</h4>
-                  </div>
+      <div class="sp_admin">
+        {{#if (eq this.role 'SUPER_ADMIN')}}
+          <div class="tool">
+              <div>
+                  <span class="material-symbols-outlined text-danger bg-dark border border-danger">
+                      local_police
+                  </span>
               </div>
-              {{else if (eq this.role 'SUPER_ADMIN')}}
-                <div class="tool">
-                    <div>
-                        <span class="material-symbols-outlined">
-                            local_police
-                        </span>
-                    </div>
-                    <div>
-                        <h4>{{this.nameuser}}</h4>
-                    </div>
-                </div>
-            {{/if}}
-          {{else}}
-            <p>Não há administradores no momento...</p>
-          {{/each}}
+              <div>
+                  <h4>{{this.nameuser}}</h4>
+                  <small>{{this.role}}</small>
+              </div>
+          </div>
+          {{/if}}
+      </div>
+      <div class="admin">
+        {{#if (eq this.role 'admin')}}
+          <div class="tool">
+              <div>
+                  <span class="material-symbols-outlined">
+                      local_police
+                  </span>
+              </div>
+              <div>
+                  <h4>{{this.nameuser}}</h4>
+                  <small>{{this.role}}</small>
+              </div>
+          </div>
+      </div>
+      {{/if}}
+        {{else}}  
+          <p>Não há administradores no momento...</p>
     </div>
+    {{/each}}
   </div>
 </div>
