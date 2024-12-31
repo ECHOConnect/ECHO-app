@@ -63,7 +63,7 @@ const routeReset = Router()
                     process.env.EMAIL_USER,
                     `Redefinição de senha`,
                     `Olá ${user.nameuser}. Você está recebendo isso porque solicitou a mudança de senha no ECHO Connect.\n\nClique no link abaixo para redefinir sua senha\n\n
-                    http://localhost:${process.env.PORT}/user/newPass?token=${token}`
+                    https://echo-app-d1tu.onrender.com/user/newPass?token=${token}`
                 )
                 req.flash('success_msg', 'E-mail de redefinição enviado com sucesso!')
                 res.redirect('/user/login')

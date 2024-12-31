@@ -76,14 +76,14 @@ loginRouter.post('/register', (req, res) => {
                     }
                 })
                 //Gerando o link de verificação
-                const link = `http://localhost:8080/user/verifyEmail/${token}`
+                const link = `https://echo-app-d1tu.onrender.com/user/verifyEmail/${token}`
 
                 //Configuração do conteúdo do email
                 const mailOption = {
                     from: 'echoconnect472@gmail.com',
                     to: savedUser.useremail,
                     subject: 'Confirmação de E-mail',
-                    text: `Olá, ${savedUser.nameuser}, seja bem vido a nossa comudidade ECHO Connect\n\nPara validar seu E-mail clique no link logo abaixo, é rápido! 😀\n\n${link}\n\nApós validar você já pode fazer o seu login: \n\n http://localhost:8080/user/login`
+                    text: `Olá, ${savedUser.nameuser}, seja bem vido a nossa comudidade ECHO Connect\n\nPara validar seu E-mail clique no link logo abaixo, é rápido! 😀\n\n${link}\n\nApós validar você já pode fazer o seu login: \n\n https://echo-app-d1tu.onrender.com/user/login`
                 }
 
                 //Enviando o E-mail
