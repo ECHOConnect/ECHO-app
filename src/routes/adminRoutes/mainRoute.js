@@ -247,25 +247,45 @@ dotenv.config()
     adminRoute.get('/editUser/:id', (req, res) => {
         //Pegando dados de id da url
         const userId = req.params.id
+        const curretUser = req.user.id
 
-        //Buscando user pelo id
-        User.findById(userId)
-        .then((dadosUser) => {
-            if(!dadosUser){
-                req.flash('error_msg', 'Usuário não encontrado')
-                return res.render('/admin/dashboard')
+        Promise.all([
+            User.findById(userId),
+            User.findById(curretUser)
+        ])
+        .then(([userToEdit, curretUser]) => {
+            if(userToEdit.id === curretUser.id){
+                req.flash('error_msg', 'Você não pode editar os próprios dados')
+                return res.redirect('/admin/dashboard')
+            }
+            if(userToEdit.role === 'SUPER_ADMIN'){
+                req.flash('error_msg', 'Você não pode editar dados de um SUPER ADMIN')
+                return res.redirect('/admin/dashboard')
+            }
+            if(userToEdit.role === 'admin' && curretUser.role === 'admin'){
+                req.flash('error_msg', 'Você não pode editar dados de outro admin')
+                res.redirect('/admin/dashboard')
             }
 
-            //Mandando os dados atuais para o forms
-            res.render('admin/editUser', {
-                layout: 'main',
-                dadosUser: dadosUser
+            //Buscando user pelo id
+                User.findById(userToEdit)
+                .then((dadosUser) => {
+                    if(!dadosUser){
+                        req.flash('error_msg', 'Usuário não encontrado')
+                        return res.render('/admin/dashboard')
+                    }
+
+                    //Mandando os dados atuais para o forms
+                    res.render('admin/editUser', {
+                        layout: 'main',
+                        dadosUser: dadosUser
+                    })
+                })
+                .catch((error) => {
+                    res.status(400).send('Erro ao carregar página ' + error )
+                })
             })
         })
-        .catch((error) => {
-            res.status(400).send('Erro ao carregar página ' + error )
-        })
-    })
 
     //Rota para receber os dados de edição
     adminRoute.post('/editUser', (req, res) => {
