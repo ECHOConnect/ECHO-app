@@ -12,7 +12,7 @@ const ResponsesForum_admin = new Schema({
         default: Date.now
     },
     postId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'ForumPost',
         required: true
     },
