@@ -1,3 +1,4 @@
+
 //Funcionalidades do forúm 
 const containerMsgForum = document.getElementById('containerMsgForum')
 function ativeChat(){
@@ -6,13 +7,6 @@ function ativeChat(){
 
 //Funcionalidades de respostas do fórum
 const resps = [...document.querySelectorAll('.resps')]
-// btnOpen.addEventListener('click', (btn) => {
-    
-//     console.log(btn.target)
-//     resps.forEach((element) => {
-//         element.classList.toggle('ativeResps')
-//     })
-// })
 function openResps(id){
     const respDiv = document.getElementById(`resp-${id}`)
     respDiv.classList.toggle('ativeResps')
@@ -52,6 +46,44 @@ document.querySelectorAll('.editar-btn').forEach((buttom) => {
             if(element.target.id === 'closeModalEdit'){
                windowEdit.classList.remove('openModalResp')
             }
+        })
+    })
+})
+
+// Funcionalidades de estilo para posts
+    // Likes
+    document.querySelectorAll('.likeIcon').forEach((like) => {
+        like.addEventListener('click', () => {
+            // Seleciona o contador relacionado ao botão clicado
+            const likeCount = like.closest('.actionBtn').querySelector('.like-counts');
+            like.classList.add('likeUp');
+            setTimeout(() => {
+                like.classList.remove('likeUp')
+            }, 500)
+        });
+    });
+
+//Funcionalidade de atualização de likes
+document.querySelectorAll('.like').forEach((likeButtom) => {
+    likeButtom.addEventListener('click', () => {
+        const postId = likeButtom.id.replace('like-buttom-', '')
+        fetch(`/user/like/${postId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application-json',
+            },
+        })
+        .then((response) => {
+            response.json()
+        })
+        .then((data) => {
+            const likeCount = document.querySelector('.like-counts')
+            likeCount.textContent = data.msg === 'Like adicionado'
+            ? parseInt(likeCount.textContent) + 1
+            : parseInt(likeCount.textContent) - 1
+        })
+        .catch((error) => {
+            console.log(`Erro ao adicionar/remover like, erro: ${error}`)
         })
     })
 })

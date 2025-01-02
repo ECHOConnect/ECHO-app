@@ -1,0 +1,29 @@
+<div class="container formPost mb-3">
+    <form action="/user/post" method="post">
+        <input type="hidden" value="{{User._id}}" name="author">
+        <div class="card">
+            <div class="card-header">
+                <h4>Nova postagem</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="conteudo">O que quer compartilhar?</label>
+                    <textarea name="conteudo" class="form-control" id="conteudo"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="tags">Tags (<small><i>Separadas por vírgula</i></small>)</label>
+                    <input type="text" placeholder="Ex: Javascript, PHP, Node.Js" class="form-control" name="tags" id="tags">
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,10 +1,92 @@
-<div class="container home">
-    <h1>Tela principal da aplicação</h1>
-    <small>usuario: {{nomeuser.nameuser}}</small><br>
-    <small>função: {{nomeuser.role}}</small>
-    {{#if (eq nomeuser.role "admin")}}
-        <p>É admin</p>
-    {{else}}
-        <p>Não é admin</p>
-    {{/if}}    
+<div class="jumbotron banner">
+  <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
+  <p class="lead">Temos alguns posts esperando por você.</p>
+  <hr class="my-4">
+  <p>Que tal compartilhar algo incrível hoje?</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/user/post" role="button">Escrever Post</a>
+  </p>
 </div>
+ <div class="main-content">
+{{#each post}}
+        <div class="container contentPost p-3">
+            <div class="card">
+                <div class="card-header headerPublic card-publication">
+                    <div>
+                        <p>Publicação de - <small><strong>{{this.author.nameuser}}</strong></small>
+                    </div>
+                    <div>
+                        <small>publicado em {{this.createdDate}}</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h2>{{this.titulo}}</h2>
+                    <hr>
+                    <p>{{this.conteudo}}</p>
+                </div>
+                <div class="card-footer actionBtn b-3">
+                    <div class="like" id="like-buttom-{{this._id}}">
+                        <span class="material-symbols-outlined likeIcon">
+                            thumb_up
+                        </span>
+                        <span class="like-counts">{{this.likes.length}}</span>
+                    </div>
+                    <div class="coments">
+                        <span class="material-symbols-outlined commentIcon">
+                            comment
+                        </span>
+                        <span class="comments-counts">0</span>
+                    </div>
+                    <div class="share">
+                        <span class="material-symbols-outlined shareIcon">
+                            share
+                        </span>
+                    </div>
+                </div>
+                <div class="p-3">
+                    tags:
+                    {{#each tags}}
+                        <strong>|{{this}}|</strong>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    {{else}}
+    <p>Nenhum post</p>
+{{/each}}
+</div>
+{{!-- <div class="container p-3">
+    <div class="card">
+        <div class="card-header card-publication">
+            <div>
+                <p>Publicação de - Nome do autor</p>
+            </div>
+            <div>
+                <small>publicado em 20 de dezembro de 2024</small>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Conteúdo: </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, quos. Nostrum laudantium odio at possimus! Voluptates accusantium, nihil eveniet nobis voluptatem dolorem sint rerum blanditiis eos officiis non hic ut!</p>
+        </div>
+        <div class="card-footer actionBtn b-3">
+            <div class="like">
+                <span class="material-symbols-outlined likeIcon">
+                    thumb_up
+                </span>
+                 <span class="like-counts">0</span>
+            </div>
+            <div class="coments">
+                <span class="material-symbols-outlined commentIcon">
+                    comment
+                </span>
+                <span class="comments-counts">0</span>
+            </div>
+            <div class="share">
+                <span class="material-symbols-outlined shareIcon">
+                    share
+                </span>
+            </div>
+        </div>
+    </div>
+</div> --}}

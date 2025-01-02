@@ -1,0 +1,60 @@
+.banner{
+    background-color: #035AA6;
+    color: rgba(255, 255, 255, 0.719);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.card-publication{
+    display: flex;
+    justify-content: space-between;
+}
+.like, .coments{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.likeIcon, .commentIcon, .shareIcon{
+    font-size: 3vw;
+    cursor: pointer;
+}
+.likeIcon.likeUp{
+    color: #035AA6;
+    animation: effectLike .4s ease-in-out;
+}
+@keyframes effectLike {
+    from{
+        transform: scale(1.5);
+    }
+    to{
+        transform: scale(1.0);
+    }
+}
+
+.actionBtn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.contentPost{
+    position: relative;
+    z-index: 9;
+}
+.main-content{
+    padding-bottom: 25%;
+}
+.formPost{
+    height: 100vh;
+    margin-top: 50px;
+}
+.headerPublic{
+    background-color: #004887;
+    color: rgba(255, 255, 255, 0.692);
+}
+@media(max-width: 680px){
+    .likeIcon, .commentIcon, .shareIcon{
+        font-size: 6vw;
+    }
+    .card-publication{
+        flex-direction: column;
+    }
+}
