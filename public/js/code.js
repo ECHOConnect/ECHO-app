@@ -32,3 +32,26 @@ function banConfirm(){
     }
 }
 
+
+//Funcionalidades de ativação de modal para edição de respostas
+document.querySelectorAll('.editar-btn').forEach((buttom) => {
+    buttom.addEventListener('click', (element) => {
+        //Pegando dados do botão de editar
+        const dataId = buttom.getAttribute('data-id')
+        const conteudo = buttom.getAttribute('data-content')
+        //Pegando dados do form
+        document.getElementById('respostaId').value = dataId
+        document.getElementById('conteudo').value = conteudo
+        //Abrindo modal
+        const windowEdit = document.getElementById('windowEditResp')
+        windowEdit.classList.add('openModalResp')
+        console.log(dataId, conteudo)
+
+        const editResponses = document.getElementById('editResponses')
+        editResponses.addEventListener('click', (element) =>  {
+            if(element.target.id === 'closeModalEdit'){
+               windowEdit.classList.remove('openModalResp')
+            }
+        })
+    })
+})

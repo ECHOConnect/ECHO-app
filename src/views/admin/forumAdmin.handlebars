@@ -128,9 +128,37 @@
         {{#each this.respostas}}
           <div class="container resp mt-4 w-90">
             <div class="card border-primary contentResponses">
-              <div class="card-header">
-                <small>Autor: </small>
-                {{this.author.nameuser}}
+              <div class="card-header headerResp">
+                <div>
+                  {{!-- Modal para editar as respostas --}}
+                  <div class="windowEditResp" id="windowEditResp">
+                    <div class="editResponses" id="editResponses">
+                      <span class="material-symbols-outlined closeEditRes" id="closeModalEdit">
+                        close
+                      </span>
+                      <form action="/admin/forumAdmin/{{this._id}}" class="campResp" method="post">
+                        <input type="hidden" value="this._id" name="respostaId" id="respostaId">
+                        <div class="mb-3">
+                        <label for="editResp" class="p-3">Editar Resposta:</label>
+                        <textarea name="conteudo" class="form-control" id="conteudo"></textarea>
+                    </div>
+                  <div class="d-flex justify-content-center p-3">
+                    <button type="submit" class="btn btn-success border border-white">Confirmar Edição</button>
+                  </div>
+                  </form>
+                  </div>
+                  </div>
+
+                  <small>Autor: </small>
+                  {{this._id}}
+                  {{this.author.nameuser}}
+                </div>
+                <div class="editResp">
+                  {{!-- <button class="btn btn-success editar-btn">Editar</button> --}}
+                  <span class="material-symbols-outlined iconEdit editar-btn" data-id="{{this._id}}" data-content="{{this.conteudo}}">
+                    edit
+                  </span>
+                </div>
               </div>
               <div class="card-body">
                 <small>Resposta ao post: </small>
@@ -153,5 +181,6 @@
     <div class="text-light d-flex w-100 justify-content-center">
       <p>Não há nenhuma postagem por aqui... 😑</p>
     </div>
-  {{/each}}
+</div>
+    {{/each}}
 </div>

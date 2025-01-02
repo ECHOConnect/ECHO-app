@@ -241,6 +241,80 @@ body{
 .container-cont{
     height: 100vh;
 }
+.headerResp{
+    display: flex;
+    justify-content: space-between;
+}
+.editResp .iconEdit{
+    cursor: pointer;
+    padding: 5px;
+}
+.editResp .iconEdit:hover{
+    animation: penAnimation .4s ease-in-out;
+}
+/*Janela modal de edição de respostas*/
+.windowEditResp{
+    height: 100vh;
+    width: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: #00488759;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    backdrop-filter: blur(3px);
+    transition: .2s ease-in-out;
+}
+.windowEditResp.openModalResp{
+    width: 100vw;
+    overflow: visible;
+}
+.editResponses{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #60a9e97d;
+    border-radius: 20px;
+    backdrop-filter: blur(1px);
+    border: 1px solid white;
+}
+ .form{
+    width: 85%;
+    padding: 5px;
+} 
+.closeEditRes{
+    font-size: 3vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    border-radius: 26px;
+    border: 1px solid red;
+    cursor: pointer;
+    transition: .4s ease-in-out;
+}
+.closeEditRes:hover{
+    background-color: rgba(255, 0, 0, 0.418);
+}
+.campResp{
+    width: 80%;
+}
+
+@keyframes penAnimation {
+    from{
+        transform: rotate(45deg);
+    }
+    to{
+        transform: rotate(-45deg);
+    }
+}
 
 /*Dasboard*/
 .containerDataUser{
