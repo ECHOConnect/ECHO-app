@@ -1,0 +1,82 @@
+<div class="main-content">
+<div class="side-home-icon">
+        <span class="material-symbols-outlined d-none">
+            filter_alt
+        </span>
+        <a href="/user/relevants">
+            <li id="btnFilterPoster">
+                <span class="textBtn">
+                    Posts mais relevântes
+                </span>
+                <small>Mais Curtidos</small>
+                <span class="material-symbols-outlined">
+                    filter_list
+                </span>
+            </li>
+        </a>
+        <form action="/user/searchPost" method="get" class="formSearchPosts">
+            <div>
+                <label for="searchPosts"></label>
+                <input type="text" placeholder="Busque por tag..." class="form-control search" name="tag">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <div class="textPesq">
+        <h4>Resultados de: "<i>{{searchPost}}</i>"</h4>
+    </div>
+{{#if post.length}}
+    {{#each post}}
+            <div class="container contentPost p-3">
+                <div class="card">
+                    <div class="card-header headerPublic card-publication">
+                        <div>
+                            <p>Publicação de - <small><strong>{{this.author.nameuser}}</strong></small>
+                        </div>
+                        <div>
+                            <small>publicado em {{this.createdDate}}</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h2>{{this.titulo}}</h2>
+                        <hr>
+                        <p>{{this.conteudo}}</p>
+                    </div>
+                    <div class="card-footer actionBtn b-3">
+                        <div class="like" id="like-buttom-{{this._id}}">
+                            <span title="-"  class="material-symbols-outlined likeIcon">
+                                thumb_up
+                            </span>
+                            <span class="like-counts">{{this.likes.length}}</span>
+                        </div>
+                        <div class="coments">
+                            <span class="material-symbols-outlined commentIcon">
+                                comment
+                            </span>
+                            <span class="comments-counts">0</span>
+                        </div>
+                        <div class="share">
+                            <span class="material-symbols-outlined shareIcon">
+                                share
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <strong>Tags:</strong>
+                        {{#each tags}}
+                            <span class="tagStyle">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        {{else}}
+        <p>Nenhum post</p>
+    {{/each}}
+    {{else}}
+    <div class="mt-4 textPesq d-flex justify-content-center">
+        <h4>Nenhum resultado encontrado para "{{searchPost}}"</h4>
+    </div>
+{{/if}}
+</div>

@@ -41,12 +41,12 @@ userRouter.post('/post', isAuthenticated, (req, res) => {
     //Pegando dados do form de postagem
     const {author, titulo, conteudo, tags} = req.body
 
-    //Separando as tags no array por vírgulas
+    //Separando as tags no array por vírgulas e convertendo para minúsculas
     const tagsArray = tags 
-    ? tags
+    ? tags.toLowerCase()
         .split(',')
-        .map((tag) => tag.trim())
-        .filter((tag) => tag !== '') 
+        .map((tag) => tag.trim().toLowerCase())
+        .filter((tag) => tag !== '')
     : []
 
     //Salvando novo post
