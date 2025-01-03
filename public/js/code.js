@@ -65,7 +65,7 @@ document.querySelectorAll('.editar-btn').forEach((buttom) => {
 
 //Funcionalidade de atualização de likes
 document.querySelectorAll('.like').forEach((likeButtom) => {
-    likeButtom.addEventListener('click', () => {
+    likeButtom.addEventListener('click', (e) => {
         const postId = likeButtom.id.replace('like-buttom-', '')
         fetch(`/user/like/${postId}`, {
             method: 'POST',
@@ -78,9 +78,12 @@ document.querySelectorAll('.like').forEach((likeButtom) => {
         })
         .then((data) => {
             const likeCount = document.querySelector('.like-counts')
-            likeCount.textContent = data.msg === 'Like adicionado'
-            ? parseInt(likeCount.textContent) + 1
-            : parseInt(likeCount.textContent) - 1
+            if(data.msg === 'Like adicionado'){
+                parseInt(likeCount.textContent) + 1
+            }
+            else{
+                parseInt(likeCount.textContent) - 1
+            }
         })
         .catch((error) => {
             console.log(`Erro ao adicionar/remover like, erro: ${error}`)

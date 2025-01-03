@@ -70,45 +70,64 @@ userRouter.post('/post', isAuthenticated, (req, res) => {
     })
 })
 
-//Rota de processamento de dados de likes
 userRouter.post('/like/:id', (req, res) => {
-    //Pegando id do post na url
-    const postId = req.params.id
-    //Pegando id do usuário logado
-    const userId = req.user._id
+    // Pegando id do post na url
+    const postId = req.params.id;
+    // Pegando id do usuário logado
+    const userId = req.user._id;
 
-    //Buscando o post específico
+    // Buscando o post específico
     Post.findById(postId)
+    .populate('likes', 'nameuser') // Preenche os dados dos likes (nameuser) com o populate
     .then((post) => {
-        //Validando existência de post
-        if(!post){
-            req.flash('error_msg', 'Post não encontrado')
-            res.redirect('/user/home')
+        // Validando existência do post
+        if (!post) {
+            req.flash('error_msg', 'Post não encontrado');
+            return res.redirect('/user/home');
         }
-        const hasLiked = post.likes.some(id => id.toString()=== userId.toString())
-        if(hasLiked){
-            post.likes.pull(userId)
+
+        // Verificando se o usuário já curtiu o post
+        const hasLiked = post.likes.some(like => like._id.toString() === userId.toString());
+
+        if (hasLiked) {
+            // Se já curtiu, remove o like
+            post.likes.pull(userId);
             post.save()
             .then(() => {
-                res.json({msg: 'like removido'})
-            }).catch((error) => {
-                console.log(error)
-                res.json({msg: 'Erro ao remover like'})
-            })
-        }
-        else{
-            post.likes.push(userId)
-            post.save()
-            .then(() => {
-                res.json({msg: 'Like adicionado'})
+                // Após salvar, renderiza o template 'home' passando o post com os likes
+                res.render('user/home', {
+                    post: [post], // Passando o post para o template
+                    likes: post.likes // Enviando o array de likes, que já contém o nameuser
+                });
+                
             })
             .catch((error) => {
-                console.log(error)
-                res.json({msg: 'Erro ao adicionar like'})
+                console.log(error);
+                res.json({ msg: 'Erro ao remover like' });
+            });
+        } else {
+            // Se não curtiu, adiciona o like
+            post.likes.push(userId);
+            post.save()
+            .then(() => {
+                res.json({ msg: 'Like adicionado' });
+                res.render('user/home', {
+                    post: [post], // Passando o post para o template
+                    likes: post.likes // Enviando o array de likes, que já contém o nameuser
+                });
             })
+            .catch((error) => {
+                console.log(error);
+                res.json({ msg: 'Erro ao adicionar like' });
+            });
         }
     })
-})
+    .catch((error) => {
+        console.log(error);
+        res.json({ msg: 'Erro ao buscar o post' });
+    });
+});
+
 
 
 export default userRouter

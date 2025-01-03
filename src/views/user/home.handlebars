@@ -4,8 +4,14 @@
   <hr class="my-4">
   <p>Que tal compartilhar algo incrível hoje?</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/user/post" role="button">Escrever Post</a>
-  </p>
+    <a href="/user/post">
+        <button class="btn btn-primary btnAddPost">Escrever Post
+            <span class="material-symbols-outlined">
+                notes
+            </span>
+        </button>
+    </a>
+    </p>
 </div>
  <div class="main-content">
 {{#each post}}
@@ -26,7 +32,7 @@
                 </div>
                 <div class="card-footer actionBtn b-3">
                     <div class="like" id="like-buttom-{{this._id}}">
-                        <span class="material-symbols-outlined likeIcon">
+                        <span title="-"  class="material-symbols-outlined likeIcon">
                             thumb_up
                         </span>
                         <span class="like-counts">{{this.likes.length}}</span>
@@ -55,38 +61,3 @@
     <p>Nenhum post</p>
 {{/each}}
 </div>
-{{!-- <div class="container p-3">
-    <div class="card">
-        <div class="card-header card-publication">
-            <div>
-                <p>Publicação de - Nome do autor</p>
-            </div>
-            <div>
-                <small>publicado em 20 de dezembro de 2024</small>
-            </div>
-        </div>
-        <div class="card-body">
-            <p>Conteúdo: </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, quos. Nostrum laudantium odio at possimus! Voluptates accusantium, nihil eveniet nobis voluptatem dolorem sint rerum blanditiis eos officiis non hic ut!</p>
-        </div>
-        <div class="card-footer actionBtn b-3">
-            <div class="like">
-                <span class="material-symbols-outlined likeIcon">
-                    thumb_up
-                </span>
-                 <span class="like-counts">0</span>
-            </div>
-            <div class="coments">
-                <span class="material-symbols-outlined commentIcon">
-                    comment
-                </span>
-                <span class="comments-counts">0</span>
-            </div>
-            <div class="share">
-                <span class="material-symbols-outlined shareIcon">
-                    share
-                </span>
-            </div>
-        </div>
-    </div>
-</div> --}}

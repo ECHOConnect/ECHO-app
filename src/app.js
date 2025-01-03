@@ -28,6 +28,8 @@
             import loginRouter from './routes/userRoutes/Login_register.js'
         //Rota de redefinição de senha
             import routeReset from './routes/userRoutes/resetPassword.js'
+        //Rota de contato
+            import routerContact from './routes/userRoutes/contact.js'
 
 //Importando configurações e middlewares
 
@@ -113,6 +115,8 @@
         app.use('/user', loginRouter)
 
         app.use('/user', routeReset)
+
+        app.use('/user', routerContact)
 
 //Conectando o servidor
     const PORT = process.env.PORT

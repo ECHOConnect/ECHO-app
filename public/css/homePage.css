@@ -50,6 +50,33 @@
     background-color: #004887;
     color: rgba(255, 255, 255, 0.692);
 }
+.btnAddPost{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.lead a{
+    display: flex;
+    width: 160px;
+    text-decoration: none;
+}
+#Options a{
+    text-decoration: none;
+    color: white;
+}
+#Options h3{
+    border: 1px solid transparent;
+    padding: 5px;
+    transition: .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 10px;
+}
+#Options a h3:hover{
+    border: 1px solid white;
+}
+.content-feedbackSystem{
+    height: 100vh;
+}
+
 @media(max-width: 680px){
     .likeIcon, .commentIcon, .shareIcon{
         font-size: 6vw;

@@ -3,7 +3,9 @@
     <div id="Options">
         <h3 class="Text_Options">Sobre</h3>
         <h3 class="Text_Options">Recursos</h3>
-        <h3 class="Text_Options">Contato</h3>
+        <a href="/user/contact">
+            <h3 class="Text_Options">Contato</h3>
+        </a>
         {{#if (eq nomeuser.role "admin")}}
             <a href="/admin/dashboard"><button id="Login_signin_btn">Perfil</button></a>
         {{else if (eq nomeuser.role "SUPER_ADMIN")}}
