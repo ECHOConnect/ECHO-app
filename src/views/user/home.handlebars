@@ -1,6 +1,24 @@
 <div class="jumbotron banner">
-  <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
-  <p class="lead">Temos alguns posts esperando por você.</p>
+  <div class="bannerPicture">
+      <div>
+          <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
+          <p class="lead">Temos alguns posts esperando por você.</p>
+      </div>
+      <div>
+         <div class="photPerfil">
+            {{#if (eq User.profilePicture "/default-profile.png")}}
+                <img src="/uploads/default-profile.png" alt="">
+            {{else}}
+                <img src="{{User.profilePicture}}" class="imgUser" alt="">
+            {{/if}}
+                <button class="btn btn-dark" onclick="ativeWindowPhoto()">Nova foto 
+                <span class="material-symbols-outlined">
+                    image
+                </span>
+            </button>
+        </div> 
+      </div>
+  </div>
   <hr class="my-4">
   <p>Que tal compartilhar algo incrível hoje?</p>
   <p class="lead">
@@ -23,7 +41,7 @@
                 <span class="textBtn">
                     Posts mais relevântes
                 </span>
-                <small>Mais Curtidos</small>
+                <small class="textMob">Mais Curtidos</small>
                 <span class="material-symbols-outlined">
                     filter_list
                 </span>
@@ -85,4 +103,22 @@
     {{else}}
     <p>Nenhum post</p>
 {{/each}}
+</div>
+
+<div class="windowPhot" id="windowPhot">
+    <div class="photo" id="photo">
+        <form class="formPhoto" action="/user/home" method="POST" enctype="multipart/form-data">
+            {{#if (eq User.profilePicture "/default-profile.png")}}
+                <img src="/uploads/default-profile.png" alt="">
+            {{else}}
+                <img src="{{User.profilePicture}}" class="imgUser" alt="">
+            {{/if}}
+            {{!-- <input class="text-light" type="file" name="profileImage"/> --}}
+            <div class="mb-3">
+                <label for="formFileSm" class="form-label"></label>
+                <input class="form-control text-dark form-control-sm" id="formFileSm" type="file" name="profileImage">
+            </div>
+            <button class="btn btn-success" type="submit">Adicionar</button>
+        </form> 
+    </div>
 </div>

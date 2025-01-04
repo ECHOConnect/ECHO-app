@@ -44,6 +44,10 @@ const User = new Schema({
     resetPasswordExpire: {
         type: Date,
         default: null
+    },
+    profilePicture: {
+        type: String,
+        default: '/uploads/default-profile.png'
     }
 })
 

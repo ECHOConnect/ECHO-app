@@ -135,10 +135,68 @@
     background-color: #00488798;
     color: white;
 }
+.textMob{
+    display: none;
+}
 .textPesq{
     padding-top: 10px;
     color: rgba(255, 255, 255, 0.781);
     height: 15vh;
+}
+.bannerPicture{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.photPerfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.photo{
+    height: 75%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #004887b5;
+    border-radius: 10px;
+    border: 1px solid #ffffff78;
+}
+.formPhoto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.btn-dark{
+    display: flex;
+    gap: 5px;
+}
+.windowPhot{
+    height: 0;
+    overflow: hidden;
+    background-color: #035aa680;
+    backdrop-filter: blur(1px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s ease-in-out;
+}
+.windowPhot.ativeWindowPhoto{
+    height: 100vh;
+    overflow: visible;
+}
+.imgUser{
+    height: 250px;
+    border-radius: 10px;
 }
 @media(max-width: 680px){
     .likeIcon, .commentIcon, .shareIcon{
@@ -154,5 +212,18 @@
         text-align: center;
         font-size: 10px;
         height: 10vw;
+    }
+    .textMob{
+        display: flex;
+    }
+    .accountIcon{
+        font-size: 10vw;
+    }
+    .bannerPicture{
+        flex-direction: column;
+    }
+    .imgUser{
+        height: 130px;
+        border-radius: 10px;
     }
 }

@@ -32,6 +32,8 @@
             import routerContact from './routes/userRoutes/contact.js'
         //Rota de posts relevântes
             import relevantRouter from './routes/userRoutes/relevants.js'
+        //Rota de edição de perfil
+            import routerCustom from './routes/userRoutes/customProfile.js'
 
 //Importando configurações e middlewares
 
@@ -121,6 +123,8 @@
         app.use('/user', routerContact)
 
         app.use('/user', relevantRouter)
+
+        app.use('/user', routerCustom)
 
 //Conectando o servidor
     const PORT = process.env.PORT

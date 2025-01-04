@@ -90,3 +90,34 @@ document.querySelectorAll('.like').forEach((likeButtom) => {
         })
     })
 })
+
+//Funcionalidade ativar foto de perfil
+document.getElementById('change-picture-btn').addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    
+    input.onchange = () => {
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append('profilePicture', file);
+  
+      fetch('/upload-profile-picture', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.error);
+          } else {
+            document.getElementById('profile-picture').src = data.user.profilePicture;
+            alert(data.message);
+          }
+        })
+        .catch((error) => console.error('Erro ao enviar a imagem:', error));
+    };
+  
+    input.click();
+  });
+  
