@@ -14,7 +14,8 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     //Reordenando do mais recente post
     .sort({createdDate: -1})
     //Populando - pegando o nome do autor pela id do autor da postagem
-    .populate('author', 'nameuser')
+    .populate('author', 'nameuser profilePicture')
+    .exec()
     .then((post) => {
         res.render('user/home', {
             layout: 'main',
@@ -71,19 +72,18 @@ userRouter.post('/post', isAuthenticated, (req, res) => {
 })
 
 userRouter.post('/like/:id', (req, res) => {
-    // Pegando id do post na url
+    // Pegando id do post na URL
     const postId = req.params.id;
     // Pegando id do usuário logado
     const userId = req.user._id;
 
     // Buscando o post específico
     Post.findById(postId)
-    .populate('likes', 'nameuser') // Preenche os dados dos likes (nameuser) com o populate
+    .populate('likes', 'nameuser') // Preenche os dados dos likes (nameuser)
     .then((post) => {
         // Validando existência do post
         if (!post) {
-            req.flash('error_msg', 'Post não encontrado');
-            return res.redirect('/user/home');
+            return res.json({ msg: 'Post não encontrado' });
         }
 
         // Verificando se o usuário já curtiu o post
@@ -94,12 +94,8 @@ userRouter.post('/like/:id', (req, res) => {
             post.likes.pull(userId);
             post.save()
             .then(() => {
-                // Após salvar, renderiza o template 'home' passando o post com os likes
-                res.render('user/home', {
-                    post: [post], // Passando o post para o template
-                    likes: post.likes // Enviando o array de likes, que já contém o nameuser
-                });
-                
+                // Envia a resposta indicando que o like foi removido
+                res.json({ msg: 'Like removido', likes: post.likes.length });
             })
             .catch((error) => {
                 console.log(error);
@@ -110,11 +106,8 @@ userRouter.post('/like/:id', (req, res) => {
             post.likes.push(userId);
             post.save()
             .then(() => {
-                res.json({ msg: 'Like adicionado' });
-                res.render('user/home', {
-                    post: [post], // Passando o post para o template
-                    likes: post.likes // Enviando o array de likes, que já contém o nameuser
-                });
+                // Envia a resposta indicando que o like foi adicionado
+                res.json({ msg: 'Like adicionado', likes: post.likes.length });
             })
             .catch((error) => {
                 console.log(error);

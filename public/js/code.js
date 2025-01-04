@@ -52,41 +52,39 @@ document.querySelectorAll('.editar-btn').forEach((buttom) => {
 
 // Funcionalidades de estilo para posts
     // Likes
-    document.querySelectorAll('.likeIcon').forEach((like) => {
-        like.addEventListener('click', () => {
-            // Seleciona o contador relacionado ao botão clicado
-            const likeCount = like.closest('.actionBtn').querySelector('.like-counts');
-            like.classList.add('likeUp');
-            setTimeout(() => {
-                like.classList.remove('likeUp')
-            }, 500)
-        });
-    });
+    // document.querySelectorAll('.likeIcon').forEach((like) => {
+    //     like.addEventListener('click', () => {
+    //         // Seleciona o contador relacionado ao botão clicado
+    //         const likeCount = like.closest('.actionBtn').querySelector('.like-counts');
+    //         like.classList.add('likeUp');
+    //     });
+    // });
 
 //Funcionalidade de atualização de likes
-document.querySelectorAll('.like').forEach((likeButtom) => {
-    likeButtom.addEventListener('click', (e) => {
-        const postId = likeButtom.id.replace('like-buttom-', '')
-        fetch(`/user/like/${postId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application-json',
-            },
-        })
-        .then((response) => {
-            response.json()
-        })
-        .then((data) => {
-            const likeCount = document.querySelector('.like-counts')
-            if(data.msg === 'Like adicionado'){
-                parseInt(likeCount.textContent) + 1
-            }
-            else{
-                parseInt(likeCount.textContent) - 1
-            }
-        })
-        .catch((error) => {
-            console.log(`Erro ao adicionar/remover like, erro: ${error}`)
+addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.like').forEach((likeButtom) => {
+        likeButtom.addEventListener('click', (e) => {
+            const postId = likeButtom.id.replace('like-buttom-', '')
+            fetch(`/user/like/${postId}`, {  // Alterado para o caminho correto da rota de like
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                },
+            })
+            .then((response) => response.json())  // Aguardar a resposta JSON
+            .then((data) => {
+                const likeCount = likeButtom.querySelector('.like-counts');
+                if(likeCount) {
+                    likeCount.textContent = data.likes;  // Atualiza o contador de likes
+                    
+                    //Efeito de like
+                    const btnAnim = document.querySelectorAll('.likeIcon')
+                    btnAnim.forEach(bt => bt.classList.toggle('likeUp'))
+                }
+            })
+            .catch((error) => {
+                console.log(`Erro ao adicionar/remover like, erro: ${error}`)
+            })
         })
     })
 })

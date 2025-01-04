@@ -61,11 +61,22 @@
         <div class="container contentPost p-3">
             <div class="card">
                 <div class="card-header headerPublic card-publication">
-                    <div>
-                        <p>Publicação de - <small><strong>{{this.author.nameuser}}</strong></small>
+                    <div class="fotoUserPost">
+                        {{#if (eq author.profilePicture "/default-profile.png")}}
+                            <img src="/uploads/default-profile.png" alt="">
+                        {{else}}
+                            <img src="{{author.profilePicture}}" class="imgUserPost" alt="">
+                        {{/if}}
                     </div>
-                    <div>
-                        <small>publicado em {{this.createdDate}}</small>
+                    <div class="dataPost">
+                        <p>Publicação de -
+                            <small>
+                                <strong>{{this.author.nameuser}}</strong>
+                            </small>
+                        </p>
+                        <div>
+                            <small>publicado em {{this.createdDate}}</small>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -104,7 +115,7 @@
     <p>Nenhum post</p>
 {{/each}}
 </div>
-
+{{!-- Janela modal de mudança de foto --}}
 <div class="windowPhot" id="windowPhot">
     <div class="photo" id="photo">
         <form class="formPhoto" action="/user/home" method="POST" enctype="multipart/form-data">
