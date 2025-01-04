@@ -32,23 +32,47 @@
             <div class="container contentPost p-3">
                 <div class="card">
                     <div class="card-header headerPublic card-publication">
-                        <div>
-                            <p>Publicação de - <small><strong>{{this.author.nameuser}}</strong></small>
-                        </div>
+                        <div class="fotoUserPost">
+                        {{#if (eq author.profilePicture "/default-profile.png")}}
+                            <img src="/uploads/default-profile.png" alt="">
+                        {{else}}
+                            <img src="{{author.profilePicture}}" class="imgUserPost" alt="">
+                        {{/if}}
+                    </div>
+                    <div class="dataPost">
+                        <p>Publicação de -
+                            <small>
+                                <strong>{{this.author.nameuser}} 
+                                    {{#if (eq this.author.role "SUPER_ADMIN")}}
+                                        <span class="text-danger tagSA">
+                                            {{this.author.role}}
+                                        </span>
+                                    {{else if (eq this.author.role "admin")}}
+                                        <span class="text-success">
+                                            {{this.author.role}}
+                                        </span>
+                                    {{!-- {{else if (eq this.author.role "user")}} --}}
+                                    {{/if}}
+                                </strong>
+                            </small>
+                        </p>
                         <div>
                             <small>publicado em {{this.createdDate}}</small>
                         </div>
                     </div>
+                </div>
                     <div class="card-body">
                         <h2>{{this.titulo}}</h2>
                         <hr>
-                        <p>{{this.conteudo}}</p>
+                        <p>{{{this.conteudo}}}</p>
                     </div>
                     <div class="card-footer actionBtn b-3">
                         <div class="like" id="like-buttom-{{this._id}}">
-                            <span title="-"  class="material-symbols-outlined likeIcon">
-                                thumb_up
-                            </span>
+                            <button class="btnLike">
+                                <span title="-"  class="material-symbols-outlined likeIcon">
+                                    thumb_up
+                                </span>
+                            </button>
                             <span class="like-counts">{{this.likes.length}}</span>
                         </div>
                         <div class="coments">

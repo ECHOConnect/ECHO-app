@@ -7,3 +7,18 @@ windowPhot.addEventListener('click', (element) => {
         windowPhot.classList.remove('ativeWindowPhoto')
     }
 })
+//Funcionalidade de biografia
+const dataUser = document.getElementById('dataUser')
+function ativeBio(){
+    dataUser.classList.toggle('ativeBio')
+}
+//Funcionalidade de info de user
+const cardProfile = document.getElementById('cardProfile')
+function ativeInfoUser(){
+    cardProfile.classList.add('ativeCardProfile')
+}
+cardProfile.addEventListener('click', (button) => {
+    if(button.target.id === 'iconCloseProfile' || button.target.id === 'cardProfile'){
+        cardProfile.classList.remove('ativeCardProfile')
+    }
+})

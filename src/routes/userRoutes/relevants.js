@@ -1,5 +1,6 @@
 import express from 'express'
 const relevantRouter = express.Router()
+import { marked, Marked } from 'marked'
 import { isAuthenticated } from '../../config/auth.js'
 import Post from '../../models/Post.js'
 
@@ -7,12 +8,17 @@ import Post from '../../models/Post.js'
     relevantRouter.get('/relevants', isAuthenticated, (req, res) => {
         const nomeuser = req.user
         Post.find()
-        .populate('author', 'nameuser')
+        .populate('author', 'nameuser profilePicture role')
         .sort({likes: -1})
         .then((posts) => {
+            //Processamento do markdown para cada post
+            const processedPost = posts.map(posts => ({
+                ...posts.toObject(),
+                conteudo: marked(posts.conteudo)
+            }))
             res.render('user/relevants', {
                 nomeuser: nomeuser,
-                posts: posts
+                posts: processedPost
             })
         })
         .catch((error) => {
@@ -38,10 +44,16 @@ relevantRouter.get('/searchPost', isAuthenticated, (req, res) => {
         const nomeuser = req.user
         //Buscando tag pesquisada no banco de dados
         Post.find({tags: {$regex: new RegExp(searchPost, 'i')}})
-        .populate('author', 'nameuser')
+        .populate('author', 'nameuser profilePicture role')
+        .exec()
         .then((post) => {
+            //Processamento do markdown para cada post
+            const processedPost = post.map(post => ({
+                ...post.toObject(),
+                conteudo: marked(post.conteudo)
+            }))
             res.render('user/searchPost', {
-                post: post,
+                post: processedPost,
                 searchPost,
                 nomeuser: nomeuser,
                 layout: 'main'

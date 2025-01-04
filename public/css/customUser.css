@@ -1,0 +1,32 @@
+.cardProfile{
+    height: 100vh;
+    display: flex;
+    width: 0;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    backdrop-filter: blur(1px);
+    z-index: 999;
+    background-color: #00000030;
+    left: 0;
+    transition: .4s cubic-bezier(1, -0.9, 0, 1.93);
+}
+.cardProfile.ativeCardProfile{
+    width: 100vw;
+}
+.cardProfileData{
+    padding: 13px;
+}
+.iconCloseProfile{
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 2vw;
+    color: white;
+    background-color: red;
+    border-radius: 30px;
+    cursor: pointer;
+}

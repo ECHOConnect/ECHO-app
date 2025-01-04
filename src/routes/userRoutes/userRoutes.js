@@ -15,7 +15,7 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     //Reordenando do mais recente post
     .sort({createdDate: -1})
     //Populando - pegando o nome do autor pela id do autor da postagem
-    .populate('author', 'nameuser profilePicture')
+    .populate('author', 'nameuser profilePicture role biography')
     .exec()
     .then((post) => {
         //Processamento do markdown para cada post

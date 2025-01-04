@@ -48,6 +48,9 @@ const User = new Schema({
     profilePicture: {
         type: String,
         default: '/uploads/default-profile.png'
+    },
+    biography: {
+        type: String,
     }
 })
 

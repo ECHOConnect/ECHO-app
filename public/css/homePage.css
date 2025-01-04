@@ -6,6 +6,65 @@
 .imglogoHome{
     height: 100px;
 }
+.dataUserHome{
+    position: relative;
+    width: 24%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #022645;
+    transition: .2s ease-in-out;
+}
+.iconInfo{
+    position: absolute;
+    top: 0;
+    color: white;
+    border: none;
+    background-color: #000051;
+    border-radius: 20px;
+}
+.formAddBio{
+    width: 100%;
+}
+.dataUserHome.ativeBio{
+    width: 90%;
+}
+.dataUserHome.ativeBio .bio{
+    overflow: visible;
+    width: 95%;
+}
+.iconEditBio{
+    top: 0;
+    position: absolute;
+    left: 2px;
+    background: transparent;
+    border: transparent;
+    color: white;
+}
+.bio{
+    height: 51%;
+    width: 0%;
+    overflow: hidden;
+}
+.bio #bioAdd{
+    height: 100%;
+    background-color: #033c6e;
+    color: white;
+}
+#bioAdd::placeholder{
+    color: rgba(255, 255, 255, 0.521);
+}
+.iconAddBio{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.iconAddB{
+    font-size: 3vw;
+}
 .card-publication{
     display: flex;
     justify-content: space-between;
@@ -28,6 +87,11 @@
 }
 .likeIcon.likeUp{
     color: #000000;
+}
+.tagSA{
+    background-color: rgba(0, 0, 0, 0.39);
+    padding: 5px;
+    border-radius: 5px;
 }
 pre{
     background-color: rgba(0, 0, 0, 0.781);
@@ -160,9 +224,9 @@ pre{
     height: 15vh;
 }
 .bannerPicture{
-    display: flex;
-    gap: 20px;
     justify-content: space-between;
+    display: flex;
+    gap: 10px;
     align-items: center;
 }
 .photPerfil{
@@ -225,7 +289,8 @@ pre{
 }
 .imgUserPost{
     height: 100px;
-    border-radius: 10px;
+    border-radius: 100%;
+    border: 1px solid white;
 }
 .dataPost{
     display: flex;
@@ -240,8 +305,28 @@ pre{
         top: 100px !important;
     }
 }
-
 @media(max-width: 680px){
+    .dataUserHome{
+        width: 45%;
+        justify-content: center;
+    }
+    #bioAdd.form-control{
+        height: 183px;
+    }
+    .card-text{
+        text-align: center;
+    }
+    .card-body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .iconAddB{
+        font-size: 10vw;
+    }
+    .dataUserHome.ativeBio{
+        flex-direction: column-reverse;
+    }
     .likeIcon, .commentIcon, .shareIcon{
         font-size: 6vw;
     }
@@ -265,9 +350,16 @@ pre{
     .bannerPicture{
         flex-direction: column;
     }
+    .cardPhot{
+        object-fit: contain;
+        height: 180px;
+        border-radius: 10px;
+    }
+    #iconCloseProfile{
+        font-size: 10vw;
+    }
     .imgUser{
         height: 130px;
-        border-radius: 10px;
     }
     .dataPost{
         display: flex;
