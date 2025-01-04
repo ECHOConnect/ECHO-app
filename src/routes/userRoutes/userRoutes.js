@@ -2,6 +2,7 @@ import { Router } from "express";
 const userRouter = Router()
 import User from "../../models/User.js";
 import Post from "../../models/Post.js";
+import { marked, Marked } from "marked";
 import { isAuthenticated } from "../../config/auth.js";
 
 
@@ -17,10 +18,15 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     .populate('author', 'nameuser profilePicture')
     .exec()
     .then((post) => {
+        //Processamento do markdown para cada post
+        const processedPost = post.map(post => ({
+            ...post.toObject(),
+            conteudo: marked(post.conteudo)
+        }))
         res.render('user/home', {
             layout: 'main',
             nomeuser: nomeuser,
-            post: post,
+            post: processedPost,
         })
     })
     .catch((error) => {
@@ -41,6 +47,7 @@ userRouter.get('/post', isAuthenticated, (req, res) => {
 userRouter.post('/post', isAuthenticated, (req, res) => {
     //Pegando dados do form de postagem
     const {author, titulo, conteudo, tags} = req.body
+    
 
     //Separando as tags no array por vírgulas e convertendo para minúsculas
     const tagsArray = tags 

@@ -49,25 +49,25 @@ forumRouter.get('/forumAdmin', isAuthenticated, isAdmin, (req, res) => {
 })
 
 //Configuração do nodemailer para envio de emails
-    // const transporter = nodemailer.createTransport({
-    //     service: 'gmail',
-    //     auth: {
-    //         user: process.env.EMAIL_USER,
-    //         pass: process.env.EMAIL_PASS  
-    //     }
-    // })
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS  
+        }
+    })
 
 //Função para o envio do email
-    // const sendEmail = (to, subject, text) => {
-    //     const mailOption = {
-    //         from: process.env.EMAIL_USER,
-    //         to: to,
-    //         subject: subject,
-    //         text: text
-    //     }
+    const sendEmail = (to, subject, text) => {
+        const mailOption = {
+            from: process.env.EMAIL_USER,
+            to: to,
+            subject: subject,
+            text: text
+        }
 
-    //     return transporter.sendMail(mailOption)
-    // }
+        return transporter.sendMail(mailOption)
+    }
 
 //Rota para processamento de dados do forúm
 forumRouter.post('/forumAdmin', (req, res) => {
@@ -87,19 +87,19 @@ forumRouter.post('/forumAdmin', (req, res) => {
     novaPostagem
     .save()
     //Buscando os roles específicos
-    // .then(() => {
-    //     return User.find({role: {$in: ['admin', 'SUPER_ADMIN'] }})
-    // })
+    .then(() => {
+        return User.find({role: {$in: ['admin', 'SUPER_ADMIN'] }})
+    })
     //Buscando os emails de todos os admins e Super Admins
     .then((admins) => {
         const adminsEmail = admins.map(admins => admins.useremail)
 
         //Enviando E-mail
-        // sendEmail(
-        //     `${adminsEmail.join(',')}`,
-        //     `Nova postagem no Forúm (${titulo})`,
-        //     `Uma nova postagem foi criada no fórum.\n\nTítulo: ${titulo}\nConteúdo: ${conteudo}`
-        // )
+        sendEmail(
+            `${adminsEmail.join(',')}`,
+            `Nova postagem no Forúm (${titulo})`,
+            `Uma nova postagem foi criada no fórum.\n\nTítulo: ${titulo}\nConteúdo: ${conteudo}`
+        )
     })
     .then(() => {
         console.log(`[debug]: usuário: ${author}`)
@@ -138,11 +138,11 @@ forumRouter.post('/forumAdmin', (req, res) => {
         .then((admins) => {
             const adminsEmail = admins.map(admins => admins.useremail)
             //Enviando o email
-            // sendEmail(
-            //     `${adminsEmail}`,
-            //     `Nova resposta no Forúm`,
-            //     `Uma nova resposta foi criada no fórum.\n\nConteúdo: ${conteudo}`
-            // )
+            sendEmail(
+                `${adminsEmail}`,
+                `Nova resposta no Forúm`,
+                `Uma nova resposta foi criada no fórum.\n\nConteúdo: ${conteudo}`
+             )
         })
         .then(() => {
             req.flash('success_msg', 'Resposta enviada com sucesso!')

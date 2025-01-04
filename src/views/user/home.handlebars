@@ -82,13 +82,15 @@
                 <div class="card-body">
                     <h2>{{this.titulo}}</h2>
                     <hr>
-                    <p>{{this.conteudo}}</p>
+                    <p>{{{this.conteudo}}}</p>
                 </div>
                 <div class="card-footer actionBtn b-3">
                     <div class="like" id="like-buttom-{{this._id}}">
-                        <span title="-"  class="material-symbols-outlined likeIcon">
-                            thumb_up
-                        </span>
+                        <button class="btnLike">
+                            <span title="-"  class="material-symbols-outlined likeIcon">
+                                thumb_up
+                            </span>
+                        </button>
                         <span class="like-counts">{{this.likes.length}}</span>
                     </div>
                     <div class="coments">
