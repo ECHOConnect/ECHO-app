@@ -4,6 +4,7 @@ import User from "../../models/User.js";
 import Post from "../../models/Post.js";
 import { marked, Marked } from "marked";
 import { isAuthenticated } from "../../config/auth.js";
+import Comentario from "../../models/Comments.js";
 
 
 //Rota de home page da aplicação
@@ -16,7 +17,13 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     .sort({createdDate: -1})
     //Populando - pegando o nome do autor pela id do autor da postagem
     .populate('author', 'nameuser profilePicture role biography')
-    .exec()
+    .populate({
+        path: 'comentarios',
+        populate: {
+            path: 'author',
+            select: 'nameuser profilePicture biography'
+        }
+    })
     .then((post) => {
         //Processamento do markdown para cada post
         const processedPost = post.map(post => ({
@@ -27,6 +34,7 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
             layout: 'main',
             nomeuser: nomeuser,
             post: processedPost,
+            comments: post
         })
     })
     .catch((error) => {

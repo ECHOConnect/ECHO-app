@@ -1,53 +1,54 @@
 <div class="jumbotron banner">
-  <div class="bannerPicture">
-      <div>
-          <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
-          <p class="lead">Temos alguns posts esperando por você.</p>
-      </div>
-      <div class="dataUserHome" id="dataUser">
-        <div class="iconAddBio">
-            <button onclick="ativeBio()" class="iconEditBio">
-                <span class="material-symbols-outlined iconAddB">
-                    edit_note
-                </span>
-            </button> 
-            <form action="/user/home/bio" class="formAddBio" method="post">
-                <input type="hidden" name="userId" value="{{User._id}}">
-                <div class="bio" id="bio">
-                    <textarea name="biography" placeholder="Adicionar bio..." class="form-control" id="bioAdd"></textarea>
-                    <div class="d-flex justify-content-center p-2">
-                        <button type="submit" class="btn btn-success">Adicionar</button>
-                    </div>
-                </div>
-            </form>
+    <div class="bannerPicture">
+        <div>
+            <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
+            <p class="lead">Temos alguns posts esperando por você.</p>
         </div>
-         <div class="photPerfil">
-            {{#if (eq User.profilePicture "/default-profile.png")}}
+        <div class="dataUserHome" id="dataUser">
+            <div class="iconAddBio">
+                <button onclick="ativeBio()" class="iconEditBio">
+                    <span class="material-symbols-outlined iconAddB">
+                        edit_note
+                    </span>
+                </button>
+                <form action="/user/home/bio" class="formAddBio" method="post">
+                    <input type="hidden" name="userId" value="{{User._id}}">
+                    <div class="bio" id="bio">
+                        <textarea name="biography" placeholder="Adicionar bio..." class="form-control"
+                            id="bioAdd"></textarea>
+                        <div class="d-flex justify-content-center p-2">
+                            <button type="submit" class="btn btn-success">Adicionar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="photPerfil">
+                {{#if (eq User.profilePicture "/default-profile.png")}}
                 <img src="/uploads/default-profile.png" alt="">
-            {{else}}
+                {{else}}
                 <img src="{{User.profilePicture}}" class="imgUser" alt="">
-            {{/if}}
-                <button class="btn btn-dark" onclick="ativeWindowPhoto()">Nova foto 
+                {{/if}}
+                <button class="btn btn-dark" onclick="ativeWindowPhoto()">Nova foto
+                    <span class="material-symbols-outlined">
+                        image
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <p>Que tal compartilhar algo incrível hoje?</p>
+    <p class="lead">
+        <a href="/user/post">
+            <button class="btn btn-primary btnAddPost">Escrever Post
                 <span class="material-symbols-outlined">
-                    image
+                    notes
                 </span>
             </button>
-        </div> 
-      </div>
-  </div>
-  <hr class="my-4">
-  <p>Que tal compartilhar algo incrível hoje?</p>
-  <p class="lead">
-    <a href="/user/post">
-        <button class="btn btn-primary btnAddPost">Escrever Post
-            <span class="material-symbols-outlined">
-                notes
-            </span>
-        </button>
-    </a>
+        </a>
     </p>
 </div>
- <div class="main-content">
+<div class="main-content">
     <div class="side-home-icon">
         <span class="material-symbols-outlined d-none">
             filter_alt
@@ -73,99 +74,150 @@
             </div>
         </form>
     </div>
-{{#each post}}
-        <div class="container contentPost p-3">
-            <div class="card">
-                <div class="card-header headerPublic card-publication">
-                    <div class="fotoUserPost">
-                        <button class="iconInfo" onclick="ativeInfoUser()">
-                            <span class="material-symbols-outlined">
-                                info_i
-                            </span>
-                        </button>
-                        {{#if (eq author.profilePicture "/default-profile.png")}}
-                            <img src="/uploads/default-profile.png" alt="">
-                        {{else}}
-                            <img title="{{author.biography}}" src="{{author.profilePicture}}" class="imgUserPost" alt="">
-                        {{/if}}
-                    </div>
-                    <div class="dataPost">
-                        <p>Publicação de -
-                            <small>
-                                <strong>{{this.author.nameuser}} 
-                                    {{#if (eq this.author.role "SUPER_ADMIN")}}
-                                        <span class="text-danger tagSA">
-                                            {{this.author.role}}
-                                        </span>
-                                    {{else if (eq this.author.role "admin")}}
-                                        <span class="text-success">
-                                            {{this.author.role}}
-                                        </span>
-                                    {{/if}}
-                                </strong>
-                            </small>
-                        </p>
-                        <div>
-                            <small>publicado em {{this.createdDate}}</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h2>{{this.titulo}}</h2>
-                    <hr>
-                    <p>{{{this.conteudo}}}</p>
-                </div>
-                <div class="card-footer actionBtn b-3">
-                    <div class="like" id="like-buttom-{{this._id}}">
-                        <button class="btnLike">
-                            <span title="-"  class="material-symbols-outlined likeIcon">
-                                thumb_up
-                            </span>
-                        </button>
-                        <span class="like-counts">{{this.likes.length}}</span>
-                    </div>
-                    <div class="coments">
-                        <button onclick="openComments()" class="btnAtiveComments">
-                            <span class="material-symbols-outlined commentIcon">
-                                comment
-                            </span>
-                        </button>
-                        <span class="comments-counts">0</span>
-                    </div>
-                    <div class="share">
-                        <span class="material-symbols-outlined shareIcon">
-                            share
+    {{#each post}}
+
+    <div class="container contentPost p-3">
+        <div class="card">
+            <div class="card-header headerPublic card-publication">
+                <div class="fotoUserPost">
+                    <button class="iconInfo" onclick="ativeInfoUser()">
+                        <span class="material-symbols-outlined">
+                            info_i
                         </span>
-                    </div>
+                    </button>
+                    {{#if (eq author.profilePicture "/default-profile.png")}}
+                    <img src="/uploads/default-profile.png" alt="">
+                    {{else}}
+                    <img title="{{author.biography}}" src="{{author.profilePicture}}" class="imgUserPost" alt="">
+                    {{/if}}
                 </div>
-                <div class="p-3">
-                    <strong>Tags:</strong>
-                    {{#each tags}}
-                        <span class="tagStyle">{{this}}</span>
-                    {{/each}}
+                <div class="dataPost">
+                    <p>Publicação de -
+                        <small>
+                            <strong>{{this.author.nameuser}}
+                                {{#if (eq this.author.role "SUPER_ADMIN")}}
+                                <span class="text-danger tagSA">
+                                    {{this.author.role}}
+                                </span>
+                                {{else if (eq this.author.role "admin")}}
+                                <span class="text-success">
+                                    {{this.author.role}}
+                                </span>
+                                {{/if}}
+                            </strong>
+                        </small>
+                    </p>
+                    <div>
+                        <small>publicado em {{this.createdDate}}</small>
+                    </div>
                 </div>
             </div>
+            <div class="card-body">
+                <h2>{{this.titulo}}</h2>
+                <hr>
+                <p>{{{this.conteudo}}}</p>
+            </div>
+            <div class="card-footer actionBtn b-3">
+                <div class="like" id="like-buttom-{{this._id}}">
+                    <button class="btnLike">
+                        <span title="-" class="material-symbols-outlined likeIcon">
+                            thumb_up
+                        </span>
+                    </button>
+                    <span class="like-counts">{{this.likes.length}}</span>
+                </div>
+                <div class="coments">
+                    <button data-post-id="{{this._id}}" onclick="openComments(this)" class="btnAtiveComments">
+                        <input type="hidden" id="id-{{this._id}}" class="id" value="{{this._id}}">
+                        <span class="material-symbols-outlined commentIcon">
+                            comment
+                        </span>
+                    </button>
+                    <span class="comments-counts">0</span>
+                </div>
+                <div class="share">
+                    <span class="material-symbols-outlined shareIcon">
+                        share
+                    </span>
+                </div>
+            </div>
+            <div class="p-3">
+                <strong>Tags:</strong>
+                {{#each tags}}
+                <span class="tagStyle">{{this}}</span>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <div class="windowComments" id="windowComments-{{this._id}}">
+        <button class="btnCloseComments">
+            <span class="material-symbols-outlined iconCloseComments" id="closeComments" onclick="CloseComment()">
+                keyboard_double_arrow_down
+            </span>
+        </button>
+        <div class="containerComments">
+                <div class="localComments">
+                    {{#if this.comentarios.length}}
+                        {{#each this.comentarios}}
+                        <div class="CommentStyle">
+                            <div class="userInfoComment">
+                                <div class="nameAuthorComment">
+                                    {{author.nameuser}}
+                                </div>
+                                <div>
+                                    {{#if (eq author.profilePicture "/default-profile.png")}}
+                                        <img src="/uploads/default-profile.png" alt="">
+                                    {{else}}
+                                        <img title="{{author.biography}}" src="{{author.profilePicture}}" class="imgUserComent" alt="">
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    {{text}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{else}}
+                        <p>Seja o primeiro(a) a comentar aqui!</p>
+                    {{/if}}
+                </div>
+            </div>
+            <form action="/user/home/comment" class="form-comment" method="post">
+                <input type="hidden" value="{{author._id}}" id="userIdComment" name="author">
+                <input type="hidden" value="{{this._id}}" name="post" id="postId" class="postId">
+                <div class="mb-3">
+                    <label for="comment"></label>
+                    <textarea placeholder="O que achou disso?" name="text" class="form-control coment-input" id=""></textarea>
+                </div>
+                <button type="submit" class="btnSendComment">
+                    <span class="material-symbols-outlined sendComment">
+                        send
+                    </span>
+                </button>
+            </form>
         </div>
     {{else}}
     <p>Nenhum post</p>
-{{/each}}
+    {{/each}}
 </div>
 {{!-- Janela modal de mudança de foto --}}
 <div class="windowPhot" id="windowPhot">
     <div class="photo" id="photo">
         <form class="formPhoto" action="/user/home" method="POST" enctype="multipart/form-data">
             {{#if (eq User.profilePicture "/default-profile.png")}}
-                <img src="/uploads/default-profile.png" alt="">
+            <img src="/uploads/default-profile.png" alt="">
             {{else}}
-                <img src="{{User.profilePicture}}" class="imgUser" alt="">
+            <img src="{{User.profilePicture}}" class="imgUser" alt="">
             {{/if}}
-            {{!-- <input class="text-light" type="file" name="profileImage"/> --}}
             <div class="mb-3">
                 <label for="formFileSm" class="form-label"></label>
                 <input class="form-control text-dark form-control-sm" id="formFileSm" type="file" name="profileImage">
             </div>
             <button class="btn btn-success" type="submit">Adicionar</button>
-        </form> 
+        </form>
     </div>
 </div>
 
@@ -178,39 +230,16 @@
             </span>
         </div>
         {{#if (eq User.profilePicture "/default-profile.png")}}
-            <img src="/uploads/default-profile.png" alt="" class="card-img-top">
+        <img src="/uploads/default-profile.png" alt="" class="card-img-top">
         {{else}}
-            <img src="{{User.profilePicture}}" class="cardPhot card-img-top" alt="">
+        <img src="{{User.profilePicture}}" class="cardPhot card-img-top" alt="">
         {{/if}}
-      <div class="card-body">
-        <h5 class="card-title">Biografia</h5>
-        <p class="card-text">{{User.biography}}</p>
-        {{!-- <div class="d-flex justify-content-center">
-            <a href="#" class="btn btn-primary">Seguir</a>
-        </div> --}}
-      </div>
-    </div>
-</div>
-
-{{!-- Janela de comentários --}}
-<div class="windowComments" id="windowComments">
-    <button class="btnCloseComments">
-        <span class="material-symbols-outlined iconCloseComments" id="closeComments">
-            keyboard_double_arrow_down
-        </span>
-    </button>
-    <div class="localComments">
-        <p>Comentários em breve!!!</p>
-        <form action="" class="form-comment">
-        <div class="mb-3">
-            <label for="comment"></label>
-            <textarea placeholder="O que achou disso?" name="comentario" class="form-control coment-input" id=""></textarea>
+        <div class="card-body">
+            <h5 class="card-title">Biografia</h5>
+            <p class="card-text">{{User.biography}}</p>
+            {{!-- <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary">Seguir</a>
+            </div> --}}
         </div>
-        <button class="btnSendComment">
-            <span class="material-symbols-outlined sendComment">
-                send
-            </span>
-        </button>
-    </form>
     </div>
 </div>

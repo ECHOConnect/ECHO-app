@@ -45,7 +45,7 @@ emoji-picker{
     background: transparent;
 }
 #closeEmoji.here{
-    font-size: 2vw;
+    font-size: 20px;
 }
 #closeEmoji.transparent{
     font-size: 0;
@@ -100,7 +100,7 @@ emoji-picker.ativeEmoji{
     display: flex;
     flex-direction: column;
 }
-@media(max-width: 468px){
+@media(max-width: 500px){
     .mood{
         animation: moodAnimation .4s ease-in-out;
     }

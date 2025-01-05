@@ -1,9 +1,10 @@
-import mongoose from "mongoose"
+import mongoose, { mongo } from "mongoose"
+import Comentario from "./Comments.js"
 const {Schema} = mongoose
 
 const Postschema = new Schema({
     author: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
@@ -26,9 +27,8 @@ const Postschema = new Schema({
         ref: 'User'
     }],
     comentarios: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
-        required: true
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Comentario'
     }]
 })
 
