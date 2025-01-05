@@ -118,4 +118,3 @@ document.getElementById('change-picture-btn').addEventListener('click', () => {
   
     input.click();
   });
-  

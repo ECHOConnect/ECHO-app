@@ -24,6 +24,11 @@ const Postschema = new Schema({
     likes: [{
         type: mongoose.Types.ObjectId,
         ref: 'User'
+    }],
+    comentarios: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
     }]
 })
 

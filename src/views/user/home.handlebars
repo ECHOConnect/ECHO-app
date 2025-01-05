@@ -101,7 +101,6 @@
                                         <span class="text-success">
                                             {{this.author.role}}
                                         </span>
-                                    {{!-- {{else if (eq this.author.role "user")}} --}}
                                     {{/if}}
                                 </strong>
                             </small>
@@ -126,9 +125,11 @@
                         <span class="like-counts">{{this.likes.length}}</span>
                     </div>
                     <div class="coments">
-                        <span class="material-symbols-outlined commentIcon">
-                            comment
-                        </span>
+                        <button onclick="openComments()" class="btnAtiveComments">
+                            <span class="material-symbols-outlined commentIcon">
+                                comment
+                            </span>
+                        </button>
                         <span class="comments-counts">0</span>
                     </div>
                     <div class="share">
@@ -188,5 +189,28 @@
             <a href="#" class="btn btn-primary">Seguir</a>
         </div> --}}
       </div>
+    </div>
+</div>
+
+{{!-- Janela de comentários --}}
+<div class="windowComments" id="windowComments">
+    <button class="btnCloseComments">
+        <span class="material-symbols-outlined iconCloseComments" id="closeComments">
+            keyboard_double_arrow_down
+        </span>
+    </button>
+    <div class="localComments">
+        <p>Comentários em breve!!!</p>
+        <form action="" class="form-comment">
+        <div class="mb-3">
+            <label for="comment"></label>
+            <textarea placeholder="O que achou disso?" name="comentario" class="form-control coment-input" id=""></textarea>
+        </div>
+        <button class="btnSendComment">
+            <span class="material-symbols-outlined sendComment">
+                send
+            </span>
+        </button>
+    </form>
     </div>
 </div>

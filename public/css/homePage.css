@@ -80,7 +80,6 @@
 }
 .likeIcon{
     color: #004887;
-    
 }
 .likeIcon:active{
     animation: effectLike .4s ease-in-out;
@@ -123,7 +122,6 @@ pre{
     padding-bottom: 25%;
 }
 .formPost{
-    height: 100vh;
     margin-top: 50px;
 }
 .headerPublic{
@@ -300,12 +298,99 @@ pre{
     border: transparent;
     background-color: transparent;
 }
+.btnAtiveComments{
+    border: transparent;
+    background-color: transparent;
+}
+.windowComments{
+    height: 0;
+    overflow: hidden;
+    background-color: #ffffffb0;
+    backdrop-filter: blur(1px);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    transition: .4s cubic-bezier(0.67, -0.05, 0.14, 1.41);
+}
+.windowComments.ativeWindowComments{
+    height: 100vh;
+    overflow: visible;
+}
+.localComments{
+    position: relative;
+    height: 100%;
+    background-color: white;
+    width: 80%;
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+}
+.btnCloseComments{
+    border: transparent;
+    background-color: transparent;
+}
+.btnCloseComments:hover{
+    animation: closeBtnAnim .4s;
+}
+.iconCloseComments{
+    margin-top: 15px;
+    color: #6c016c;
+    font-size: 4vw;
+    cursor: pointer;
+}
+.form-comment{
+    position: absolute;
+    bottom: 0;
+    width: 85%;
+}
+.coment-input{
+    position: absolute;
+    bottom: 31px;
+    width: 100%;
+    padding-right: 45px;
+}
+.btnSendComment{
+    position: absolute;
+    bottom: 28px;
+    right: 0;
+    border: transparent;
+    background: transparent;
+}
+.sendComment{
+   font-size: 3vw;
+   color: #000051;
+}
+@keyframes closeBtnAnim {
+    from{
+        transform: translateY(5px);
+    }   
+    to{
+        transform: translateY(0);
+    }
+}
 @media(max-width: 368px){
     .side-home-icon{
         top: 100px !important;
     }
 }
 @media(max-width: 680px){
+    .iconCloseComments{
+        font-size: 10vw;
+    }
+    .btnSendComment{
+        bottom: 43px;
+    }
+    .sendComment{
+        font-size: 10vw;
+    }
+    .localComments{
+        width: 100%;
+    }
     .dataUserHome{
         width: 45%;
         justify-content: center;
