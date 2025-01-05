@@ -381,6 +381,7 @@ pre{
 @media(max-width: 680px){
     .iconCloseComments{
         font-size: 10vw;
+        margin-top: 13vh;
     }
     .btnSendComment{
         bottom: 43px;
