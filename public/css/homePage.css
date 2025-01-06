@@ -314,7 +314,7 @@ pre{
     left: 0;
     right: 0;
     z-index: 99;
-    transition: .4s ease-in-out;
+    transition: .4s cubic-bezier(0.56, -0.04, 0.03, 1.6);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -325,11 +325,10 @@ pre{
 }
 .localComments{
     overflow-y: scroll;
-    height: 534px;
+    height: 460px;
     position: relative;
-    /* height: 100%; */
     background-color: white;
-    width: 80%;
+    width: 95%;
     padding: 20px;
     border-radius: 20px 20px 0 0;
     display: flex;
@@ -350,20 +349,24 @@ pre{
     cursor: pointer;
 }
 .form-comment{
-    position: absolute;
-    bottom: 0;
-    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    background-color: white;
+}
+.localText{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 .coment-input{
-    position: absolute;
     bottom: 31px;
-    width: 100%;
     padding-right: 45px;
+    width: 90%;
+    padding: 10px;
 }
 .btnSendComment{
-    position: absolute;
-    bottom: 28px;
-    right: 0;
     border: transparent;
     background: transparent;
 }
@@ -410,6 +413,19 @@ pre{
     align-items: center;
     justify-content: center;
 }
+#btnBan{
+    position: absolute;
+    right: 0;
+    padding: 0px;
+    border: none;
+    top: 0;
+    border-radius: 50px;
+    color: #890707;
+    background-color: black;
+}
+#btnBan .iconBan{
+    font-size: 3vw;
+}
 @keyframes closeBtnAnim {
     from{
         transform: translateY(5px);
@@ -424,8 +440,11 @@ pre{
     }
 }
 @media(max-width: 680px){
+    .nameAuthorComment{
+        font-size: 3vw;
+    }
     .form-comment{
-        width: 95%;
+        width: 100%;
     }
     .CommentStyle{
        font-size: 3vw;
@@ -504,8 +523,6 @@ pre{
         flex-direction: column;
         align-items: center;
     }   
-    .side-home-icon{
-        top: 135px;
-    }
+    
 }
 

@@ -1,0 +1,33 @@
+.windowBan{
+    height: 100vh;
+    width: 0;
+    overflow: hidden;
+    background-color: #00000017;
+    backdrop-filter: blur(1px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.windowBan.ativeWindowBan{
+    width: 100vw;
+    overflow: visible;
+}
+.ban{
+    height: 50%;
+    width: 70%;
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+}
+.other{
+    height: 0;
+}
+.other.hereBan{
+    height: 30px;
+}

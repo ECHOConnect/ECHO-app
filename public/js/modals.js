@@ -12,13 +12,35 @@ const dataUser = document.getElementById('dataUser')
 function ativeBio(){
     dataUser.classList.toggle('ativeBio')
 }
+
 //Funcionalidade de info de user
-const cardProfile = document.getElementById('cardProfile')
-function ativeInfoUser(){
+function ativeInfoUser(id){
+    const btn = id.getAttribute('data-user')
+    const cardProfile = document.getElementById(`cardProfile-${btn}`)
     cardProfile.classList.add('ativeCardProfile')
+    console.log(id, cardProfile)
 }
-cardProfile.addEventListener('click', (button) => {
-    if(button.target.id === 'iconCloseProfile' || button.target.id === 'cardProfile'){
-        cardProfile.classList.remove('ativeCardProfile')
+function closeInfoUser(){
+    document.querySelectorAll('.cardProfile').forEach(window => window.classList.remove('ativeCardProfile'))
+}
+
+//Funcionalidade de janela de denúncia
+const windowBan = document.getElementById('windowBan')
+function openBan(){
+    windowBan.classList.add('ativeWindowBan')
+}
+windowBan.addEventListener('click', (area) => {
+    if(area.target.id === 'windowBan'){
+        windowBan.classList.remove('ativeWindowBan')
+    }
+})
+const ban = document.getElementById('selectBan')
+ban.addEventListener('change', (element) => {
+    console.log(element.target.value)
+    if(element.target.value === 'Outro'){
+        document.getElementById('textOther').classList.remove('d-none')
+    }
+    else{
+        document.getElementById('textOther').classList.add('d-none')
     }
 })

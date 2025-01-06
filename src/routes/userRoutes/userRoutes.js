@@ -46,8 +46,10 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
 
 //Rota para tela de postagem
 userRouter.get('/post', isAuthenticated, (req, res) => {
+    const nomeuser = req.user
     res.render('user/post', {
-        layout: 'main'
+        layout: 'main',
+        nomeuser: nomeuser
     })
 })
 

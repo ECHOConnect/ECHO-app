@@ -24,7 +24,7 @@
             </div>
             <div class="photPerfil">
                 {{#if (eq User.profilePicture "/default-profile.png")}}
-                <img src="/uploads/default-profile.png" alt="">
+                <img src="/uploads/default-profile.png" class="imgUser" alt="">
                 {{else}}
                 <img src="{{User.profilePicture}}" class="imgUser" alt="">
                 {{/if}}
@@ -75,18 +75,22 @@
         </form>
     </div>
     {{#each post}}
-
     <div class="container contentPost p-3">
         <div class="card">
             <div class="card-header headerPublic card-publication">
                 <div class="fotoUserPost">
-                    <button class="iconInfo" onclick="ativeInfoUser()">
+                    <button id="btnBan" onclick="openBan()">
+                        <span class="material-symbols-outlined iconBan">
+                            report
+                        </span>
+                    </button>
+                    <button class="iconInfo" data-user="{{this._id}}" onclick="ativeInfoUser(this)">
                         <span class="material-symbols-outlined">
                             info_i
                         </span>
                     </button>
                     {{#if (eq author.profilePicture "/default-profile.png")}}
-                    <img src="/uploads/default-profile.png" alt="">
+                    <img src="/uploads/default-profile.png" class="imgUserPost" alt="">
                     {{else}}
                     <img title="{{author.biography}}" src="{{author.profilePicture}}" class="imgUserPost" alt="">
                     {{/if}}
@@ -167,7 +171,7 @@
                                 </div>
                                 <div>
                                     {{#if (eq author.profilePicture "/default-profile.png")}}
-                                        <img src="/uploads/default-profile.png" alt="">
+                                        <img src="/uploads/default-profile.png" alt="" class="imgUserComent">
                                     {{else}}
                                         <img title="{{author.biography}}" src="{{author.profilePicture}}" class="imgUserComent" alt="">
                                     {{/if}}
@@ -188,7 +192,7 @@
             <form action="/user/home/comment" class="form-comment" method="post">
                 <input type="hidden" value="{{author._id}}" id="userIdComment" name="author">
                 <input type="hidden" value="{{this._id}}" name="post" id="postId" class="postId">
-                <div class="mb-3">
+                <div class="mb-3 localText">
                     <label for="comment"></label>
                     <textarea placeholder="O que achou disso?" name="text" class="form-control coment-input" id=""></textarea>
                 </div>
@@ -198,6 +202,52 @@
                     </span>
                 </button>
             </form>
+        </div>
+
+
+        <div class="cardProfile" id="cardProfile-{{this._id}}">
+            <div class="card cardProfileData" style="width: 18rem;">
+                <div class="closeCardProfile" id="closeCardProfile">
+                    <span class="material-symbols-outlined iconCloseProfile" id="iconCloseProfile" onclick="closeInfoUser()">
+                        cancel
+                    </span>
+                </div>
+                {{#if (eq author.profilePicture "/default-profile.png")}}
+                <img src="/uploads/default-profile.png" class="cardPhot card-img-top" alt="" class="card-img-top">
+                {{else}}
+                <img src="{{author.profilePicture}}" class="cardPhot card-img-top" alt="">
+                {{/if}}
+                <div class="card-body">
+                    <h5 class="card-title">Biografia</h5>
+                    <p class="card-text">{{author.biography}}</p>
+                    {{!-- <div class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-primary">Seguir</a>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+
+        {{!-- Janela de denúncia --}}
+        <div class="windowBan" id="windowBan">
+            <div class="card ban">
+                <div class="card-header">
+                    <h4>Por que você quer denunciar este conteúdo?</h4>
+                </div>
+                <div class="card-body">
+                    <select class="form-select" id="selectBan" aria-label="Default select example">
+                        <option selected>Menu de opções</option>
+                        <option value="Improprio">Impróprio</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                    <div class="mt-4 w-100 d-none" id="textOther">
+                        <label for="other">Informe outro motivo</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
         </div>
     {{else}}
     <p>Nenhum post</p>
@@ -220,26 +270,6 @@
         </form>
     </div>
 </div>
-
-
-<div class="cardProfile" id="cardProfile">
-    <div class="card cardProfileData" style="width: 18rem;">
-        <div class="closeCardProfile" id="closeCardProfile">
-            <span class="material-symbols-outlined iconCloseProfile" id="iconCloseProfile">
-                cancel
-            </span>
-        </div>
-        {{#if (eq User.profilePicture "/default-profile.png")}}
-        <img src="/uploads/default-profile.png" alt="" class="card-img-top">
-        {{else}}
-        <img src="{{User.profilePicture}}" class="cardPhot card-img-top" alt="">
-        {{/if}}
-        <div class="card-body">
-            <h5 class="card-title">Biografia</h5>
-            <p class="card-text">{{User.biography}}</p>
-            {{!-- <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary">Seguir</a>
-            </div> --}}
-        </div>
-    </div>
-</div>
+<script>
+    
+</script>
