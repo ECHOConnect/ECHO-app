@@ -1,8 +1,10 @@
 <div id="Central">
     <h1>Bem vindo ao ECHO, faça seu login para começar</h1>
-    <span id="frst-sp"></span>
-    <span id="scnd-sp"></span>
-    <span id="thrd-sp"></span>
+    <div class="lines">
+        <span id="frst-sp"></span>
+        <span id="scnd-sp"></span>
+        <span id="thrd-sp"></span>
+    </div>
 
     <form action="/user/register" id="form-signin" method="post">
         <label for="name">
@@ -36,9 +38,9 @@
         <input type="date" name="birthdayuser" id="user-brth" class="input-lgn">
         
         <div id="btns">
-            <button type="submit" id="btn">Criar Conta</button>
+            <button type="submit" class="btnL">Criar Conta</button>
         </div>
     </form>
-    <a href="/user/login"><button type="submit" id="btn">Login</button></a>
+    <a href="/user/login"><button type="submit" class="btnL">Login</button></a>
     
 </div>

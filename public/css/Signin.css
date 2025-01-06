@@ -60,15 +60,23 @@ label{
     font-size: 1vw;
     margin-bottom: 0.3vw;
 }
-#btn{
-    background-color: #035AA6;
-    color: white;
+.btnL{
+    background-color: white;
+    color: #035AA6;
     border: none;
     border-radius: 7px;
     width: 14vw;
     height: 2.5vw;
     font-size: 1.2vw;
     cursor: pointer;
+    margin-top: 10px;
+    border: 1px solid #035AA6;
+    transition: .2s ease-in-out;
+}
+.btnL:hover{
+    background-color: #035AA6;
+    color: #ffffff;
+    border: 1px solid #013461;
 }
 #btns{
     display: flex;
@@ -76,4 +84,55 @@ label{
     justify-content: center;
     margin-top:15px ;
     gap: 2.3vw;
+}
+.lines{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#forgort-pass{
+    padding-left: 5px;
+}
+@media(max-width: 650px){
+    .lines{
+        gap: 15px;
+    }
+    #Central{
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    #Central h1{
+        padding-bottom: 50px;
+    }
+    .input-lgn{
+        height: 30px;
+        width: 100%;
+        font-size: 5vw;
+    }
+    #form-login{
+        width: 100%;
+    }
+    #form-signin{
+        width: 100%;
+    }
+    .spn-name{
+        font-size: 5vw;
+    }
+    #forgort-pass{
+        font-size: 3vw;
+        padding-left: 5px;
+        padding-top: 5px;
+    }
+    .btnL{
+        background-color: #035AA6;
+        color: white;
+        width: 100%;
+        height: 30px;
+        font-size: 4vw;
+    }
+    #Central a{
+        width: 100%;
+        margin-top: 10px;
+    }
 }

@@ -1,8 +1,10 @@
 <div id="Central">
         <h1>Bem vindo ao ECHO, faça seu login para começar</h1>
-        <span id="frst-sp"></span>
-        <span id="scnd-sp"></span>
-        <span id="thrd-sp"></span>
+        <div class="lines">
+            <span id="frst-sp"></span>
+            <span id="scnd-sp"></span>
+            <span id="thrd-sp"></span>
+        </div>
         <form action="/user/login" id="form-login" method="post">
             <label for="email">
                 <span class="spn-name">Email:</span>
@@ -15,10 +17,10 @@
             <input type="password" name="userpass" id="password" class="input-lgn">
             <a href="/user/resetPassword" id="forgort-pass">Esqueci a senha</a>
             <div id="btns">
-                <button type="submit" id="btn">Login</button>
+                <button type="submit" class="btnL">Login</button>
             </div>
         </form>
-        <a href="/user/register"><button id="btn">Criar Conta</button></a>
+        <a href="/user/register"><button class="btnL">Criar Conta</button></a>
         
     </div>
     

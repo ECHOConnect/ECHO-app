@@ -31,3 +31,8 @@
 .other.hereBan{
     height: 30px;
 }
+@media(max-width: 650px){
+    .ban{
+        width: 95%;
+    }
+}
