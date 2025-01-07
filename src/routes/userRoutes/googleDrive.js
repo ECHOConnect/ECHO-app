@@ -84,7 +84,6 @@ routerUpload.post('/home/:userId', upload.single('profilePhoto'), async (req, re
         });
 
         const fileId = uploadResponse.data.id
-        console.log(fileId)
         // Atualizar o link no banco de dados
         const newPhotoLink = `https://drive.google.com/uc?export=view&id=${fileId}`
 

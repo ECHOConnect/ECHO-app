@@ -35,7 +35,7 @@
                 {{#if (eq User.profilePicture)}}
                 <img src="/uploads/default-profile.png" class="imgUser" alt="">
                 {{else}}
-                <img src="https://drive.google.com/uc?export=view&id={{User.profilePicture}}" class="imgUser" alt="">
+                <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" class="imgUser" alt="">
                 {{/if}}
                 <button class="btn btn-dark" onclick="ativeWindowPhoto()">Nova foto
                     <span class="material-symbols-outlined">
@@ -101,7 +101,7 @@
                     {{#if (eq author.profilePicture "/default-profile.png")}}
                     <img src="/uploads/default-profile.png" class="imgUserPost" alt="">
                     {{else}}
-                    <img title="{{author.biography}}" src="{{author.profilePicture}}" class="imgUserPost" alt="">
+                    <img title="{{author.biography}}" src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="imgUserPost" alt="">
                     {{/if}}
                 </div>
                 <div class="dataPost">
@@ -162,7 +162,7 @@
             </div>
         </div>
     </div>
-
+{{!-- Janela de comentários --}}
     <div class="windowComments" id="windowComments-{{this._id}}">
         <button class="btnCloseComments">
             <span class="material-symbols-outlined iconCloseComments" id="closeComments" onclick="CloseComment()">
@@ -182,7 +182,7 @@
                                     {{#if (eq author.profilePicture "/default-profile.png")}}
                                         <img src="/uploads/default-profile.png" alt="" class="imgUserComent">
                                     {{else}}
-                                        <img title="{{author.biography}}" src="{{author.profilePicture}}" class="imgUserComent" alt="">
+                                        <img title="{{author.biography}}" src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="imgUserComent" alt="">
                                     {{/if}}
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
             </form>
         </div>
 
-
+{{!-- Janela de informação de usuários --}}
         <div class="cardProfile" id="cardProfile-{{this._id}}">
             <div class="card cardProfileData" style="width: 18rem;">
                 <div class="closeCardProfile" id="closeCardProfile">
@@ -224,7 +224,7 @@
                 {{#if (eq author.profilePicture "/default-profile.png")}}
                 <img src="/uploads/default-profile.png" class="cardPhot card-img-top" alt="" class="card-img-top">
                 {{else}}
-                <img src="https://drive.google.com/uc?export=view&id={{User.profilePicture}}" class="cardPhot card-img-top" alt="">
+                <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="cardPhot card-img-top" alt="">
                 {{/if}}
                 <div class="card-body">
                     <h5 class="card-title">Biografia</h5>
@@ -271,7 +271,7 @@
             {{#if (eq User.profilePicture "/default-profile.png")}}
             <img src="/uploads/default-profile.png" alt="">
             {{else}}
-            <img src="https://drive.google.com/uc?export=view&id={{User.profilePicture}}" class="imgUser" alt="">
+            <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" class="imgUser" alt="">
             {{/if}}
             <div class="mb-3">
                 <label for="formFileSm" class="form-label"></label>
