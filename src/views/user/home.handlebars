@@ -3,9 +3,10 @@
         <div>
             <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
             <p class="lead">Temos alguns posts esperando por você.</p>
+            <hr>
             <form action="/user/home/searchUser" method="get">
                 <div class="mb-3 formSearchUser">
-                    <label class="mb-3" for="searchUser">Busque por outros usuários e aumente sua conexão de conhecimento:</label>
+                    <label class="mb-3" for="searchUser">Busque por outros usuários e aumente suas conexões de conhecimento:</label>
                     <input type="text" name="q" placeholder="Pesquisar" class="form-control">
                 </div>
                 <div class="mb-3">
@@ -33,7 +34,7 @@
             </div>
             <div class="photPerfil">
                 {{#if (eq User.profilePicture)}}
-                <img src="/uploads/default-profile.png" class="imgUser" alt="">
+                <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" class="imgUser" alt="">
                 {{else}}
                 <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" class="imgUser" alt="">
                 {{/if}}
@@ -146,7 +147,7 @@
                             comment
                         </span>
                     </button>
-                    <span class="comments-counts">0</span>
+                    <span class="comments-counts">{{this.comentarios.length}}</span>
                 </div>
                 <div class="share">
                     <span class="material-symbols-outlined shareIcon">
@@ -169,7 +170,7 @@
                 keyboard_double_arrow_down
             </span>
         </button>
-        <div class="containerComments">
+        <div class="containerComments" onclick="quantCommentsPosts(this)">
                 <div class="localComments">
                     {{#if this.comentarios.length}}
                         {{#each this.comentarios}}
@@ -180,7 +181,7 @@
                                 </div>
                                 <div>
                                     {{#if (eq author.profilePicture "/default-profile.png")}}
-                                        <img src="/uploads/default-profile.png" alt="" class="imgUserComent">
+                                        <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt="" class="imgUserComent">
                                     {{else}}
                                         <img title="{{author.biography}}" src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="imgUserComent" alt="">
                                     {{/if}}
@@ -222,7 +223,7 @@
                     </span>
                 </div>
                 {{#if (eq author.profilePicture "/default-profile.png")}}
-                <img src="/uploads/default-profile.png" class="cardPhot card-img-top" alt="" class="card-img-top">
+                <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" class="cardPhot card-img-top" alt="" class="card-img-top">
                 {{else}}
                 <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="cardPhot card-img-top" alt="">
                 {{/if}}
@@ -269,7 +270,7 @@
         <form class="formPhoto" action="/user/home/{{User._id}}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="userId" value="{{User._id}}">
             {{#if (eq User.profilePicture "/default-profile.png")}}
-            <img src="/uploads/default-profile.png" alt="">
+            <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt="">
             {{else}}
             <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" class="imgUser" alt="">
             {{/if}}
