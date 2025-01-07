@@ -432,6 +432,9 @@ pre{
     align-items: center;
     justify-content: center;
 }
+.formSearchUser{
+    width: 50%;
+}
 @keyframes closeBtnAnim {
     from{
         transform: translateY(5px);
@@ -450,6 +453,9 @@ pre{
     }
 }
 @media(max-width: 680px){
+    .formSearchUser{
+        width: 100%;
+    }
     #btnBan .iconBan{
         font-size: 10vw;
     }

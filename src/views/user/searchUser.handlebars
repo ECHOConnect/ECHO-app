@@ -1,0 +1,33 @@
+<div class="container mt-2 content-sarch-user">
+    <p>Busca por: {{query}}</p>
+    {{#if user.length}}
+        {{#each user}}
+            <div class="card mt-4">
+                <div class="card-header name-phot-user">
+                    <div>
+                        {{this.nameuser}}
+                    </div>
+                    <div>
+                        {{#if (eq this.profilePicture "/default-profile.png")}}
+                            <img src="/uploads/default-profile.png" class="imgUserComent" alt="">
+                        {{else}}
+                            <img src="{{this.profilePicture}}" class="imgUserComent" alt="">
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="card-body">
+                    {{#if biography}}
+                        {{this.biography}}
+                    {{else}}
+                        <p>Sem biografia</p>
+                    {{/if}}
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success">+Info</button> <span class="text-danger">*Em desenvolvimento</span>
+                </div>
+            </div>
+        {{else}}
+            <p>Nenhum usuário encontrado!</p>
+        {{/each}}
+    {{/if}}
+</div>

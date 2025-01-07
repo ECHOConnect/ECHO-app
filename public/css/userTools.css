@@ -31,6 +31,17 @@
 .other.hereBan{
     height: 30px;
 }
+.content-sarch-user{
+    margin-bottom: 20% !important;
+}
+.name-phot-user{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    font-size: 2vw;
+}
 @media(max-width: 650px){
     .ban{
         width: 95%;

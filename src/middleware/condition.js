@@ -7,10 +7,11 @@ const conditionHeader = (app) => {
             '/user/post',
             '/user/contact',
             '/user/relevants',
+            '/user/home/searchUser'
         ];
     
         // Verifica se o caminho está na lista de rotas ou se corresponde ao padrão da rota dinâmica
-        if (noHeaderRoutes.includes(req.path) || req.path.match(/^\/user\/searchPost\/.+$/)) {
+        if (noHeaderRoutes.includes(req.path) || req.path.match(/^\/user\/searchPost\/.+$/) || req.path.match(/^\/user\/home\/searchUser\/.+$/)) {
             res.locals.showHeader = false;
         } else {
             res.locals.showHeader = true;
