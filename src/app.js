@@ -38,6 +38,8 @@
             import routeComments from './routes/userRoutes/comments.js'
         //Rota de busca de usuários
             import routeSearch from './routes/userRoutes/searchUser.js'
+        //Rota upload para o drive
+            import routerUpload from './routes/userRoutes/googleDrive.js'
 
 //Importando configurações e middlewares
 
@@ -133,6 +135,8 @@
         app.use('/user', routeComments)
 
         app.use('/user', routeSearch)
+
+        app.use('/user', routerUpload)
 
 //Conectando o servidor
     const PORT = process.env.PORT

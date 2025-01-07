@@ -32,10 +32,10 @@
                 </form>
             </div>
             <div class="photPerfil">
-                {{#if (eq User.profilePicture "/default-profile.png")}}
+                {{#if (eq User.profilePicture)}}
                 <img src="/uploads/default-profile.png" class="imgUser" alt="">
                 {{else}}
-                <img src="{{User.profilePicture}}" class="imgUser" alt="">
+                <img src="https://drive.google.com/uc?export=view&id={{User.profilePicture}}" class="imgUser" alt="">
                 {{/if}}
                 <button class="btn btn-dark" onclick="ativeWindowPhoto()">Nova foto
                     <span class="material-symbols-outlined">
@@ -224,7 +224,7 @@
                 {{#if (eq author.profilePicture "/default-profile.png")}}
                 <img src="/uploads/default-profile.png" class="cardPhot card-img-top" alt="" class="card-img-top">
                 {{else}}
-                <img src="{{author.profilePicture}}" class="cardPhot card-img-top" alt="">
+                <img src="https://drive.google.com/uc?export=view&id={{User.profilePicture}}" class="cardPhot card-img-top" alt="">
                 {{/if}}
                 <div class="card-body">
                     <h5 class="card-title">Biografia</h5>
@@ -266,15 +266,16 @@
 {{!-- Janela modal de mudança de foto --}}
 <div class="windowPhot" id="windowPhot">
     <div class="photo" id="photo">
-        <form class="formPhoto" action="/user/home" method="POST" enctype="multipart/form-data">
+        <form class="formPhoto" action="/user/home/{{User._id}}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="userId" value="{{User._id}}">
             {{#if (eq User.profilePicture "/default-profile.png")}}
             <img src="/uploads/default-profile.png" alt="">
             {{else}}
-            <img src="{{User.profilePicture}}" class="imgUser" alt="">
+            <img src="https://drive.google.com/uc?export=view&id={{User.profilePicture}}" class="imgUser" alt="">
             {{/if}}
             <div class="mb-3">
                 <label for="formFileSm" class="form-label"></label>
-                <input class="form-control text-dark form-control-sm" id="formFileSm" type="file" name="profileImage">
+                <input class="form-control text-dark form-control-sm" id="formFileSm" type="file" name="profilePhoto">
             </div>
             <button class="btn btn-success" type="submit">Adicionar</button>
         </form>

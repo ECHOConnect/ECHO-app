@@ -7,6 +7,10 @@ import { populate } from "dotenv"
 
 routeSearch.get('/home/searchUser', isAuthenticated,  (req, res) => {
     const query = req.query.q
+    if(query == '' || typeof query == null || typeof query == undefined){
+        req.flash('error_msg', 'Campo de pesquisa vazio')
+        res.redirect('/user/home')
+    }
     console.log(query)
     User.find({
         $or: [
