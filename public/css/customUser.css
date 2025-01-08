@@ -127,7 +127,7 @@ emoji-picker.ativeEmoji{
     background-color: #035aa6;
     backdrop-filter: blur(1px);
     backdrop-filter: blur(1px);
-    transition: .4s cubic-bezier(0.63, 0.61, 0, 2.28)
+    transition: .1s cubic-bezier(0.63, 0.61, 0, 2.28);
 }
 .window-profile-user-tools.active-window-profile-tools .profile-user-tools{
     width: 50vw;
@@ -161,6 +161,9 @@ emoji-picker.ativeEmoji{
 .profile-icon{
     font-size: 6vw;
     color: white;
+}
+.nameuser{
+    font-size: 5vw;
 }
 @media(max-width: 500px){
     .mood{

@@ -10,16 +10,30 @@
         </a>
         {{#if (eq nomeuser.role "admin")}}
             <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
-                <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt=""> 
+                {{#if User.profilePicture}}
+                    <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt="">
+                {{else}}
+                    <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt="">
+                {{/if}}
             </button>
 
         {{else if (eq nomeuser.role "SUPER_ADMIN")}}
             <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
-                <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt=""> 
+                {{#if User.profilePicture}}
+                    <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt="">
+                {{else}}
+                    <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt="">
+                {{/if}}
             </button>
 
         {{else if (eq nomeuser.role "user")}}
-            <button onclick="ativeProfileUserTools()" id="Login_signin_btn">Perfil</button>
+            <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
+                {{#if User.profilePicture}}
+                    <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt="">
+                {{else}}
+                    <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt="">
+                {{/if}}
+            </button>
         {{else}}
             <a href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
         {{/if}}
@@ -84,7 +98,7 @@
                         {{#if (eq nomeuser.role "user")}}
                             <button class="btn btn-success">Amigos</button>
                             <button class="btn btn-success">Solicitações pendentes</button>
-                            <button class="btn btn-danger">Sair</button>
+                            <a href="/user/logout"><button class="btn btn-danger w-100">Sair</button></a>
                         {{else}}
                             <a href="/admin/dashboard" class="text-decoration-none"><button class="btn btn-dark d-flex w-100 justify-content-center">Painel de Administração</button></a>
                             <button class="btn btn-success">Amigos</button>
