@@ -1,5 +1,6 @@
 <div class="container mt-2 content-sarch-user">
     <p>Busca por: {{query}}</p>
+    <input id="myId" type="text" value="{{User.conections}}">
     {{#if user.length}}
         {{#each user}}
             <div class="card mt-4">
@@ -22,8 +23,18 @@
                         <p>Sem biografia</p>
                     {{/if}}
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-success">+Info</button> <span class="text-danger">*Em desenvolvimento</span>
+                <div class="card-footer btnDataConection">
+                    <button class="btn btn-success">+Info</button>
+                    <form action="/user/addConection" method="post">
+                        <input type="hidden" value="{{this._id}}" name="userId" class="idConnected">
+                            <button type="submit" class="btn btnConect btn-success d-flex">
+                                Conectar
+                                <span class="material-symbols-outlined">
+                                    network_intelligence
+                                </span>
+                            </button>
+                    </form>
+                    <span class="text-danger">*Em desenvolvimento</span>
                 </div>
             </div>
         {{else}}

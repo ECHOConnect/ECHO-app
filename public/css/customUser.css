@@ -117,6 +117,7 @@ emoji-picker.ativeEmoji{
 .window-profile-user-tools.active-window-profile-tools{
     width: 100vw;
     overflow: visible;
+    z-index: 9999;
 }
 .profile-user-tools{
     width: 0;
@@ -164,6 +165,34 @@ emoji-picker.ativeEmoji{
 }
 .nameuser{
     font-size: 5vw;
+}
+.btnProfileTools{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.content-conections{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btnDataConection{
+    display: flex;
+    gap: 15px;
+}
+.listFriendsPage{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.btnInfoConnections{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
 }
 @media(max-width: 500px){
     .mood{

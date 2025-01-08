@@ -51,7 +51,11 @@ const User = new Schema({
     },
     biography: {
         type: String,
-    }
+    },
+    connections: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }]
 })
 
 export default mongoose.model('User', User)

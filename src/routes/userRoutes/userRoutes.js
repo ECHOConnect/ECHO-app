@@ -1,9 +1,12 @@
 import { Router } from "express";
 const userRouter = Router()
 import User from "../../models/User.js";
+import nodemailer from 'nodemailer'
 import Post from "../../models/Post.js";
 import { marked, Marked } from "marked";
 import { isAuthenticated } from "../../config/auth.js";
+import dotenv from 'dotenv'
+dotenv.config()
 import Comentario from "../../models/Comments.js";
 
 
@@ -148,6 +151,96 @@ userRouter.get('/logout', (req, res, next) => {
         res.redirect('/user/login')
     })
 })
+
+//Rota de informação de amigos
+    userRouter.get('/conections/:id', (req, res) => {
+        const myUserId = req.params.id
+        const nomeuser = req.user
+        User.findById(myUserId)
+        .populate('connections', 'nameuser useremail username profilePicture')
+        .then(userConnect => {
+            if(!userConnect){
+                req.flash('error_msg', 'Usuário não encontrado')
+                return res.redirect('/user/home')
+            }
+            const friendsList = userConnect.connections
+            res.render('user/conections', {
+                friendsList: friendsList,
+                nomeuser: nomeuser,
+            })
+        })
+        .catch((error) => {
+            console.log('[debug]: Erro: ', error)
+        })
+    })
+    //Configurando o email para o usuário
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    })
+    //Função para o envio de email
+    function senMail(from, to, subject, text){
+        const mailOption = {
+            from: from,
+            to: to,
+            subject: subject,
+            text: text
+        }
+        return transporter.sendMail(mailOption)
+    }
+
+    //Rota para adição de conexão
+    userRouter.post('/addConection', (req, res) => {
+        const {userId} = req.body
+        const myUserId = req.user
+        if(userId === myUserId){
+            req.flash('error_msg', 'Você não pode se conectar a si mesmo')
+            return res.redirect(req.headers.referer)
+        }
+        User.findById(userId)
+        .then((user) => {
+            if(user.connections.includes(userId)){
+                req.flash('error_msg', 'Você já está conectado a este usuário')
+                return res.redirect(req.headers.referer)
+            }
+            User.findByIdAndUpdate(myUserId, {$push: {connections: userId}}, {new: true})
+            .populate('connections', 'useremail username nameuser')
+            .then((userSend) => {
+                if(!userSend){
+                    req.flash('error_msg', 'Usuário não encontrado')
+                    res.redirect('/user/home')
+                }
+
+                //Filtrando usuário que foi adicionado
+                User.findById(userId)
+                .then((userAdd) => {
+                    const emailReceiver = userAdd.useremail
+                    const nameReceiver = userAdd.nameuser
+                    console.log(emailReceiver, nameReceiver)
+                    //Enviando email
+                    senMail(
+                        `${process.env.EMAIL_USER}`,
+                        `${emailReceiver}`,
+                        `Você acabou de ser adicionado(a) na conexão de conhecimentos de alguém!`,
+                        `Olá ${nameReceiver},\n${userSend.nameuser} te adicionou na lista de conexões!! você foi adicionado(a) na rede de conhecimentos de alguém, isso significa que querem aprender com você!\n\n
+                        FUNCIONALIDADE EM TESTE!!`
+                    )
+                    req.flash('success_msg', `Sua rede neural agora tem mais um aliado no compartilhamento de estudos.`)
+                    const pageLoad = req.headers.referer
+                    res.redirect(pageLoad)
+                })
+
+            })
+            .catch((error) => {
+                console.log('[debug]: Erro: ', error)
+                req.flash('error_msg', `Erro ao se conectar com ${userId.nameuser}`)
+                res.redirect('/user/home/searchUser')
+            })
+        })
+    })
 
 
 export default userRouter

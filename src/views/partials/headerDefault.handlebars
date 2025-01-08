@@ -100,10 +100,28 @@
                             <button class="btn btn-success">Solicitações pendentes</button>
                             <a href="/user/logout"><button class="btn btn-danger w-100">Sair</button></a>
                         {{else}}
-                            <a href="/admin/dashboard" class="text-decoration-none"><button class="btn btn-dark d-flex w-100 justify-content-center">Painel de Administração</button></a>
-                            <button class="btn btn-success">Amigos</button>
-                            <button class="btn btn-success">Solicitações pendentes</button>
-                            <a href="/user/logout" class="text-decoration-none "><button class="btn w-100 btn-danger">Sair</button></a>
+                            <a href="/admin/dashboard" class="text-decoration-none">
+                                <button class="btn btn-dark d-flex w-100 justify-content-center btnProfileTools">
+                                    Painel de Administração
+                                    <span class="material-symbols-outlined">
+                                        admin_panel_settings
+                                    </span>
+                                </button>
+                            </a>
+                            <a href="/user/conections/{{User._id}}" class="text-decoration-none">
+                                <button class="btn w-100 btn-success btnProfileTools">Amigos
+                                    <span class="material-symbols-outlined">
+                                        group
+                                    </span>
+                                </button>
+                            </a>
+                            <button class="btn btn-success btnProfileTools">
+                                Solicitações pendentes
+                                <span class="material-symbols-outlined">
+                                    hourglass_top
+                                </span>
+                            </button>
+                            <a href="/user/logout" class="text-decoration-none "><button class="btn w-100 btn-danger btnProfileTools">Sair</button></a>
                             <span class="text-danger">* "Amigos" e "Solicitações" em desenvolvimento"</span>
                         {{/if}}
                     </div>

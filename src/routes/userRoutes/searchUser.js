@@ -18,9 +18,8 @@ routeSearch.get('/home/searchUser', isAuthenticated,  (req, res) => {
             {nameuser: {$regex: query, $options: 'i'}},
             {username: {$regex: query, $options: 'i'}}
         ]
-    }).select('nameuser username biography profilePicture ')
+    }).select('nameuser username biography profilePicture conections')
     .then((user) => {
-        console.log(user)
         res.render('user/searchUser', {
             user: user,
             query: query,

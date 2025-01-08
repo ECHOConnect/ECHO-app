@@ -1,0 +1,31 @@
+<div class="container mt-4 content-conections">
+    <h3>Suas conexões: </h3>
+    {{#each friendsList}}
+        <div class="card w-50 mt-4">
+            <div class="card-body listFriendsPage">
+                {{#if this.profilePicture}}
+                <div>
+                    <img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" class="imgUserComent" alt="">
+                </div>
+                <div class="btnInfoConnections">
+                    <div>
+                        {{this.nameuser}} <br>
+                        {{this.useremail}}
+                    </div>
+                    <div>
+                        <button class="btn btn-success">+Info</button>
+                    </div>
+                </div>
+                    
+                {{else}}
+                <div>
+                    <img src="/uploads/default-profile.png" class="imgUserComent" alt="">
+                </div>
+                <div>
+                    {{this.nameuser}}
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    {{/each}}
+</div>
