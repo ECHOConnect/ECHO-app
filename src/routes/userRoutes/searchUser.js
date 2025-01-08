@@ -7,6 +7,7 @@ import { populate } from "dotenv"
 
 routeSearch.get('/home/searchUser', isAuthenticated,  (req, res) => {
     const query = req.query.q
+    const nomeuser = req.user
     if(query == '' || typeof query == null || typeof query == undefined){
         req.flash('error_msg', 'Campo de pesquisa vazio')
         res.redirect('/user/home')
@@ -23,7 +24,8 @@ routeSearch.get('/home/searchUser', isAuthenticated,  (req, res) => {
         res.render('user/searchUser', {
             user: user,
             query: query,
-            layout: 'main.handlebars'
+            layout: 'main.handlebars',
+            nomeuser: nomeuser
         })
     })
     .catch((error) => {

@@ -9,13 +9,120 @@
             <h3 class="Text_Options">Contato</h3>
         </a>
         {{#if (eq nomeuser.role "admin")}}
-            <a href="/admin/dashboard"><button id="Login_signin_btn">Perfil</button></a>
+            <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
+                <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt=""> 
+            </button>
+
         {{else if (eq nomeuser.role "SUPER_ADMIN")}}
-            <a href="/admin/dashboard"><button id="Login_signin_btn">Perfil</button></a>
+            <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
+                <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt=""> 
+            </button>
+
         {{else if (eq nomeuser.role "user")}}
-            <a href="/user/perfil"><button id="Login_signin_btn">Perfil</button></a>
+            <button onclick="ativeProfileUserTools()" id="Login_signin_btn">Perfil</button>
         {{else}}
-            <a href="/user/login"><button id="Login_signin_btn">Login/Sign in</button></a>
+            <a href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
         {{/if}}
     </div>
 </header>
+
+
+<div class="window-profile-user-tools" id="window-profile-user-tools">
+    <div class="profile-user-tools bg-light text-dark">
+        <button class="closeProfileTools">
+            <span class="material-symbols-outlined close-profile-user-tools-icon" onclick="closeWindowProfileToos()">
+                cancel
+            </span>
+        </button>
+        <div class="container content-profile-user-tools">
+            <div class="card">
+                <div class="card-header headerProfile">
+                    <div class="dataUserHome" id="dataUser">
+                        <div class="iconAddBio">
+                            <button onclick="ativeBio()" class="iconEditBio">
+                                <span class="material-symbols-outlined iconAddB">
+                                    edit_note
+                                </span>
+                            </button>
+                            <form action="/user/home/bio" class="formAddBio" method="post">
+                                <input type="hidden" name="userId" value="{{User._id}}">
+                                <div class="bio" id="bio">
+                                    {{#if User.biography}}
+                                    <textarea name="biography" placeholder="Atualizar Biografia..." class="form-control"
+                                        id="bioAdd"></textarea>
+                                    {{else}}
+                                    <textarea name="biography" placeholder="Adicionar bio..." class="form-control"
+                                        id="bioAdd"></textarea>
+                                    {{/if}}
+                                    <div class="d-flex justify-content-center p-2">
+                                        {{#if User.biography}}
+                                        <button type="submit" class="btn btn-success">Atualizar</button>
+                                        {{else}}
+                                        <button type="submit" class="btn btn-success">Adicionar</button>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="photPerfil">
+                            {{#if (eq User.profilePicture)}}
+                            <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9"
+                                class="imgUser" alt="">
+                            {{else}}
+                            <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" class="imgUser"
+                                alt="">
+                            {{/if}}
+                            <button class="btn btn-dark mt-4" onclick="ativeWindowPhoto()">Nova foto
+                                <span class="material-symbols-outlined">
+                                    image
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="btnConections">
+                        {{#if (eq nomeuser.role "user")}}
+                            <button class="btn btn-success">Amigos</button>
+                            <button class="btn btn-success">Solicitações pendentes</button>
+                            <button class="btn btn-danger">Sair</button>
+                        {{else}}
+                            <a href="/admin/dashboard" class="text-decoration-none"><button class="btn btn-dark d-flex w-100 justify-content-center">Painel de Administração</button></a>
+                            <button class="btn btn-success">Amigos</button>
+                            <button class="btn btn-success">Solicitações pendentes</button>
+                            <a href="/user/logout" class="text-decoration-none "><button class="btn w-100 btn-danger">Sair</button></a>
+                            <span class="text-danger">* "Amigos" e "Solicitações" em desenvolvimento"</span>
+                        {{/if}}
+                    </div>
+                    <div class="b">
+                        <div class="card">
+                        <div class="card-header">
+                            <small>Biografia</small>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                            <p>{{User.nameuser}}</p>
+                            {{#if User.biography}}
+                                <footer class="blockquote-footer">{{User.biography}}</footer>
+                            {{else}}
+                                <footer class="blockquote-footer">Sem biografia...</footer>
+                            {{/if}}
+                            </blockquote>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="/user/home/searchUser" method="get">
+                        <div class="mb-3 formSearchUser">
+                            <label class="mb-3" for="searchUser">Busque por outros usuários e aumente suas conexões de conhecimento:</label>
+                            <input type="text" name="q" placeholder="Pesquisar" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

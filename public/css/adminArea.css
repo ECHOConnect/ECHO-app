@@ -412,4 +412,12 @@ body{
         position: absolute;
         top: 15px;
     }
+    .listBtn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .listBtn a, .listBtn a button{
+        width: 100%;
+    }
 }

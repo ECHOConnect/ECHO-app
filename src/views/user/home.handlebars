@@ -3,47 +3,6 @@
         <div>
             <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
             <p class="lead">Temos alguns posts esperando por você.</p>
-            <hr>
-            <form action="/user/home/searchUser" method="get">
-                <div class="mb-3 formSearchUser">
-                    <label class="mb-3" for="searchUser">Busque por outros usuários e aumente suas conexões de conhecimento:</label>
-                    <input type="text" name="q" placeholder="Pesquisar" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Pesquisar</button>
-                </div>
-            </form>
-        </div>
-        <div class="dataUserHome" id="dataUser">
-            <div class="iconAddBio">
-                <button onclick="ativeBio()" class="iconEditBio">
-                    <span class="material-symbols-outlined iconAddB">
-                        edit_note
-                    </span>
-                </button>
-                <form action="/user/home/bio" class="formAddBio" method="post">
-                    <input type="hidden" name="userId" value="{{User._id}}">
-                    <div class="bio" id="bio">
-                        <textarea name="biography" placeholder="Adicionar bio..." class="form-control"
-                            id="bioAdd"></textarea>
-                        <div class="d-flex justify-content-center p-2">
-                            <button type="submit" class="btn btn-success">Adicionar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="photPerfil">
-                {{#if (eq User.profilePicture)}}
-                <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" class="imgUser" alt="">
-                {{else}}
-                <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" class="imgUser" alt="">
-                {{/if}}
-                <button class="btn btn-dark" onclick="ativeWindowPhoto()">Nova foto
-                    <span class="material-symbols-outlined">
-                        image
-                    </span>
-                </button>
-            </div>
         </div>
     </div>
     <hr class="my-4">

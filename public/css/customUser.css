@@ -100,9 +100,78 @@ emoji-picker.ativeEmoji{
     display: flex;
     flex-direction: column;
 }
+
+/*Perfil de usuário*/
+.window-profile-user-tools{
+    height: 100vh;
+    width: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #00000021;
+    backdrop-filter: blur(1px);
+    transition: .4s cubic-bezier(0.63, 0.61, 0, 2.28)
+}
+.window-profile-user-tools.active-window-profile-tools{
+    width: 100vw;
+    overflow: visible;
+}
+.profile-user-tools{
+    width: 0;
+    right: 0;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    background-color: #035aa6;
+    backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+    transition: .4s cubic-bezier(0.63, 0.61, 0, 2.28)
+}
+.window-profile-user-tools.active-window-profile-tools .profile-user-tools{
+    width: 50vw;
+    overflow: visible;
+} 
+.headerProfile{
+    padding-bottom: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.btnConections{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.close-profile-user-tools-icon{
+    font-size: 3vw;
+    color: red;
+}
+.closeProfileTools{
+    background: transparent;
+    border: transparent;
+}
+.content-profile-user-tools{
+    overflow-y: scroll;
+    height: 90%;
+}
+.profile-icon{
+    font-size: 6vw;
+    color: white;
+}
 @media(max-width: 500px){
     .mood{
         animation: moodAnimation .4s ease-in-out;
+    }
+    .close-profile-user-tools-icon{
+        font-size: 10vw;
+        color: red;
+    }
+    .window-profile-user-tools.active-window-profile-tools .profile-user-tools{
+        width: 100vw;
     }
 }
 @keyframes moodAnimation {

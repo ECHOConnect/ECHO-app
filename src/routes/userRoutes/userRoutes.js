@@ -138,6 +138,16 @@ userRouter.post('/like/:id', (req, res) => {
     });
 });
 
+//Rota para logout do sistema
+userRouter.get('/logout', (req, res, next) => {
+    req.logout((error) => {
+        if(error){
+            return next(error)
+        }
+        req.flash('success_msg', 'Deslogado com sucesso!')
+        res.redirect('/user/login')
+    })
+})
 
 
 export default userRouter

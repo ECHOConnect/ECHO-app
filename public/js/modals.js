@@ -44,3 +44,15 @@ ban.addEventListener('change', (element) => {
         document.getElementById('textOther').classList.add('d-none')
     }
 })
+
+//Janela modal de perfil de usuário
+
+function ativeProfileUserTools(){
+    const window = document.getElementById('window-profile-user-tools')
+    window.classList.add('active-window-profile-tools')
+}
+
+function closeWindowProfileToos(){
+    const window = document.getElementById('window-profile-user-tools')
+    window.classList.remove('active-window-profile-tools')
+}
