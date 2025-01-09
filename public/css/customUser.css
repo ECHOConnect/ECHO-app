@@ -164,7 +164,7 @@ emoji-picker.ativeEmoji{
     color: white;
 }
 .nameuser{
-    font-size: 5vw;
+    font-size: 2vw;
 }
 .btnProfileTools{
     display: flex;
@@ -172,7 +172,7 @@ emoji-picker.ativeEmoji{
     gap: 10px;
 }
 .content-conections{
-    height: 100vh;
+    margin-bottom: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -194,7 +194,42 @@ emoji-picker.ativeEmoji{
     align-items: center;
     justify-content: space-between;
 }
+.cardConections{
+    width: 50%;
+}
+.cardListGroups{
+    margin-bottom: 20%;
+}
+.contentNoGroup{
+    height: 100vh;
+}
+.contentNoGroup h3{
+    opacity: .8;
+}
+.listGroupMembers{
+    display: flex;
+    flex-direction: column;
+}
+.itemListGroup{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 @media(max-width: 500px){
+    .nameuser{
+        font-size: 5vw;
+    }
+    .cardConections{
+        width: 100%;
+    }
+    .btnInfoConnections{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    .content-conections{
+        margin-bottom: 20%;
+    }
     .mood{
         animation: moodAnimation .4s ease-in-out;
     }

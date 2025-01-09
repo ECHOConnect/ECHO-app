@@ -151,6 +151,15 @@ body{
 
 
 @media (max-width: 550px){
+    .NoLogin{
+        width: 115px;
+        font-size: 4vw;
+        background-color: #035AA6;
+        color: white;
+    }
+    .NoLogin:hover{
+        background-color: #035AA6;
+    }
     #Options .Text_Options{
         display: none;
     }

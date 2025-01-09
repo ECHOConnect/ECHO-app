@@ -1,7 +1,7 @@
 <div class="container mt-4 content-conections">
     <h3>Suas conexões: </h3>
     {{#each friendsList}}
-        <div class="card w-50 mt-4">
+        <div class="card cardConections mt-4">
             <div class="card-body listFriendsPage">
                 {{#if this.profilePicture}}
                 <div>
@@ -9,8 +9,7 @@
                 </div>
                 <div class="btnInfoConnections">
                     <div>
-                        {{this.nameuser}} <br>
-                        {{this.useremail}}
+                        <strong>{{this.nameuser}}</strong> <br>
                     </div>
                     <div>
                         <button class="btn btn-success">+Info</button>

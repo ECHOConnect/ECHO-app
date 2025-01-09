@@ -40,7 +40,7 @@
     </div>
 </header>
 
-
+{{!-- Janela de perfil --}}
 <div class="window-profile-user-tools" id="window-profile-user-tools">
     <div class="profile-user-tools bg-light text-dark">
         <button class="closeProfileTools">
@@ -52,6 +52,7 @@
             <div class="card">
                 <div class="card-header headerProfile">
                     <div class="dataUserHome" id="dataUser">
+                        {{!-- Campo de edição de biografia ou adição --}}
                         <div class="iconAddBio">
                             <button onclick="ativeBio()" class="iconEditBio">
                                 <span class="material-symbols-outlined iconAddB">
@@ -78,6 +79,7 @@
                                 </div>
                             </form>
                         </div>
+                        {{!-- Campo de imagem e troca de imagem --}}
                         <div class="photPerfil">
                             {{#if (eq User.profilePicture)}}
                             <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9"
@@ -96,10 +98,18 @@
                     <hr>
                     <div class="btnConections">
                         {{#if (eq nomeuser.role "user")}}
-                            <button class="btn btn-success">Amigos</button>
-                            <button class="btn btn-success">Solicitações pendentes</button>
+                        {{!-- Botão de listagem de amigos (users) --}}
+                            <a href="/user/conections/{{User._id}}" class="text-decoration-none">
+                                <button class="btn w-100 btn-success btnProfileTools">Amigos
+                                    <span class="material-symbols-outlined">
+                                        group
+                                    </span>
+                                </button>
+                            </a>
+                            {{!-- Botão de logout (users) --}}
                             <a href="/user/logout"><button class="btn btn-danger w-100">Sair</button></a>
                         {{else}}
+                        {{!-- Botão de painel de administração admins --}}
                             <a href="/admin/dashboard" class="text-decoration-none">
                                 <button class="btn btn-dark d-flex w-100 justify-content-center btnProfileTools">
                                     Painel de Administração
@@ -108,6 +118,7 @@
                                     </span>
                                 </button>
                             </a>
+                            {{!-- Botão de listagem de amigos (admins, SUPER_ADMIN) --}}
                             <a href="/user/conections/{{User._id}}" class="text-decoration-none">
                                 <button class="btn w-100 btn-success btnProfileTools">Amigos
                                     <span class="material-symbols-outlined">
@@ -115,16 +126,29 @@
                                     </span>
                                 </button>
                             </a>
-                            <button class="btn btn-success btnProfileTools">
-                                Solicitações pendentes
-                                <span class="material-symbols-outlined">
-                                    hourglass_top
-                                </span>
-                            </button>
+                            {{!-- Botão para criação de grupos --}}
+                            <a href="/user/createGroup" class="text-decoration-none">
+                                <button class="btn btn-success w-100 btnProfileTools">
+                                    Criar grupo de estudos
+                                    <span class="material-symbols-outlined">
+                                        groups
+                                    </span>
+                                </button>
+                            </a>
+                            {{!-- Grupos de estudo --}}
+                            <a href="/user/groupList" class="text-decoration-none">
+                                <button class="btn btn-success w-100 btnProfileTools">
+                                    Acessar Grupos de Estudos
+                                    <span class="material-symbols-outlined">
+                                        tenancy
+                                    </span>
+                                </button>
+                            </a>
+                            {{!-- Botão de logout (admins, SUPER_ADMINS) --}}
                             <a href="/user/logout" class="text-decoration-none "><button class="btn w-100 btn-danger btnProfileTools">Sair</button></a>
-                            <span class="text-danger">* "Amigos" e "Solicitações" em desenvolvimento"</span>
                         {{/if}}
                     </div>
+                    {{!-- Biografia --}}
                     <div class="b">
                         <div class="card">
                         <div class="card-header">
@@ -143,6 +167,7 @@
                         </div>
                     </div>
                 </div>
+                {{!-- Busca de usuários --}}
                 <div class="card-body">
                     <form action="/user/home/searchUser" method="get">
                         <div class="mb-3 formSearchUser">

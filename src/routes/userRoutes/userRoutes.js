@@ -154,8 +154,11 @@ userRouter.get('/logout', (req, res, next) => {
 
 //Rota de informação de amigos
     userRouter.get('/conections/:id', (req, res) => {
+        //Pegando dados de id do usuário logado da url
         const myUserId = req.params.id
+        //Dados gerais de usuário para condição do template de header
         const nomeuser = req.user
+        //Filtrando usuário logado para condições de conexões
         User.findById(myUserId)
         .populate('connections', 'nameuser useremail username profilePicture')
         .then(userConnect => {
@@ -196,14 +199,16 @@ userRouter.get('/logout', (req, res, next) => {
     userRouter.post('/addConection', (req, res) => {
         const {userId} = req.body
         const myUserId = req.user
-        if(userId === myUserId){
-            req.flash('error_msg', 'Você não pode se conectar a si mesmo')
-            return res.redirect(req.headers.referer)
-        }
+        
         User.findById(userId)
         .then((user) => {
+            console.log('[debug] users: ', userId, myUserId)
             if(user.connections.includes(userId)){
                 req.flash('error_msg', 'Você já está conectado a este usuário')
+                return res.redirect(req.headers.referer)
+            }
+            if(myUserId == userId){
+                req.flash('error_msg', 'Você não pode se conectar a si mesmo')
                 return res.redirect(req.headers.referer)
             }
             User.findByIdAndUpdate(myUserId, {$push: {connections: userId}}, {new: true})

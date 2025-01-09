@@ -1,0 +1,32 @@
+<div class="container mt-4 mb-5">
+    <div class="card">
+        {{!-- Card de criação de grupo --}}
+        <div class="card-header">
+            <h3>Criar novo grupo de estudos</h3>
+        </div>
+        <form action="/user/createGroup/add" method="post">
+            <input type="hidden" value="{{User._id}}" name="createdBy">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="nameGroup">Nome do grupo</label>
+                    <input type="text" class="form-control" name="nameGroup" id="nameGroup">
+                </div>
+                <div class="mb-3">
+                    <label for="description">Descrição do grupo</label>
+                    <input type="text" class="form-control" name="description" id="description">
+                </div>
+                <div class="mb-3">
+                    <label for="connections">Convidar Conexões:</label>
+                    <select class="form-select" name="members[]" id="connections" multiple required size="5" aria-label="Size 3 select example">
+                        {{#each connect}}
+                            <option value="{{this._id}}">{{this.username}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Criar Grupo</button>
+            </div>
+        </form>
+    </div>
+</div>

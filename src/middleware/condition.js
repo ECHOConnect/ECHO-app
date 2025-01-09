@@ -8,8 +8,10 @@ const conditionHeader = (app) => {
             '/user/contact',
             '/user/relevants',
             '/user/home/searchUser',
-            '/user/conections'
-        ];
+            '/user/conections',
+            '/user/createGroup',
+            '/user/groupList'
+        ]
     
         // Verifica se o caminho está na lista de rotas ou se corresponde ao padrão da rota dinâmica
         if (noHeaderRoutes.includes(req.path) || req.path.match(/^\/user\/searchPost\/.+$/) || req.path.match(/^\/user\/home\/searchUser\/.+$/) || req.path.match(/^\/user\/conections\/.+$/)){
