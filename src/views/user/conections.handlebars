@@ -12,7 +12,7 @@
                         <strong>{{this.nameuser}}</strong> <br>
                     </div>
                     <div>
-                        <button class="btn btn-success">+Info</button>
+                        <a href="/user/infoConections/{{this._id}}"><button class="btn btn-success">+Info</button></a>
                     </div>
                 </div>
                     
@@ -25,6 +25,10 @@
                 </div>
                 {{/if}}
             </div>
+        </div>
+    {{else}}
+        <div class="container infoNoConnections d-flex justify-content-center">
+            <h3>Você não tem nenhuma conexão ainda</h3>
         </div>
     {{/each}}
 </div>

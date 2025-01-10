@@ -28,7 +28,7 @@ import { connect } from 'mongoose'
       const userId = req.user
       const nomeuser = req.user
       User.findById(userId)
-      .populate('connections', 'username profilePicture')
+      .populate('connections', 'nameuser profilePicture')
       .then((user) => {
         //Pegar as conexões e colocar no forms para adição
         const connect = user.connections
@@ -87,6 +87,26 @@ import { connect } from 'mongoose'
           groups: groups,
         })
       })
+    })
+
+  //Rota para informação de usuários
+    routerCustom.get('/infoConections/:id', (req, res) => {
+      const connectId = req.params.id
+      const nomeuser = req.user
+      User.findById(connectId)
+      .populate('connections', 'nameuser profilePicture')
+      .then((user) => {
+        const userConnect = user.connections
+        res.render('user/infoConections', {
+          user: user,
+          nomeuser: nomeuser,
+          userConnect: userConnect
+        })
+      })
+      .catch((error) => {
+        console.log('[debug]: Erro: ', error)
+      })
+      
     })
 
 export default routerCustom

@@ -16,10 +16,28 @@
                     <input type="text" class="form-control" name="description" id="description">
                 </div>
                 <div class="mb-3">
-                    <label for="connections">Convidar Conexões:</label>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="p-3">Suas conexões</h4>
+                        </div>
+                        <div class="card-body">
+                            {{#each connect}}
+                                <div class="content-list-conections">
+                                    <div>
+                                        <img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" class="imgUserComent" alt="">
+                                    </div>
+                                    <div>
+                                        {{this.nameuser}}
+                                    </div>
+                                </div>
+                                <hr>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <label id="infoCreateGroup" for="connections">Convidar Conexões: <span><i>*Você pode selecionar mais de um membro segurando Ctrl</i></span></label>
                     <select class="form-select" name="members[]" id="connections" multiple required size="5" aria-label="Size 3 select example">
                         {{#each connect}}
-                            <option value="{{this._id}}">{{this.username}}</option>
+                            <option value="{{this._id}}">{{this.nameuser}}</option>
                         {{/each}}
                     </select>
                 </div>

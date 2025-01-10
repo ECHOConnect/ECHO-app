@@ -1,0 +1,35 @@
+.local-connection-group{
+    display: grid;
+    grid-template-columns: 20% 70%;
+    height: 100vh;
+    column-gap: 15px;
+}
+.local-connection-group h4{
+    text-align: center;
+}
+.local-members-group{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.content-members{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.local-chat{
+    height: 90%;
+}
+.form-send-msg-group{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.form-send-msg-group input{
+    width: 100%;
+}

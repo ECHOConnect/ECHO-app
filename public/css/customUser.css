@@ -215,6 +215,25 @@ emoji-picker.ativeEmoji{
     align-items: center;
     gap: 15px;
 }
+.content-data-connection{
+    margin-bottom: 20%;
+}
+.content-list-conections{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px;
+}
+#infoCreateGroup{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.infoNoConnections{
+    height: 100vh;
+}
 @media(max-width: 500px){
     .nameuser{
         font-size: 5vw;

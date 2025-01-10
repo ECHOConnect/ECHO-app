@@ -1,0 +1,29 @@
+<div class="local-connection-group">
+ <div class="local-members-group">
+   <h4>Membros</h4>
+   {{#each infoMembersGroup}}
+      <div class="card">
+         <div class="card-body content-members">
+            <div>
+               <img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" class="imgUserComent" alt="">
+            </div>
+            <div>
+               <span>{{this.nameuser}}</span>
+            </div>
+         </div>
+      </div>
+   {{/each}}
+ </div>
+ <div>
+   <div class="d-flex justify-content-center">
+      <h3>ECHO Chat</h3>
+   </div>
+   <div class="card local-chat">
+   
+   {{!-- Aqui será o form de envio --}}
+   <div class="form-send-msg-group">
+      <input placeholder="Mensagem..." class="form-control" type="text"><button class="btn btn-primary">Enviar</button>
+   </div>
+   </div>
+ </div>
+</div>
