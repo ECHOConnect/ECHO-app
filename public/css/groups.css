@@ -1,16 +1,15 @@
 .local-connection-group{
-    display: grid;
-    grid-template-columns: 20% 70%;
-    height: 100vh;
+    /* display: grid;
+    grid-template-columns: 10% 85%;
     column-gap: 15px;
-}
-.local-connection-group h4{
-    text-align: center;
+    margin-bottom: 20%; */
 }
 .local-members-group{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-start;
     gap: 15px;
+    padding-left: 20px;
 }
 .content-members{
     display: flex;
@@ -32,4 +31,53 @@
 }
 .form-send-msg-group input{
     width: 100%;
+}
+.cardMember{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background: transparent;
+    align-items: center;
+    height: 100px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.borderOnline{
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    animation: borderOnline 2s infinite;
+}
+.btnAdd, .btnListGroup{
+    display: flex;
+    align-items: center;
+}
+.menuDrop.show{
+    z-index: 9;
+}
+.localFeedGroup{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20%;
+}
+.infoGroup{
+    padding: 5px;
+}
+.btnActions{
+    display: flex !important;
+    justify-content: flex-start !important;
+    padding-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+@keyframes borderOnline {
+    from{
+        box-shadow: 0px 0px 0px 2px green; 
+    }
+    to{
+        box-shadow: 0px 0px 7px 4px green;
+    }
 }

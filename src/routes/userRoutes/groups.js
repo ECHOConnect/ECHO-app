@@ -10,11 +10,18 @@ const routerGroups = Router()
         Group.findById(groupId)
         .populate('members', 'nameuser profilePicture')
         .then((group) => {
+            if(!group.members){
+                req.flash('error_msg', 'Usuário não faz parte do grupo')
+                res.redirect('/user/groupList')
+            }
             const infoMembersGroup = group.members 
             res.render('user/groups', {
                 group: group,
                 nomeuser: nomeuser,
-                infoMembersGroup: infoMembersGroup
+                infoMembersGroup: infoMembersGroup,
+                userLog: {
+                    _id: String(req.user._id)
+                }
             })
         })
         .catch((error) => {

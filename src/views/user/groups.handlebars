@@ -1,29 +1,81 @@
-<div class="local-connection-group">
- <div class="local-members-group">
-   <h4>Membros</h4>
-   {{#each infoMembersGroup}}
-      <div class="card">
-         <div class="card-body content-members">
-            <div>
-               <img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" class="imgUserComent" alt="">
-            </div>
-            <div>
-               <span>{{this.nameuser}}</span>
+<div class="local-connection-group mt-4">
+   <div class="localFeedGroup">
+      <div class="d-flex justify-content-center">
+         <h3>Grupo de estudos ({{group.nameGroup}})</h3>
+      </div>
+      <div>
+         <div class="local-members-group">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+               data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><span
+                  class="material-symbols-outlined">
+                  groups
+               </span>
+            </button>
+
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+               id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+               <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+               </div>
+               <div class="offcanvas-body">
+                  {{#each infoMembersGroup}}
+                  <div class="card border cardMember">
+                     {{#if (eq ../User.id this.id)}}
+                     <div class="card-body content-members">
+                        <div>
+                           <img title="Online" src="https://drive.google.com/thumbnail?id={{this.profilePicture}}"
+                              class="imgUserComent borderOnline" alt="">
+                        </div>
+                     </div>
+                     <div class="text-light p-3">
+                        {{this.nameuser}}
+                     </div>
+                     {{else}}
+                     <div class="card-body content-members">
+                        <div>
+                           <img title="Offline" src="https://drive.google.com/thumbnail?id={{this.profilePicture}}"
+                              class="imgUserComent" alt="">
+                        </div>
+                     </div>
+                     <div class="text-light p-3">
+                        {{this.nameuser}}
+                     </div>
+                     {{/if}}
+                  </div>
+                  {{/each}}
+               </div>
             </div>
          </div>
       </div>
-   {{/each}}
- </div>
- <div>
-   <div class="d-flex justify-content-center">
-      <h3>ECHO Chat</h3>
+      <div class="dropdown btnActions">
+         <button class="btn btnAdd btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <span class="material-symbols-outlined">
+               add
+            </span>
+         </button>
+         <ul class="dropdown-menu menuDrop">
+            <li><a class="dropdown-item" href="#">Adicionar postagem</a></li>
+            <li><a class="dropdown-item" href="#">Configurações de Grupo</a></li>
+            <li class="btnExitGroup"><a class="dropdown-item text-danger" href="#">Sair do grupo</a></li>
+         </ul>
+      </div>
+      <div class="card localForum">
+         <div class="jumbotron infoGroup">
+            <h1 class="display-4">Olá, {{nomeuser.nameuser}}</h1>
+            <p class="lead">Seja bem vindo(a) ao grupo de estudos - <strong>{{group.nameGroup}}</strong>.</p>
+            <hr class="my-4">
+            <p>{{group.description}}</p>
+         </div>
+      </div>
+      <div class="postGroup">
+         <div class="">
+
+         </div>
+      </div>
    </div>
-   <div class="card local-chat">
-   
-   {{!-- Aqui será o form de envio --}}
-   <div class="form-send-msg-group">
-      <input placeholder="Mensagem..." class="form-control" type="text"><button class="btn btn-primary">Enviar</button>
-   </div>
-   </div>
- </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
