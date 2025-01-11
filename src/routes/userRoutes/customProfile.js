@@ -46,20 +46,31 @@ import { connect } from 'mongoose'
   //Rota de processamento de dados para a criação do grupo
     routerCustom.post('/createGroup/add', (req, res) => {
       //Pegando dados do formulário de criação do grupo
-      const {nameGroup, description, members, createdBy} = req.body
+      const {nameGroup, description, members} = req.body
       //Id do usuário que criou o grupo
       const userId = req.user
 
-      if(!nameGroup || !description || !members){
+      if(!nameGroup || !description || !Array.isArray(members)){
         req.flash('error_msg', 'Campos para criação do grupo em falta!')
         res.redirect('/user/home')
       }
+      //Formatando dados de usuários
+      const membersFormat = members.map((memberId) => ({
+        user: memberId,
+        role: 'member'
+      }))
+      //Criador do grupo como admin
+      membersFormat.push({
+        user: userId,
+        role: 'admin'
+      })
 
       const newGroup = new Group({
         nameGroup: nameGroup,
         description: description,
-        createdBy: createdBy,
-        members: [userId, ...members]
+        admin: userId,
+        createdBy: userId,
+        members: membersFormat
       })
 
       newGroup.save()
@@ -77,9 +88,9 @@ import { connect } from 'mongoose'
   //Rota para acessar os grupos de estudos
     routerCustom.get('/groupList', (req, res) => {
       const nomeuser = req.user
-      const userId = req.user._id
-      Group.find({members: userId})
-      .populate('members', 'nameuser profilePicture')
+      const userId = req.user
+      Group.find({'members.user': userId})
+      .populate('members.user', 'nameuser profilePicture')
       .populate('createdBy', 'nameuser')
       .then((groups) => {
         res.render('user/groupList', {

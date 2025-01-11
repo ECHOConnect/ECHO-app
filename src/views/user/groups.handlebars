@@ -15,33 +15,26 @@
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
                id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+                  <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Membros do grupo</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                </div>
                <div class="offcanvas-body">
-                  {{#each infoMembersGroup}}
+                  {{#each members}}
                   <div class="card border cardMember">
-                     {{#if (eq ../User.id this.id)}}
                      <div class="card-body content-members">
+                        {{#if (eq this.role 'admin')}}
                         <div>
-                           <img title="Online" src="https://drive.google.com/thumbnail?id={{this.profilePicture}}"
-                              class="imgUserComent borderOnline" alt="">
+                           <img title="Admin" src="https://drive.google.com/thumbnail?id={{this.user.profilePicture}}"
+                              class="imgUserComent borderAdmin" alt="">
                         </div>
+                        {{else}}
+                        <img title="Member" src="https://drive.google.com/thumbnail?id={{this.user.profilePicture}}"
+                           class="imgUserComent" alt="">
+                        {{/if}}
                      </div>
                      <div class="text-light p-3">
-                        {{this.nameuser}}
+                        {{this.user.nameuser}}
                      </div>
-                     {{else}}
-                     <div class="card-body content-members">
-                        <div>
-                           <img title="Offline" src="https://drive.google.com/thumbnail?id={{this.profilePicture}}"
-                              class="imgUserComent" alt="">
-                        </div>
-                     </div>
-                     <div class="text-light p-3">
-                        {{this.nameuser}}
-                     </div>
-                     {{/if}}
                   </div>
                   {{/each}}
                </div>
@@ -56,7 +49,7 @@
             </span>
          </button>
          <ul class="dropdown-menu menuDrop">
-            <li><a class="dropdown-item" href="#">Adicionar postagem</a></li>
+            <li><a class="dropdown-item" href="/user/Postgroup/{{group._id}}">Adicionar postagem</a></li>
             <li><a class="dropdown-item" href="#">Configurações de Grupo</a></li>
             <li class="btnExitGroup"><a class="dropdown-item text-danger" href="#">Sair do grupo</a></li>
          </ul>
@@ -66,16 +59,102 @@
             <h1 class="display-4">Olá, {{nomeuser.nameuser}}</h1>
             <p class="lead">Seja bem vindo(a) ao grupo de estudos - <strong>{{group.nameGroup}}</strong>.</p>
             <hr class="my-4">
+            <small>Descrição do grupo:</small>
             <p>{{group.description}}</p>
          </div>
       </div>
       <div class="postGroup">
-         <div class="">
-
+         {{#if posts.length}}
+         {{#each posts}}
+         <div class="card mt-4">
+            <div class="card-header header-post-group">
+               <div>
+                  <img src="https://drive.google.com/thumbnail?id={{this.author.profilePicture}}" class="imgUserComent"
+                     alt="">
+               </div>
+               <div class="data-post">
+                  <span>
+                     Autor: <strong>{{this.author.nameuser}}</strong>
+                  </span>
+                  <span>
+                     <small>{{this.createDate}}</small>
+                  </span>
+               </div>
+            </div>
+            <div class="card-body">
+               {{this.content}}
+            </div>
+            <div class="card-footer">
+               <button class="btn-comment-post-group" data-post-id="{{this._id}}" onclick="openComments(this)">
+                  <span class="material-symbols-outlined">
+                     comment
+                  </span>
+               </button>
+            </div>
          </div>
+
+
+         {{!-- Janela de comentários --}}
+         <div class="windowComments" id="windowComments-{{this._id}}">
+            <button class="btnCloseComments">
+               <span class="material-symbols-outlined iconCloseComments" id="closeComments" onclick="CloseComment()">
+                  keyboard_double_arrow_down
+               </span>
+            </button>
+            <div class="containerComments" onclick="quantCommentsPosts(this)">
+               <div class="localComments">
+                  {{#if this.comentarios.length}}
+                  {{#each this.comentarios}}
+                  <div class="CommentStyle">
+                     <div class="userInfoComment">
+                        <div class="nameAuthorComment">
+                           {{author.nameuser}}
+                        </div>
+                        <div>
+                           {{#if (eq author.profilePicture "/default-profile.png")}}
+                           <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt=""
+                              class="imgUserComent">
+                           {{else}}
+                           <img title="{{author.biography}}"
+                              src="https://drive.google.com/thumbnail?id={{author.profilePicture}}"
+                              class="imgUserComent" alt="">
+                           {{/if}}
+                        </div>
+                     </div>
+                     <div>
+                        <div>
+                           {{text}}
+                        </div>
+                     </div>
+                  </div>
+                  {{/each}}
+                  {{else}}
+                  <p>Seja o primeiro(a) a comentar aqui!</p>
+                  {{/if}}
+               </div>
+            </div>
+            <form action="/user/group/{{this._id}}" class="form-comment" method="post">
+               <input type="hidden" value="{{author._id}}" id="userIdComment" name="author">
+               <input type="hidden" value="{{this._id}}" name="post" id="postId" class="postId">
+               <div class="mb-3 localText">
+                  <label for="comment"></label>
+                  <textarea placeholder="O que achou disso?" name="text" class="form-control coment-input"
+                     id=""></textarea>
+               </div>
+               <button type="submit" class="btnSendComment">
+                  <span class="material-symbols-outlined sendComment">
+                     send
+                  </span>
+               </button>
+            </form>
+         </div>
+
+         {{/each}}
+         {{else}}
+         <p>Nenhuma postagem ainda, seja o primeiro a iniciar uma discursão sobre algum assunto!</p>
+         {{/if}}
       </div>
    </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

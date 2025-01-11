@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose, { mongo } from "mongoose"
 const {Schema} = mongoose
 
 const Groupschema = new Schema({
@@ -10,9 +10,21 @@ const Groupschema = new Schema({
         type: String,
         default: ''
     },
-    members: [{
+    admin: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
+    },
+    members: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User' 
+        },
+        role: {
+            type: String,
+            enum: ['admin', 'member'],
+            default: 'member'
+        }
     }],
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,

@@ -1,0 +1,20 @@
+<div class="container content-post-group mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>O que deseja publicar hoje?</h4>
+        </div>
+        <form action="/user/Postgroup" method="post">
+        <input type="hidden" value="{{User._id}}" name="author">
+        <input type="hidden" value="{{group._id}}" name="group">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="content">Conteúdo da publicação</label>
+                    <textarea name="content" class="form-control" id="content"></textarea>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Publicar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -42,7 +42,7 @@
     justify-content: center;
     margin-bottom: 20px;
 }
-.borderOnline{
+.borderAdmin{
     border-radius: 50%;
     height: 90px;
     width: 90px;
@@ -72,6 +72,24 @@
     padding-left: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+/*Postagens*/
+.content-post-group{
+    margin-bottom: 20%;
+}
+.header-post-group{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.data-post{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.btn-comment-post-group{
+    background-color: transparent;
+    border: transparent;
 }
 @keyframes borderOnline {
     from{

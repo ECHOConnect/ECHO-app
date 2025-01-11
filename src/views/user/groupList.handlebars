@@ -16,8 +16,13 @@
                         <ul class="listGroupMembers">
                             {{#each this.members}}
                                 <div class="itemListGroup">
-                                    <img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" class="imgUserComent" alt="">
-                                    <span>{{this.nameuser}}</span>
+                                    <img src="https://drive.google.com/thumbnail?id={{this.user.profilePicture}}" class="imgUserComent" alt="">
+                                    <span>{{this.user.nameuser}}</span> - 
+                                    {{#if (eq this.role "admin")}}
+                                        <span class="text-success">{{this.role}}</span>
+                                    {{else}}    
+                                        <span>{{this.role}}</span>
+                                    {{/if}}
                                 </div>
                                 <hr>
                             {{/each}}
