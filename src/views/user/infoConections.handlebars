@@ -21,11 +21,14 @@
         </figure>
         {{else}}
         <blockquote class="blockquote mb-0">
-            <p>Perfil sem biografia</p>
-            <footer class="blockquote-footer">{{User.biography}}</footer>
+            <p class="d-flex justify-content-center">Perfil sem biografia</p> <br>
         </blockquote>
         {{/if}}
         <h4>Conexões de {{user.nameuser}}</h4>
+        <div class="mb-3">
+            <span>Total de conexões:</span>
+            <strong>{{userConnect.length}}</strong>
+        </div>
         {{#each userConnect}}
             <div class="card content-list-conections">
                 <div class="d-flex align-items-center">

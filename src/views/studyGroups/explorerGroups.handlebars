@@ -1,8 +1,6 @@
-<div class="container mt-4">
-    <h2>Seus Grupos de Estudo:</h2>
-    <div class="mt-4">
-        {{#each groups}}
-        <div class="card cardListGroups">
+<div class="container content-groups-explorer mt-4">
+    {{#each groups}}
+        <div class="card mb-5">
             <div class="card-header bg-dark text-light">
                 <span>Grupo:</span>
                 <div class="data-name-status">
@@ -34,37 +32,35 @@
                 </div>
             </div>
             <div class="card-body">
-                <h4>Descrição</h4>
-                <p>{{this.description}}</p>
+                <div>
+                    <h5>Descrição:</h5>
+                    <p>{{this.description}}</p>
+                </div>
                 <hr>
-                <h4>Participantes</h4>
-                <ul class="listGroupMembers">
-                    {{#each this.members}}
-                    <div class="itemListGroup">
-                        <img src="https://drive.google.com/thumbnail?id={{this.user.profilePicture}}"
-                            class="imgUserComent" alt="">
-                        <span>{{this.user.nameuser}}</span> -
-                        {{#if (eq this.role "admin")}}
-                        <span class="text-success">{{this.role}}</span>
-                        {{else}}
-                        <span>{{this.role}}</span>
-                        {{/if}}
+                <div>
+                    <div>
+                        <h4>Membros</h4>
                     </div>
-                    <hr>
+                    {{#each members}}
+                        <div class="member-list-group">
+                            <div>
+                                <img src="http://drive.google.com/thumbnail?id={{this.user.profilePicture}}" class="imgUserComent" alt="">
+                            </div>
+                            <div class="w-100 roleMembers">
+                                {{#if (eq this.role "admin")}}
+                                    {{this.user.nameuser}} <span class="text-success">{{this.role}}</span>
+                                {{else}}
+                                    {{this.user.nameuser}} <span>{{this.role}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <hr>
                     {{/each}}
-                </ul>
+                </div>
             </div>
-            <div class="card-footer d-flex align-items-center justify-content-center">
-                <a href="/user/group/{{this._id}}">
-                    <button class="btn m-3 btn-success">Acessar</button>
-                </a>
-                <span class="text-danger">*Em desenvolvimento</span>
+            <div class="card-footer p-3 d-flex justify-content-center">
+                <a href="/user/group/{{this._id}}"><button class="btn btn-success">Acessar</button></a>
             </div>
         </div>
-        {{else}}
-        <div class="container mt-4 contentNoGroup d-flex justify-content-center">
-            <h3>Você ainda não está em nenhum grupo</h3>
-        </div>
-        {{/each}}
-    </div>
+    {{/each}}
 </div>

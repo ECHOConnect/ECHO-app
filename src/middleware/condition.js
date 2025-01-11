@@ -12,7 +12,8 @@ const conditionHeader = (app) => {
             '/user/createGroup',
             '/user/groupList',
             '/user/infoConections',
-            '/user/Postgroup'
+            '/user/Postgroup',
+            '/user/explorerGroups'
         ]
     
         // Verifica se o caminho está na lista de rotas ou se corresponde ao padrão da rota dinâmica

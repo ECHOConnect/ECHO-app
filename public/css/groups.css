@@ -77,10 +77,14 @@
 .content-post-group{
     margin-bottom: 20%;
 }
-.header-post-group{
+.header-post-group, .member-list-group{
     display: flex;
     align-items: center;
     gap: 10px;
+}
+.roleMembers, .data-name-status{
+    display: flex;
+    justify-content: space-between;
 }
 .data-post{
     display: flex;
@@ -90,6 +94,9 @@
 .btn-comment-post-group{
     background-color: transparent;
     border: transparent;
+}
+.content-groups-explorer{
+    margin-bottom: 20%;
 }
 @keyframes borderOnline {
     from{

@@ -16,6 +16,17 @@
                     <input type="text" class="form-control" name="description" id="description">
                 </div>
                 <div class="mb-3">
+                    <label for="status">Privacidade do grupo:</label>
+                    <select class="form-select" aria-label="Default select example" name="status" id="status">
+                        <option selected>Selecione uma das opções</option>
+                        <option value="public">Público</option>
+                        <option value="private">Privado</option>
+                    </select>
+                </div>
+                <div id="definition">
+
+                </div>
+                <div class="mb-3">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="p-3">Suas conexões</h4>
@@ -48,3 +59,25 @@
         </form>
     </div>
 </div>
+
+<script>
+    const definition = document.getElementById('definition')
+    definition.style.display = 'none'
+    document.getElementById('status').addEventListener('change', (element) => {
+        console.log(element.target.value)
+
+        if(element.target.value == 'public' || element.target.value == 'private'){
+            definition.style.display = 'block'
+        }
+        if(element.target.value === 'public'){
+            definition.innerHTML = `<p class="text-success">*Ao escolher o status "público" o grupo pode ser acessado por todos, o conteúdo ficará disponível para acesso de quem não participa.</p>`
+        }
+        else if(element.target.value === 'private'){
+            definition.innerHTML = `<p class="text-success">*Ao escolher o status <span class="text-danger">"privado"</span> o grupo só será acessado por quem o admin adicionar.</p>`
+        }
+        else{
+            definition.style.display = 'none'
+        }
+    })
+    
+</script>

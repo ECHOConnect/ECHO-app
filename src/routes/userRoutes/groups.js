@@ -1,12 +1,15 @@
 import { Router } from "express"
 import Group from "../../models/Group.js"
 import PostsGroups from "../../models/Post_group.js"
+import { marked }  from 'marked'
+import { content } from "googleapis/build/src/apis/content/index.js"
 const routerGroups = Router()
 
 //Rota para detalhes de grupos já na parte interna
     routerGroups.get('/group/:id', (req, res) => {
         const groupId = req.params.id
         const nomeuser = req.user
+        const userId = req.user._id
 
         Group.findById(groupId)
         .populate('members.user', 'nameuser profilePicture')
@@ -14,6 +17,20 @@ const routerGroups = Router()
             PostsGroups.find({group: groupId})
             .populate('author', 'nameuser profilePicture role')
             .then((posts) => {
+                /*Processando dados em markdown*/
+                const processedPost = posts.map(posts => ({
+                    ...posts.toObject(),
+                    content: marked(posts.content)
+
+                }))
+                // Verifica se é um grupo privado e se o usuário é membro
+                if (group.status === 'private') {
+                    const isMember = group.members.some((member) => String(member.user._id) === String(userId));
+                    if (!isMember) {
+                        req.flash('error_msg', 'Você não tem permissão para acessar este grupo.');
+                        return res.redirect('/user/explorerGroups');
+                    }
+                }
                 if(!group.members){
                     req.flash('error_msg', 'Usuário não faz parte do grupo')
                     res.redirect('/user/groupList')
@@ -22,7 +39,7 @@ const routerGroups = Router()
                 res.render('user/groups', {
                     group: group,
                     nomeuser: nomeuser,
-                    posts: posts,
+                    posts: processedPost,
                     members: group.members,
                     userLog: {
                         _id: String(req.user._id)
@@ -73,6 +90,23 @@ const routerGroups = Router()
         .catch((error) => {
             req.flash('error_msg', '[debug]: Erro: ', error)
             res.redirect(req.headers.referer)
+        })
+    })
+
+    //Listagem de grupos diversos
+    routerGroups.get('/explorerGroups', (req, res) => {
+        const nomeuser = req.user
+        Group.find()
+        .populate('createdBy', 'nameuser profilePicture')
+        .populate('members.user', 'nameuser profilePicture role')
+        .then((groups) => {
+            res.render('studyGroups/explorerGroups', {
+                groups: groups,
+                nomeuser: nomeuser,
+            })
+        })
+        .catch((error) => {
+            console.log('[debug]: Erro: ', error)
         })
     })
 

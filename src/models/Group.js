@@ -10,6 +10,11 @@ const Groupschema = new Schema({
         type: String,
         default: ''
     },
+    status: {
+        type: String,
+        enum: ['public', 'private'],
+        default: 'public'
+    },
     admin: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

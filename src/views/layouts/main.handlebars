@@ -21,9 +21,10 @@
     {{else}}
       {{> headerDefault}}
     {{/if}}
-    {{>msg}}
+    {{> msg}}
     {{{body}}}
-    {{>footer}}
+    {{> windowProfile}}
+    {{> footer}}
     
     {{>sidebar}}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -32,5 +33,12 @@
     <script src="/js/code.js"></script>
     <script src="/js/modals.js"></script>
     <script src="/js/coments.js"></script>
+    <script>
+    //Funcionalidade de biografia
+      const dataUser = document.getElementById('dataUser')
+      function ativeBio(){
+          dataUser.classList.toggle('ativeBio')
+      }
+    </script>
   </body>
 </html>

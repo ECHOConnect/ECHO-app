@@ -59,40 +59,39 @@
             <h1 class="display-4">Olá, {{nomeuser.nameuser}}</h1>
             <p class="lead">Seja bem vindo(a) ao grupo de estudos - <strong>{{group.nameGroup}}</strong>.</p>
             <hr class="my-4">
-            <small>Descrição do grupo:</small>
+            <h5>Descrição do grupo:</h5>
             <p>{{group.description}}</p>
          </div>
       </div>
       <div class="postGroup">
          {{#if posts.length}}
          {{#each posts}}
-         <div class="card mt-4">
-            <div class="card-header header-post-group">
-               <div>
-                  <img src="https://drive.google.com/thumbnail?id={{this.author.profilePicture}}" class="imgUserComent"
-                     alt="">
+            <div class="card mt-4">
+               <div class="card-header header-post-group">
+                  <div>
+                     <img src="https://drive.google.com/thumbnail?id={{this.author.profilePicture}}" class="imgUserComent"
+                        alt="">
+                  </div>
+                  <div class="data-post">
+                     <span>
+                        Autor: <strong>{{this.author.nameuser}}</strong>
+                     </span>
+                     <span>
+                        <small>{{this.createDate}}</small>
+                     </span>
+                  </div>
                </div>
-               <div class="data-post">
-                  <span>
-                     Autor: <strong>{{this.author.nameuser}}</strong>
-                  </span>
-                  <span>
-                     <small>{{this.createDate}}</small>
-                  </span>
+               <div class="card-body">
+                  {{{this.content}}}
+               </div>
+               <div class="card-footer">
+                  <button class="btn-comment-post-group" data-post-id="{{this._id}}" onclick="openComments(this)">
+                     <span class="material-symbols-outlined">
+                        comment
+                     </span>
+                  </button>
                </div>
             </div>
-            <div class="card-body">
-               {{this.content}}
-            </div>
-            <div class="card-footer">
-               <button class="btn-comment-post-group" data-post-id="{{this._id}}" onclick="openComments(this)">
-                  <span class="material-symbols-outlined">
-                     comment
-                  </span>
-               </button>
-            </div>
-         </div>
-
 
          {{!-- Janela de comentários --}}
          <div class="windowComments" id="windowComments-{{this._id}}">
@@ -151,7 +150,9 @@
 
          {{/each}}
          {{else}}
-         <p>Nenhuma postagem ainda, seja o primeiro a iniciar uma discursão sobre algum assunto!</p>
+         <div class="container mt-4 d-flex justify-content-center">
+            <p>Nenhuma postagem ainda, seja o primeiro a iniciar uma discursão sobre algum assunto!</p>
+         </div>
          {{/if}}
       </div>
    </div>

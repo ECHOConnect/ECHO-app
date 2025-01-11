@@ -46,7 +46,7 @@ import { connect } from 'mongoose'
   //Rota de processamento de dados para a criação do grupo
     routerCustom.post('/createGroup/add', (req, res) => {
       //Pegando dados do formulário de criação do grupo
-      const {nameGroup, description, members} = req.body
+      const {nameGroup, description, status, members} = req.body
       //Id do usuário que criou o grupo
       const userId = req.user
 
@@ -68,6 +68,7 @@ import { connect } from 'mongoose'
       const newGroup = new Group({
         nameGroup: nameGroup,
         description: description,
+        status: status,
         admin: userId,
         createdBy: userId,
         members: membersFormat
@@ -91,7 +92,8 @@ import { connect } from 'mongoose'
       const userId = req.user
       Group.find({'members.user': userId})
       .populate('members.user', 'nameuser profilePicture')
-      .populate('createdBy', 'nameuser')
+      .populate('createdBy', 'nameuser profilePicture')
+      .sort({createdDate: -1})
       .then((groups) => {
         res.render('user/groupList', {
           nomeuser: nomeuser,

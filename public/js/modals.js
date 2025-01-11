@@ -7,11 +7,7 @@ windowPhot.addEventListener('click', (element) => {
         windowPhot.classList.remove('ativeWindowPhoto')
     }
 })
-//Funcionalidade de biografia
-const dataUser = document.getElementById('dataUser')
-function ativeBio(){
-    dataUser.classList.toggle('ativeBio')
-}
+
 
 //Funcionalidade de info de user
 function ativeInfoUser(id){
