@@ -412,7 +412,7 @@ pre{
     align-items: center;
     justify-content: center;
 }
-#btnBan{
+#postTool{
     position: absolute;
     right: 0;
     margin: 5px;
@@ -422,8 +422,11 @@ pre{
     color: #890707;
     background-color: black;
 }
-#btnBan .iconBan{
-    font-size: 3vw;
+.dropdown-toggle::after{
+    display: none;
+}
+.btnBanTool{
+    cursor: pointer;
 }
 .btnSendBan{
     display: flex !important;
@@ -456,6 +459,9 @@ pre{
     }
 }
 @media(max-width: 680px){
+    .tagStyle{
+        padding: 2px;
+    }
     .formSearchUser{
         width: 100%;
     }

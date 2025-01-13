@@ -73,6 +73,8 @@ emoji-picker.ativeEmoji{
     width: 100%;
     font-size: 2vw;
     cursor: pointer;
+    background-color: #0000004a;
+    backdrop-filter: blur(2px);
 }
 .mood{
     padding: 5px;

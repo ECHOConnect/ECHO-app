@@ -1,0 +1,75 @@
+<div class="container formPost mb-3">
+    <form action="/user/editPost/{{post._id}}" method="post">
+        <input type="hidden" value="{{User._id}}" name="author">
+        <div class="card">
+            <div class="card-header">
+                <h4>Nova postagem</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" value="{{post.titulo}}" class="form-control">
+                </div>
+                <div class="mb-3 content-digit">
+                    <label for="conteudo">O que quer compartilhar?</label>
+                    <div class="iconEmojis" id="iconEmojis">
+                        <button onclick="activeEmoji()" type="button" class="btnEmoji">
+                            <span class="material-symbols-outlined mood" id="btnEmoji">
+                                mood
+                            </span>
+                        </button>
+                        <button type="button" class="closeEmojis">
+                            <span class="material-symbols-outlined closeEmojiIcon" id="closeEmoji">
+                                close
+                            </span>
+                        </button>
+                    </div>
+                    <textarea name="conteudo" placeholder="Escreva sua mensagem... pode ser utilizando markdown!" class="form-control" id="conteudo">{{post.conteudo}}</textarea>
+                    <emoji-picker id="emojiPicker" class="light"></emoji-picker>
+                </div>
+                <div class="mb-3">
+                    <label for="tags">Tags (<small><i>Separadas por vírgula</i></small>)</label>
+                    <input type="text" placeholder="Ex: Javascript, PHP, Node.Js" class="form-control" value="{{post.tags}}" name="tags" id="tags">
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+//Funcionalidades de adição de emojis
+document.querySelector('emoji-picker').addEventListener('emoji-click', (element) => {
+    const emoji = element.detail.unicode
+    console.log(emoji)
+    const text = document.querySelector('#conteudo')
+    text.value += emoji
+})
+
+function activeEmoji(){
+    const closeEmoji = document.getElementById('closeEmoji')
+    const btnEmoji = document.getElementById('btnEmoji')
+    const emojiPicker = document.getElementById('emojiPicker')
+    emojiPicker.classList.add('ativeEmoji')
+    btnEmoji.classList.add('transparent')
+    closeEmoji.classList.add('here')
+}
+const iconEmojis = document.getElementById('iconEmojis')
+iconEmojis.addEventListener('click', (element) => {
+    console.log(element.target)
+    if(element.target.id === 'closeEmoji'){
+        document.getElementById('emojiPicker').classList.remove('ativeEmoji')
+        document.getElementById('closeEmoji').classList.add('transparent')
+        document.getElementById('btnEmoji').classList.remove('transparent')
+    }
+    if(element.target.id === 'btnEmoji'){
+        document.getElementById('closeEmoji').classList.remove('transparent')
+    }
+})
+
+
+</script>

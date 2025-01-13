@@ -44,6 +44,9 @@
             import routerGroups from './routes/userRoutes/groups.js'
         //Rota de configurações
             import routerSettings from './routes/userRoutes/settings.js'
+        //Rota de edição de ferramentas de postagens
+            import routerPostTool from './routes/userRoutes/postTools.js'
+
 
 //Importando configurações e middlewares
 
@@ -99,6 +102,17 @@
         app.set('view engine', 'handlebars')
         app.set('views', path.resolve('src', 'views'));
 
+    //Middleware de usuários logados
+    app.use((req, res, next) => {
+        if(req.isAuthenticated()){
+            res.locals.isLoggedUserId = req.user._id
+        }
+        else{
+            res.locals.isLoggedUserId = null
+        }
+        next()
+    })
+
     //Config. de caminho padrão para pastas estáticas
         app.use(express.static(path.join(__dirname, '../public')))
 
@@ -111,7 +125,7 @@
         
     //helper de condições complexas para o handlebars
     hbs.registerHelper('eq', function (a, b) {
-        return a === b;
+        return a?.toString() === b?.toString()
     });
 
 //ROTAS
@@ -145,6 +159,8 @@
         app.use('/user', routerGroups)
 
         app.use('/user', routerSettings)
+
+        app.use('/user', routerPostTool)
 
 //Conectando o servidor
     const PORT = process.env.PORT
