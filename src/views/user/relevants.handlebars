@@ -47,7 +47,7 @@
                     {{#if (eq author.profilePicture "/default-profile.png")}}
                         <img src="/uploads/default-profile.png" alt="">
                     {{else}}
-                        <img src="{{author.profilePicture}}" class="imgUserPost" alt="">
+                        <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="imgUserPost" alt="">
                     {{/if}}
                 </div>
                 <div class="dataPost">
@@ -88,7 +88,7 @@
                         <span class="material-symbols-outlined commentIcon">
                             comment
                         </span>
-                        <span class="comments-counts">0</span>
+                        <span class="comments-counts">{{this.comentarios.length}}</span>
                     </div>
                     <div class="share">
                         <span class="material-symbols-outlined shareIcon">

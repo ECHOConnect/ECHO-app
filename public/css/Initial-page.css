@@ -147,8 +147,25 @@ body{
     height: 13vw;
 }
 
-
-
+.imgNeural{
+    height: 300px; 
+}
+.imglp{
+    height: 100%;
+    animation: neuralAnime infinite 5s ease-in-out;
+   
+}
+@keyframes neuralAnime {
+    0%{
+        transform: rotate(-90deg);
+    }
+    50%{
+        transform: rotate(90deg);
+    }
+    100%{
+        transform: rotate(-90deg);
+    }
+}
 
 @media (max-width: 550px){
     .NoLogin{
@@ -181,7 +198,9 @@ body{
         font-size: 3vw;
     }
     #Descrition{
+        display: flex;
         flex-direction: column;
+        height: 100vh;
     }
     #Descrition h1{
         margin: 15px;

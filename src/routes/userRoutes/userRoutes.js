@@ -158,6 +158,7 @@ userRouter.get('/logout', (req, res, next) => {
         const myUserId = req.params.id
         //Dados gerais de usuário para condição do template de header
         const nomeuser = req.user
+        
         //Filtrando usuário logado para condições de conexões
         User.findById(myUserId)
         .populate('connections', 'nameuser useremail username profilePicture')
@@ -200,11 +201,11 @@ userRouter.get('/logout', (req, res, next) => {
         const {userId} = req.body
         const myUserId = req.user
         
-        if(myUserId === userId){
+        if(myUserId.equals(userId)){
             req.flash('error_msg', 'Você não pode se conectar a si mesmo')
             return res.redirect(req.headers.referer)
         }
-        User.findById(userId)
+        User.findById(myUserId)
         .then((user) => {
             console.log('[debug] users: ', userId, myUserId)
             if(!user){
