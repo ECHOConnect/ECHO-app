@@ -16,8 +16,10 @@ const routerGroups = Router()
         .then((group) => {
             PostsGroups.find({group: groupId})
             .populate('author', 'nameuser profilePicture role')
+            .populate('replies.author', 'nameuser profilePicture')
             .then((posts) => {
-                /*Processando dados em markdown*/
+                /*Processando dados em markdown
+                */
                 const processedPost = posts.map(posts => ({
                     ...posts.toObject(),
                     content: marked(posts.content)
@@ -51,6 +53,37 @@ const routerGroups = Router()
             console.log('[debug]: Erro: ', error)
         })
     })
+
+     //Comentários dos posts
+     routerGroups.post('/group/comment/:id', (req, res) => {
+        //Pegando dados de comentários
+        const postId = req.params.id
+        const {author, content} = req.body
+
+        //Buscando o post que foi comentado
+        PostsGroups.findById(postId)
+        .then((post) => {
+            if(!post){
+                req.flash('error_msg', 'Postagem não encontrada')
+                res.redirect(req.headers.referer)
+            }
+            //Incrementando comentários aos posts
+            const newComment = { author, content }
+            post.replies.push(newComment)
+
+            //Salvando postagem com o comentário
+            return post.save()
+        })
+        .then((commented) => {
+            req.flash('success_msg', 'Comentário adicionado com sucesso')
+            res.redirect(req.headers.referer)
+        })
+        .catch((error) => {
+            req.flash('error_msg', 'Erro ao tentar adicionar comentário')
+            res.redirect(req.headers.referer)
+            console.log(error)
+        })
+     })
 
     //Rota para postagens nos grupos
     routerGroups.get('/postgroup/:id', (req, res) => {

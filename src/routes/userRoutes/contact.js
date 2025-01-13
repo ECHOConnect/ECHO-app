@@ -14,8 +14,10 @@ const transporter = nodemailer.createTransport({
 })
 //Rota para página de contato
     routerContact.get('/contact', (req, res) => {
+        const nomeuser = req.user
          res.render('user/contact',{
-            layout: 'main'
+            layout: 'main',
+            nomeuser: nomeuser
          })
     })
 

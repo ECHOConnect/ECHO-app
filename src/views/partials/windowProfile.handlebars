@@ -138,6 +138,15 @@
                                     </span>
                                 </button>
                             </a>
+                            {{!-- Mais configurações --}}
+                            <a href="/user/settings/{{User._id}}" class="text-decoration-none">
+                                <button class="btn btn-success w-100 btnProfileTools">
+                                    Mais Configurações
+                                    <span class="material-symbols-outlined">
+                                        settings
+                                    </span>
+                                </button>
+                            </a>
                             {{!-- Botão de logout (admins, SUPER_ADMINS) --}}
                             <a href="/user/logout" class="text-decoration-none "><button class="btn w-100 btn-danger btnProfileTools">Sair</button></a>
                         {{/if}}

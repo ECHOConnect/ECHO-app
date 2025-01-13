@@ -17,7 +17,7 @@ const conditionHeader = (app) => {
         ]
     
         // Verifica se o caminho está na lista de rotas ou se corresponde ao padrão da rota dinâmica
-        if (noHeaderRoutes.includes(req.path) || req.path.match(/^\/user\/searchPost\/.+$/) || req.path.match(/^\/user\/home\/searchUser\/.+$/) || req.path.match(/^\/user\/conections\/.+$/) || req.path.match(/^\/user\/infoConections\/.+$/) || req.path.match(/^\/user\/group\/.+$/) || req.path.match(/^\/user\/Postgroup\/.+$/)){
+        if (noHeaderRoutes.includes(req.path) || req.path.match(/^\/user\/searchPost\/.+$/) || req.path.match(/^\/user\/home\/searchUser\/.+$/) || req.path.match(/^\/user\/conections\/.+$/) || req.path.match(/^\/user\/infoConections\/.+$/) || req.path.match(/^\/user\/group\/.+$/) || req.path.match(/^\/user\/Postgroup\/.+$/) || req.path.match(/^\/user\/settings\/.+$/)){
             res.locals.showHeader = false;
         } else {
             res.locals.showHeader = true;

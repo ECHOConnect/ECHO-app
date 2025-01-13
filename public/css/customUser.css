@@ -117,7 +117,7 @@ emoji-picker.ativeEmoji{
 .window-profile-user-tools.active-window-profile-tools{
     width: 100vw;
     overflow: visible;
-    z-index: 9999;
+    z-index: 99;
 }
 .profile-user-tools{
     width: 0;

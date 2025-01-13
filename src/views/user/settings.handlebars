@@ -1,0 +1,59 @@
+<div class="container content-settings mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>Configurações de {{nomeuser.nameuser}}</h4>
+        </div>
+        <div class="card-body">
+            <div class="card-header">
+                <h5>Dados básicos</h5>
+            </div>
+            <form action="/user/updateData/{{nomeuser._id}}" method="post" class="mt-4">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="nameuser">Nome de usuário</label>
+                        <input type="text" value="{{nomeuser.nameuser}}" class="form-control" name="nameuser" id="nameuser">
+                    </div>
+                    <div class="mb-3">
+                        <label for="username">Nome completo</label>
+                        <input type="text" value="{{nomeuser.username}}" class="form-control" name="username" id="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="useremail">E-mail</label>
+                        <input type="text" value="{{nomeuser.useremail}}" class="form-control" name="useremail" id="useremail">
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Salvar alterações</button>
+                </div>
+            </form>
+            <hr>
+            <div class="card-header contactSettings">
+                <h5 class="d-flex align-items-center">Feedback</h5><i>*Contate-nos, sua opinião nos ajuda a crescer!
+                <img src="/assets/images/19614-vegettossjb.gif" alt="" class="imgUserComent">
+                </i>
+            </div>
+            <div class="list-group">
+                <a href="/user/contact" class="listSettings list-group-item list-group-item-action">Feedback
+                    <span class="material-symbols-outlined">
+                        forum
+                    </span>
+                </a>
+            </div>
+            <hr>
+            <div class="card-header">
+                <h5>Segurança</h5>
+            </div>
+            <div class="list-group">
+                <a href="/user/resetPassword" class="listSettings list-group-item    list-group-item-action">Alteração de senha
+                    <span class="material-symbols-outlined">
+                        lock
+                    </span>
+                </a>
+            </div>
+            
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+</div>

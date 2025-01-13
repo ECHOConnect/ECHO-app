@@ -42,6 +42,13 @@
     gap: 20px;
     font-size: 2vw;
 }
+/*Configurações*/
+.contactSettings{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
 @media(max-width: 650px){
     .ban{
         width: 95%;

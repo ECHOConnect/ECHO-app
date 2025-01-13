@@ -434,6 +434,10 @@ pre{
 .formSearchUser{
     width: 100%;
 }
+.body-biography-card{
+    overflow-y: scroll;
+    height: 250px;
+}
 @keyframes closeBtnAnim {
     from{
         transform: translateY(5px);
@@ -494,7 +498,6 @@ pre{
     .card-body{
         display: flex;
         flex-direction: column;
-        align-items: center;
     }
     .iconAddB{
         font-size: 10vw;

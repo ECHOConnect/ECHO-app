@@ -24,21 +24,24 @@
                 </div>
                 {{User._id}}
                 <div class="card-footer btnDataConection">
-                    <button class="btn btn-success">+Info</button>
-                    <form action="/user/addConection" method="post">
-                        <input type="hidden" value="{{this._id}}" name="userId" class="idConnected">
+                    <a href="/user/infoConections/{{this._id}}"><button class="btn btn-success">+Info</button></a>
+                    {{!-- <form action="/user/addConection" method="post">
+                        <input type="text" value="{{this._id}}" name="userId" class="idConnected">
                             <button type="submit" class="btn btnConect btn-success d-flex">
                                 Conectar
                                 <span class="material-symbols-outlined">
                                     network_intelligence
                                 </span>
                             </button>
-                    </form>
-                    <span class="text-danger">*Em desenvolvimento</span>
+                            {{this._id}}
+                    </form> --}}
                 </div>
             </div>
         {{else}}
             <p>Nenhum usuário encontrado!</p>
         {{/each}}
     {{/if}}
+    {{#each connectios}}
+        {{this._id}}
+    {{/each}}
 </div>

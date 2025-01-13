@@ -108,10 +108,11 @@
                     </button>
                     <span class="comments-counts">{{this.comentarios.length}}</span>
                 </div>
-                <div class="share">
+                <div class="share d-flex align-items-center">
                     <span class="material-symbols-outlined shareIcon">
                         share
                     </span>
+                    <span class="text-danger">*Em desenvolvimento</span>
                 </div>
             </div>
             <div class="p-3">
@@ -186,8 +187,9 @@
                 {{else}}
                 <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="cardPhot card-img-top" alt="">
                 {{/if}}
-                <div class="card-body">
+                <div class="card-body body-biography-card">
                     <h5 class="card-title">Biografia</h5>
+                    <hr>
                     <p class="card-text">{{author.biography}}</p>
                     {{!-- <div class="d-flex justify-content-center">
                         <a href="#" class="btn btn-primary">Seguir</a>

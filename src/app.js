@@ -42,6 +42,8 @@
             import routerUpload from './routes/userRoutes/googleDrive.js'
         //Rota para grupos
             import routerGroups from './routes/userRoutes/groups.js'
+        //Rota de configurações
+            import routerSettings from './routes/userRoutes/settings.js'
 
 //Importando configurações e middlewares
 
@@ -141,6 +143,8 @@
         app.use('/user', routerUpload)
 
         app.use('/user', routerGroups)
+
+        app.use('/user', routerSettings)
 
 //Conectando o servidor
     const PORT = process.env.PORT

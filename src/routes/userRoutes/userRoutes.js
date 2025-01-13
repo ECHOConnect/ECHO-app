@@ -185,7 +185,7 @@ userRouter.get('/logout', (req, res, next) => {
         }
     })
     //Função para o envio de email
-    function senMail(from, to, subject, text){
+    function sendMail(from, to, subject, text){
         const mailOption = {
             from: from,
             to: to,
@@ -200,15 +200,19 @@ userRouter.get('/logout', (req, res, next) => {
         const {userId} = req.body
         const myUserId = req.user
         
+        if(myUserId === userId){
+            req.flash('error_msg', 'Você não pode se conectar a si mesmo')
+            return res.redirect(req.headers.referer)
+        }
         User.findById(userId)
         .then((user) => {
             console.log('[debug] users: ', userId, myUserId)
-            if(user.connections.includes(userId)){
-                req.flash('error_msg', 'Você já está conectado a este usuário')
+            if(!user){
+                req.flash('error_msg', 'Usuário não encontrado')
                 return res.redirect(req.headers.referer)
             }
-            if(myUserId == userId){
-                req.flash('error_msg', 'Você não pode se conectar a si mesmo')
+            if(user.connections.includes(userId)){
+                req.flash('error_msg', 'Você já está conectado a este usuário')
                 return res.redirect(req.headers.referer)
             }
             User.findByIdAndUpdate(myUserId, {$push: {connections: userId}}, {new: true})
@@ -226,7 +230,7 @@ userRouter.get('/logout', (req, res, next) => {
                     const nameReceiver = userAdd.nameuser
                     console.log(emailReceiver, nameReceiver)
                     //Enviando email
-                    senMail(
+                    sendMail(
                         `${process.env.EMAIL_USER}`,
                         `${emailReceiver}`,
                         `Você acabou de ser adicionado(a) na conexão de conhecimentos de alguém!`,

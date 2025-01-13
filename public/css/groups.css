@@ -77,10 +77,15 @@
 .content-post-group{
     margin-bottom: 20%;
 }
-.header-post-group, .member-list-group{
+.header-post-group, .member-list-group, .btn-comment-post-group, .listSettings{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+}
+.contactSettings{
+    display: flex;
+    justify-content: space-between;
+
 }
 .roleMembers, .data-name-status{
     display: flex;
@@ -95,7 +100,7 @@
     background-color: transparent;
     border: transparent;
 }
-.content-groups-explorer{
+.content-groups-explorer, .content-settings{
     margin-bottom: 20%;
 }
 @keyframes borderOnline {
