@@ -8,8 +8,16 @@ import Post from '../../models/Post.js'
     relevantRouter.get('/relevants', isAuthenticated, (req, res) => {
         const nomeuser = req.user
         Post.find()
-        .populate('author', 'nameuser profilePicture role')
-        .sort({likes: -1})
+        .sort({likes: 1})
+        //Populando - pegando o nome do autor pela id do autor da postagem
+        .populate('author', 'nameuser profilePicture role biography')
+        .populate({
+            path: 'comentarios',
+            populate: {
+                path: 'author',
+                select: 'nameuser profilePicture biography'
+            }
+        })
         .then((posts) => {
             //Processamento do markdown para cada post
             const processedPost = posts.map(posts => ({

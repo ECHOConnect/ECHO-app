@@ -17,7 +17,7 @@ const routerSettings = Router()
 
 //Rota de atualização de dados
     routerSettings.post('/updateData/:id', (req, res) => {
-        const {username, nameuser, useremail} = req.body
+        const {username, nameuser, useremail, biography} = req.body
         const userId = req.params.id
         console.log(userId)
         User.findOne({useremail})
@@ -49,8 +49,9 @@ const routerSettings = Router()
             }
             else{
                 return User.findByIdAndUpdate(userId, {
-                    username, 
-                    nameuser
+                    username: username, 
+                    nameuser: nameuser,
+                    biography: biography
                 }, {new: true})
             }
         })

@@ -50,29 +50,31 @@
             <div class="card-header headerPublic card-publication">
                 <div class="fotoUserPost">
                     <div class="dropdown" id="postTool">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             <span class="material-symbols-outlined">
                                 more_horiz
                             </span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/user/infoConections/{{this.author._id}}">Informações da conta</a></li>
+                            <li><a class="dropdown-item" href="/user/infoConections/{{this.author._id}}">Informações da
+                                    conta</a></li>
                             {{#if (eq this.author._id ../isLoggedUserId)}}
+                            <li>
+                                <a class="dropdown-item" href="/user/editPost/{{this._id}}">Editar</a>
+                            </li>
+                            <form action="/user/deletePost/{{this._id}}" method="post">
                                 <li>
-                                    <a class="dropdown-item" href="/user/editPost/{{this._id}}">Editar</a>
+                                    <button class="dropdown-item text-danger" type="submit">Deletar</button>
                                 </li>
-                                <form action="/user/deletePost/{{this._id}}" method="post">
-                                    <li>
-                                        <button class="dropdown-item text-danger" type="submit">Deletar</button>
-                                    </li>
-                                </form>
+                            </form>
                             {{else}}
-                                <li onclick="openBan()" class="d-flex       dropdown-item btnBanTool text-danger">
+                            <li onclick="openBan()" class="d-flex       dropdown-item btnBanTool text-danger">
                                 denunciar
-                                    <span class="material-symbols-outlined iconBan ">
-                                        report
-                                    </span>
-                                </li>
+                                <span class="material-symbols-outlined iconBan ">
+                                    report
+                                </span>
+                            </li>
                             {{/if}}
                         </ul>
                     </div>
@@ -82,9 +84,12 @@
                         </span>
                     </button>
                     {{#if (eq author.profilePicture "/default-profile.png")}}
-                    <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" class="imgUserPost" alt="">
+                    <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9"
+                        class="imgUserPost" alt="">
                     {{else}}
-                    <img title="{{author.biography}}" src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="imgUserPost" alt="">
+                    <img title="{{author.biography}}"
+                        src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="imgUserPost"
+                        alt="">
                     {{/if}}
                 </div>
                 <div class="dataPost">
@@ -124,13 +129,13 @@
                 </div>
                 <div class="coments">
                     <button data-post-id="{{this._id}}" onclick="openComments(this)" class="btnAtiveComments">
-                        <input type="hidden" id="id-{{this._id}}" class="id" value="{{this._id}}">
                         <span class="material-symbols-outlined commentIcon">
                             comment
                         </span>
                     </button>
                     <span class="comments-counts">{{this.comentarios.length}}</span>
                 </div>
+
                 <div class="share d-none align-items-center">
                     <span class="material-symbols-outlined shareIcon">
                         share
@@ -147,7 +152,7 @@
         </div>
     </div>
 
-{{!-- Janela de comentários --}}
+    {{!-- Janela de comentários --}}
     <div class="windowComments" id="windowComments-{{this._id}}">
         <button class="btnCloseComments">
             <span class="material-symbols-outlined iconCloseComments" id="closeComments" onclick="CloseComment()">
@@ -155,105 +160,112 @@
             </span>
         </button>
         <div class="containerComments" onclick="quantCommentsPosts(this)">
-                <div class="localComments">
-                    {{#if this.comentarios.length}}
-                        {{#each this.comentarios}}
-                        <div class="CommentStyle">
-                            <div class="userInfoComment">
-                                <div class="nameAuthorComment">
-                                    {{author.nameuser}}
-                                </div>
-                                <div>
-                                    {{#if (eq author.profilePicture "/default-profile.png")}}
-                                        <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt="" class="imgUserComent">
-                                    {{else}}
-                                        <img title="{{author.biography}}" src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="imgUserComent" alt="">
-                                    {{/if}}
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    {{text}}
-                                </div>
-                            </div>
+            <div class="localComments">
+                {{#if this.comentarios.length}}
+                {{#each this.comentarios}}
+                <div class="CommentStyle">
+                    <div class="userInfoComment">
+                        <div class="nameAuthorComment">
+                            {{author.nameuser}}
                         </div>
-                        {{/each}}
-                        {{else}}
-                        <p>Seja o primeiro(a) a comentar aqui!</p>
-                    {{/if}}
-                </div>
-            </div>
-            <form action="/user/home/comment" class="form-comment" method="post">
-                <input type="hidden" value="{{author._id}}" id="userIdComment" name="author">
-                <input type="hidden" value="{{this._id}}" name="post" id="postId" class="postId">
-                <div class="mb-3 localText">
-                    <label for="comment"></label>
-                    <textarea placeholder="O que achou disso?" name="text" class="form-control coment-input" id=""></textarea>
-                </div>
-                <button type="submit" class="btnSendComment">
-                    <span class="material-symbols-outlined sendComment">
-                        send
-                    </span>
-                </button>
-            </form>
-        </div>
-
-{{!-- Janela de informação de usuários --}}
-        <div class="cardProfile" id="cardProfile-{{this._id}}">
-            <div class="card cardProfileData" style="width: 18rem;">
-                <div class="closeCardProfile" id="closeCardProfile">
-                    <span class="material-symbols-outlined iconCloseProfile" id="iconCloseProfile" onclick="closeInfoUser()">
-                        cancel
-                    </span>
-                </div>
-                {{#if (eq author.profilePicture "/default-profile.png")}}
-                <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" class="cardPhot card-img-top" alt="" class="card-img-top">
-                {{else}}
-                <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="cardPhot card-img-top" alt="">
-                {{/if}}
-                <div class="card-body body-biography-card">
-                    <h5 class="card-title">Biografia</h5>
-                    <hr>
-                    <p class="card-text">{{author.biography}}</p>
-                    {{!-- <div class="d-flex justify-content-center">
-                        <a href="#" class="btn btn-primary">Seguir</a>
-                    </div> --}}
-                </div>
-            </div>
-        </div>
-
-        {{!-- Janela de denúncia --}}
-        <div class="windowBan" id="windowBan">
-            <div class="card ban">
-                <div class="card-header">
-                    <h4>Por que você quer denunciar este conteúdo?</h4>
-                </div>
-                <div class="card-body">
-                    <select class="form-select" id="selectBan" aria-label="Default select example">
-                        <option selected>Menu de opções</option>
-                        <option value="Improprio">Impróprio</option>
-                        <option value="Outro">Outro</option>
-                    </select>
-                    <div class="mt-4 w-100 d-none" id="textOther">
-                        <label for="other">Informe outro motivo</label>
-                        <input type="text" class="form-control">
+                        <div>
+                            {{#if (eq author.profilePicture "/default-profile.png")}}
+                            <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt=""
+                                class="imgUserComent">
+                            {{else}}
+                            <img title="{{author.biography}}"
+                                src="https://drive.google.com/thumbnail?id={{author.profilePicture}}"
+                                class="imgUserComent" alt="">
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            {{text}}
+                        </div>
                     </div>
                 </div>
-                <div class="card-footer btnSendBan">
-                    <button class="btn btn-success">Confirmar</button>
-                    <small class="text-danger">*Área em desenvolvimento</small>
-                </div>
+                {{/each}}
+                {{else}}
+                <p>Seja o primeiro(a) a comentar aqui!</p>
+                {{/if}}
             </div>
         </div>
+        <form action="/user/home/comment" class="form-comment" method="post">
+            <input type="hidden" value="{{author._id}}" id="userIdComment" name="author">
+            <input type="hidden" value="{{this._id}}" name="post" id="postId" class="postId">
+            <div class="mb-3 localText">
+                <label for="comment"></label>
+                <textarea placeholder="O que achou disso?" name="text" class="form-control coment-input"
+                    id=""></textarea>
+            </div>
+            <button type="submit" class="btnSendComment">
+                <span class="material-symbols-outlined sendComment">
+                    send
+                </span>
+            </button>
+        </form>
+    </div>
+    {{!-- Janela de informação de usuários --}}
+    <div class="cardProfile" id="cardProfile-{{this._id}}">
+        <div class="card cardProfileData" style="width: 18rem;">
+            <div class="closeCardProfile" id="closeCardProfile">
+                <span class="material-symbols-outlined iconCloseProfile" id="iconCloseProfile"
+                    onclick="closeInfoUser()">
+                    cancel
+                </span>
+            </div>
+            {{#if (eq author.profilePicture "/default-profile.png")}}
+            <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9"
+                class="cardPhot card-img-top" alt="" class="card-img-top">
+            {{else}}
+            <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="cardPhot card-img-top"
+                alt="">
+            {{/if}}
+            <div class="card-body body-biography-card">
+                <h5 class="card-title">Biografia</h5>
+                <hr>
+                <p class="card-text">{{author.biography}}</p>
+                {{!-- <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Seguir</a>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+
+    {{!-- Janela de denúncia --}}
+    <div class="windowBan" id="windowBan">
+        <div class="card ban">
+            <div class="card-header">
+                <h4>Por que você quer denunciar este conteúdo?</h4>
+            </div>
+            <div class="card-body">
+                <select class="form-select" id="selectBan" aria-label="Default select example">
+                    <option selected>Menu de opções</option>
+                    <option value="Improprio">Impróprio</option>
+                    <option value="Outro">Outro</option>
+                </select>
+                <div class="mt-4 w-100 d-none" id="textOther">
+                    <label for="other">Informe outro motivo</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="card-footer btnSendBan">
+                <button class="btn btn-success">Confirmar</button>
+                <small class="text-danger">*Área em desenvolvimento</small>
+            </div>
+        </div>
+    </div>
     {{else}}
     <p>Nenhum post</p>
     {{/each}}
-</div>
+</div> 
+
 {{!-- Janela modal de mudança de foto --}}
 <div class="windowPhot" id="windowPhot">
     <div class="photo" id="photo">
         <form class="formPhoto" action="/user/home/{{User._id}}" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="userId" value="{{User._id}}">
+            <input type="hidden" name="userId" value="{{User._id}}">
             {{#if (eq User.profilePicture "/default-profile.png")}}
             <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt="">
             {{else}}
@@ -267,5 +279,9 @@
         </form>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>

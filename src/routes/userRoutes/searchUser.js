@@ -4,7 +4,6 @@ import User from "../../models/User.js"
 import { isAuthenticated } from "../../config/auth.js"
 import { populate } from "dotenv"
 
-
 routeSearch.get('/home/searchUser', isAuthenticated,  (req, res) => {
     const query = req.query.q
     const nomeuser = req.user

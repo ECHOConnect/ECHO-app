@@ -85,16 +85,19 @@
                         <span class="like-counts">{{this.likes.length}}</span>
                     </div>
                     <div class="coments">
+                    <button data-post-id="{{this._id}}" onclick="openComments(this)" class="btnAtiveComments">
+                        <input type="hidden" id="id-{{this._id}}" class="id" value="{{this._id}}">
                         <span class="material-symbols-outlined commentIcon">
                             comment
                         </span>
-                        <span class="comments-counts">{{this.comentarios.length}}</span>
-                    </div>
-                    <div class="share">
+                    </button>
+                    <span class="comments-counts">{{this.comentarios.length}}</span>
+                </div>
+                    {{!-- <div class="share">
                         <span class="material-symbols-outlined shareIcon">
                             share
                         </span>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="p-3">
                     <strong>tags:</strong>
@@ -104,7 +107,101 @@
                 </div>
             </div>
         </div>
+        {{!-- Janela de comentários --}}
+    <div class="windowComments" id="windowComments-{{this._id}}">
+        <button class="btnCloseComments">
+            <span class="material-symbols-outlined iconCloseComments" id="closeComments" onclick="CloseComment()">
+                keyboard_double_arrow_down
+            </span>
+        </button>
+        <div class="containerComments" onclick="quantCommentsPosts(this)">
+            <div class="localComments">
+                {{#if this.comentarios.length}}
+                {{#each this.comentarios}}
+                <div class="CommentStyle">
+                    <div class="userInfoComment">
+                        <div class="nameAuthorComment">
+                            {{author.nameuser}}
+                        </div>
+                        <div>
+                            {{#if (eq author.profilePicture "/default-profile.png")}}
+                            <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt=""
+                                class="imgUserComent">
+                            {{else}}
+                            <img title="{{author.biography}}"
+                                src="https://drive.google.com/thumbnail?id={{author.profilePicture}}"
+                                class="imgUserComent" alt="">
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            {{text}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <p>Seja o primeiro(a) a comentar aqui!</p>
+                {{/if}}
+            </div>
+        </div>
+        <form action="/user/home/comment" class="form-comment" method="post">
+            <input type="hidden" value="{{author._id}}" id="userIdComment" name="author">
+            <input type="hidden" value="{{this._id}}" name="post" id="postId" class="postId">
+            <div class="mb-3 localText">
+                <label for="comment"></label>
+                <textarea placeholder="O que achou disso?" name="text" class="form-control coment-input"
+                    id=""></textarea>
+            </div>
+            <button type="submit" class="btnSendComment">
+                <span class="material-symbols-outlined sendComment">
+                    send
+                </span>
+            </button>
+        </form>
+    </div>
+    {{!-- Janela de informação de usuários --}}
+    <div class="cardProfile" id="cardProfile-{{this._id}}">
+        <div class="card cardProfileData" style="width: 18rem;">
+            <div class="closeCardProfile" id="closeCardProfile">
+                <span class="material-symbols-outlined iconCloseProfile" id="iconCloseProfile"
+                    onclick="closeInfoUser()">
+                    cancel
+                </span>
+            </div>
+            {{#if (eq author.profilePicture "/default-profile.png")}}
+            <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9"
+                class="cardPhot card-img-top" alt="" class="card-img-top">
+            {{else}}
+            <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" class="cardPhot card-img-top"
+                alt="">
+            {{/if}}
+            <div class="card-body body-biography-card">
+                <h5 class="card-title">Biografia</h5>
+                <hr>
+                <p class="card-text">{{author.biography}}</p>
+                {{!-- <div class="d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary">Seguir</a>
+                </div> --}}
+            </div>
+        </div>
+    </div>
     {{else}}
     <p>Nenhum post</p>
 {{/each}}
 </div>
+
+<script>
+    function openComments(id){
+    const BtnId = id.getAttribute('data-post-id')
+    const comment = document.getElementById(`windowComments-${BtnId}`)
+    comment.classList.add('ativeWindowComments')
+}
+
+
+function CloseComment(){
+    const closeWindow = document.querySelectorAll('.windowComments')
+    closeWindow.forEach(window => window.classList.remove('ativeWindowComments'))
+}
+</script>

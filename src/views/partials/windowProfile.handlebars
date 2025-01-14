@@ -10,33 +10,6 @@
             <div class="card">
                 <div class="card-header headerProfile">
                     <div class="dataUserHome" id="dataUser">
-                        {{!-- Campo de edição de biografia ou adição --}}
-                        <div class="iconAddBio">
-                            <button onclick="ativeBio()" class="iconEditBio">
-                                <span class="material-symbols-outlined iconAddB">
-                                    edit_note
-                                </span>
-                            </button>
-                            <form action="/user/home/bio" class="formAddBio" method="post">
-                                <input type="hidden" name="userId" value="{{User._id}}">
-                                <div class="bio" id="bio">
-                                    {{#if User.biography}}
-                                    <textarea name="biography" placeholder="Atualizar Biografia..." class="form-control"
-                                        id="bioAdd"></textarea>
-                                    {{else}}
-                                    <textarea name="biography" placeholder="Adicionar bio..." class="form-control"
-                                        id="bioAdd"></textarea>
-                                    {{/if}}
-                                    <div class="d-flex justify-content-center p-2">
-                                        {{#if User.biography}}
-                                        <button type="submit" class="btn btn-success">Atualizar</button>
-                                        {{else}}
-                                        <button type="submit" class="btn btn-success">Adicionar</button>
-                                        {{/if}}
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                         {{!-- Campo de imagem e troca de imagem --}}
                         <div class="photPerfil">
                             {{#if (eq User.profilePicture)}}
