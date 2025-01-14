@@ -103,6 +103,9 @@
 .content-groups-explorer, .content-settings{
     margin-bottom: 20%;
 }
+.noneData{
+    height: 100vh;
+}
 @keyframes borderOnline {
     from{
         box-shadow: 0px 0px 0px 2px green; 

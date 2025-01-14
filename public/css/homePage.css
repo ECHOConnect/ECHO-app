@@ -285,7 +285,9 @@ pre{
     padding: 10px;
 }
 .imgUserPost{
+    object-fit: cover;
     height: 100px;
+    width: 100px;
     border-radius: 100%;
     border: 1px solid white;
 }
@@ -440,6 +442,10 @@ pre{
 .body-biography-card{
     overflow-y: scroll;
     height: 250px;
+}
+/*swiper*/
+.swiperContainer{
+    height: 200px;
 }
 @keyframes closeBtnAnim {
     from{

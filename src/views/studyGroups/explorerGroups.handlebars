@@ -62,5 +62,9 @@
                 <a href="/user/group/{{this._id}}"><button class="btn btn-success">Acessar</button></a>
             </div>
         </div>
+    {{else}}
+        <div class="d-flex justify-content-center noneData">
+            <h5>Nenhum grupo por aqui</h5>
+        </div>
     {{/each}}
 </div>

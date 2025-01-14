@@ -118,3 +118,12 @@ document.getElementById('change-picture-btn').addEventListener('click', () => {
   
     input.click();
   });
+
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
