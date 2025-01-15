@@ -37,18 +37,34 @@
                 <h4>Descrição</h4>
                 <p>{{this.description}}</p>
                 <hr>
+                <div class="mb-3">
+                    <div class="titleAdmins">
+                        <strong>Administradores do grupo: </strong>
+                    </div>
+                    <hr>
+                    <div class="areaAdmins">
+                        {{#each this.admin}}
+                        <div class="d-block gap-3 justify-content-center align-items-center">
+                            <div class="imgAdmin">
+                                <a href="/user/infoConections/{{this._id}}"><img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" class="imgUserComent" alt=""></a>
+                            </div>
+                            <div>
+                                <span class="bg-dark rounded p-2 text-light">{{this.nameuser}}</span>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <hr>
+                </div>
                 <h4>Participantes</h4>
                 <ul class="listGroupMembers">
                     {{#each this.members}}
                     <div class="itemListGroup">
-                        <img src="https://drive.google.com/thumbnail?id={{this.user.profilePicture}}"
-                            class="imgUserComent" alt="">
-                        <span>{{this.user.nameuser}}</span> -
-                        {{#if (eq this.role "admin")}}
-                        <span class="text-success">{{this.role}}</span>
-                        {{else}}
-                        <span>{{this.role}}</span>
-                        {{/if}}
+                        <a href="/user/infoConections/{{this.user._id}}">
+                            <img src="https://drive.google.com/thumbnail?id={{this.user.profilePicture}}"
+                                class="imgUserComent" alt="">
+                        </a>
+                        <span>{{this.user.nameuser}}</span>
                     </div>
                     <hr>
                     {{/each}}
@@ -58,7 +74,6 @@
                 <a href="/user/group/{{this._id}}">
                     <button class="btn m-3 btn-success">Acessar</button>
                 </a>
-                <span class="text-danger">*Em desenvolvimento</span>
             </div>
         </div>
         {{else}}

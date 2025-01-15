@@ -1,47 +1,98 @@
 <div class="container status mt-4">
+    {{!-- Card de grupos e informações --}}
     <div class="card">
+        {{!-- Informações de grupo --}}
         <div class="card-header">
             <h3>Configurações do grupo <strong>({{group.nameGroup}})</strong></h3>
+            <h5>Privacidade: <i>{{group.status}}</i></h5>
         </div>
-        <div class="card-body">
-            <div class="mb-3">
-                <label for="name">Nome do Grupo: </label>
-                <input type="text" name="nameGroup" value="{{group.nameGroup}}" class="form-control"> 
-            </div>
-            <div class="mb-3">
-                <label for="description">Descrição do grupo: </label>
-                <input type="text" name="description" value="{{group.description}}" class="form-control"> 
-            </div>
-            <div class="mb-3">
-                <label for="status">Privacidade do grupo: <i>(No momento o grupo é - <strong>{{group.status}}</strong>)</i></label>
-                <select class="form-select" aria-label="Default select example" name="status" id="status">
-                    <option selected>Selecione uma das opções</option>
-                    <option value="public">Público</option>
-                    <option value="private">Privado</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="admin">Admin</label>
-                <select class="form-select" aria-label="Default select example" name="status" id="status">
-                    <option selected>Escolher outro admin para o grupo</option>
+        {{!-- Formulário de modificações --}}
+        <form action="/user/groupTools/{{group._id}}" method="post">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="name">Nome do Grupo: </label>
+                    <input type="text" name="nameGroup" value="{{group.nameGroup}}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="description">Descrição do grupo: </label>
+                    <input type="text" name="description" value="{{group.description}}" class="form-control">
+                </div>
+                {{#each group.members}}
+                    {{#if (eq this.user._id ../User._id)}}
+                        {{#if (eq this.role "admin")}}
+                            <div class="mb-3">
+                            <label for="status">Privacidade do grupo: </label>
+                            <select class="form-select" aria-label="Default select example" name="status" id="status" required>
+                                <!-- Primeira opção como marcador visual -->
+                                <option value="" disabled {{#if (eq group.status null)}}selected{{/if}}>Selecione uma das opções</option>
+                                <!-- Opção pública -->
+                                <option value="public" {{#if (eq group.status 'public')}}selected{{/if}}>Público</option>
+                                <!-- Opção privada -->
+                                <option value="private" {{#if (eq group.status 'private')}}selected{{/if}}>Privado</option>
+                            </select>
+                        </div>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
+                <div id="definition">
+
+                </div>
+                <div class="mb-3">
                     {{#each group.members}}
-                        {{#if (eq this.role "member")}}
-                        <option value="public">{{this.user.nameuser}}</option>
+                        {{#if (eq this.user._id ../User._id)}}
+                            {{#if (eq this.role "admin")}}
+                                <label for="admin">Admin</label>
+                                <select class="form-select" aria-label="Default example" name="admin[]" id="admin">
+                                {{#if (eq this.role "admin")}}
+                                    <option value="{{this.user._id}}" selected>{{this.user.nameuser}}</option>
+                                {{/if}}
+                                {{#each ../group.members}}
+                                    <option value="{{this.user._id}}">{{this.user.nameuser}}</option>
+                                {{/each}}
+                                </select>
+                            {{/if}}
                         {{/if}}
                     {{/each}}
-                </select>
+                </div>
+                <div class="mb-3">
+                    <label for="addMember">Adicionar novo membro</label>
+                    <select class="form-select" name="members[]" id="connections" multiple size="5"
+                        aria-label="Size 3 select example">
+                        {{#if connections.length}}
+                            {{#each connections}}
+                                <option value="{{this._id}}">{{this.nameuser}}</option>
+                            {{/each}}
+                        {{else}}
+                        <p>Você não tem nenhuma conexão</p>
+                        {{/if}}
+                    </select>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="addMember">Adicionar novo membro</label>
-                <select class="form-select" name="members[]" id="connections" multiple required size="5" aria-label="Size 3 select example">
-                    {{#each connections}}
-                        <option value="{{this._id}}">{{this.nameuser}}</option>
-                    {{/each}}
-                </select>
+            <div class="card-footer saveNewGroup d-flex align-items-center justify-content-center">
+                <button class="btn btn-success">Salvar</button><span class="text-danger">*Em desenvolvimento</span>
             </div>
-        </div>
-        <div class="card-footer saveNewGroup d-flex align-items-center justify-content-center">
-            <button class="btn btn-success">Salvar</button><span class="text-danger">*Em desenvolvimento</span>
-        </div>
+        </form>
     </div>
 </div>
+
+<script>
+    const definition = document.getElementById('definition')
+    definition.style.display = 'none'
+    document.getElementById('status').addEventListener('change', (element) => {
+        console.log(element.target.value)
+
+        if(element.target.value == 'public' || element.target.value == 'private'){
+            definition.style.display = 'block'
+        }
+        if(element.target.value === 'public'){
+            definition.innerHTML = `<p class="text-success">*Ao escolher o status "público" o grupo pode ser acessado por todos, o conteúdo ficará disponível para acesso de quem não participa.</p>`
+        }
+        else if(element.target.value === 'private'){
+            definition.innerHTML = `<p class="text-success">*Ao escolher o status <span class="text-danger">"privado"</span> o grupo só será acessado por quem o admin adicionar.</p>`
+        }
+        else{
+            definition.style.display = 'none'
+        }
+    })
+    
+</script>

@@ -131,6 +131,7 @@ const routerGroups = Router()
         const nomeuser = req.user
         Group.find()
         .populate('createdBy', 'nameuser profilePicture')
+        .populate('admin')
         .populate('members.user', 'nameuser profilePicture role')
         .then((groups) => {
             res.render('studyGroups/explorerGroups', {

@@ -112,7 +112,7 @@ body{
     align-items: center;
     justify-content: space-around;
     padding-top: 1vw;
-    z-index: 999;
+    z-index: 9;
     position: relative
 }
 #Footer h2{

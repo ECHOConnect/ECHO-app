@@ -123,7 +123,6 @@
                      <div>
                         <div id="content-comments">
                            {{this.content}}
-
                         </div>
                      </div>
                   </div>
@@ -133,7 +132,7 @@
                </div>
             </div>
             <form action="/user/group/comment/{{this._id}}" class="form-comment" method="post">
-               <input type="hidden" value="{{author._id}}" id="userIdComment" name="author">
+               <input type="hidden" value="{{../User._id}}" id="userIdComment" name="author">
                <input type="hidden" value="{{this._id}}" name="post" id="postId" class="postId">
                <div class="mb-3 localText">
                   <label for="comment"></label>

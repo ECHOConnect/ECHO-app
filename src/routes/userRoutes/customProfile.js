@@ -131,6 +131,7 @@ import { connect } from 'mongoose'
       const userId = req.user
       Group.find({'members.user': userId})
       .populate('members.user', 'nameuser profilePicture')
+      .populate('admin', 'nameuser profilePicture')
       .populate('createdBy', 'nameuser profilePicture')
       .sort({createdDate: -1})
       .then((groups) => {
