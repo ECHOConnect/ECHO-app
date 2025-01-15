@@ -15,11 +15,11 @@ const Groupschema = new Schema({
         enum: ['public', 'private'],
         default: 'public'
     },
-    admin: {
+    admin: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    },
+    }],
     members: [{
         user: {
             type: mongoose.Schema.Types.ObjectId,

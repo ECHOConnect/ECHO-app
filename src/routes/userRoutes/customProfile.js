@@ -4,6 +4,9 @@ import upload from '../../config/multer.js'
 // import multer from 'multer'
 import User from '../../models/User.js'
 import Group from '../../models/Group.js'
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
 import { connect } from 'mongoose'
 
 //Rota para bio
@@ -57,7 +60,8 @@ import { connect } from 'mongoose'
       //Formatando dados de usuários
       const membersFormat = members.map((memberId) => ({
         user: memberId,
-        role: 'member'
+        role: 'member',
+        email: memberId.useremail
       }))
       //Criador do grupo como admin
       membersFormat.push({
@@ -75,17 +79,52 @@ import { connect } from 'mongoose'
       })
 
       newGroup.save()
-      .then(() => {
-        req.flash('success_msg', 'Grupo criado com sucesso!')
-        res.redirect(req.headers.referer)
+      .then((newGroupAdd) => {
+        // Enviar emails individualmente para cada membro
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+        });
+  
+        // Enviar para cada membro do grupo (exceto o criador)
+        newGroupAdd.members.forEach(async (member) => {
+          if (member.user !== userId) { // Ignorar o criador
+            // Pegar o email do membro
+            const memberDetails = await User.findById(member.user);
+            const memberEmail = memberDetails.useremail;
+  
+            if (memberEmail) {
+              const mailOption = {
+                from: process.env.EMAIL_USER,
+                to: memberEmail,
+                subject: `Adição em grupo de estudo`,
+                text: `Olá, você foi adicionado ao grupo de estudos: ${newGroupAdd.nameGroup}. Aproveite!`,
+              };
+  
+              // Enviar email
+              transporter.sendMail(mailOption, (err) => {
+                if (err) {
+                  console.error(`[debug]: Erro ao enviar email para ${memberEmail}: ${err}`);
+                } else {
+                  console.log(`[debug]: Email enviado para ${memberEmail}`);
+                }
+              });
+            }
+          }  
+        });
+    
+        req.flash('success_msg', 'Grupo criado com sucesso!');
+        res.redirect('/user/groupList');
       })
       .catch((error) => {
-        console.log('[debug]: Erro: ', error)
-        req.flash('error_msg', 'Houve um erro ao criar grupo, tente novamente')
-        res.redirect(req.headers.referer)
+        console.error('[debug]: Erro ao criar grupo: ', error);
+        req.flash('error_msg', 'Houve um erro ao criar grupo, tente novamente');
+        res.redirect(req.headers.referer);
       })
     })
-
   //Rota para acessar os grupos de estudos
     routerCustom.get('/groupList', (req, res) => {
       const nomeuser = req.user

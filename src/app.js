@@ -46,6 +46,8 @@
             import routerSettings from './routes/userRoutes/settings.js'
         //Rota de edição de ferramentas de postagens
             import routerPostTool from './routes/userRoutes/postTools.js'
+        //Rota de ferramentas para grupos
+            import routerGroupTools from './routes/groupsTools/groupTools.js'
 
 
 //Importando configurações e middlewares
@@ -161,6 +163,8 @@
         app.use('/user', routerSettings)
 
         app.use('/user', routerPostTool)
+
+        app.use('/user', routerGroupTools)
 
 //Conectando o servidor
     const PORT = process.env.PORT

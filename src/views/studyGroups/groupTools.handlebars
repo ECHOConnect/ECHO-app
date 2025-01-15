@@ -1,0 +1,47 @@
+<div class="container status mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>Configurações do grupo <strong>({{group.nameGroup}})</strong></h3>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="name">Nome do Grupo: </label>
+                <input type="text" name="nameGroup" value="{{group.nameGroup}}" class="form-control"> 
+            </div>
+            <div class="mb-3">
+                <label for="description">Descrição do grupo: </label>
+                <input type="text" name="description" value="{{group.description}}" class="form-control"> 
+            </div>
+            <div class="mb-3">
+                <label for="status">Privacidade do grupo: <i>(No momento o grupo é - <strong>{{group.status}}</strong>)</i></label>
+                <select class="form-select" aria-label="Default select example" name="status" id="status">
+                    <option selected>Selecione uma das opções</option>
+                    <option value="public">Público</option>
+                    <option value="private">Privado</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="admin">Admin</label>
+                <select class="form-select" aria-label="Default select example" name="status" id="status">
+                    <option selected>Escolher outro admin para o grupo</option>
+                    {{#each group.members}}
+                        {{#if (eq this.role "member")}}
+                        <option value="public">{{this.user.nameuser}}</option>
+                        {{/if}}
+                    {{/each}}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="addMember">Adicionar novo membro</label>
+                <select class="form-select" name="members[]" id="connections" multiple required size="5" aria-label="Size 3 select example">
+                    {{#each connections}}
+                        <option value="{{this._id}}">{{this.nameuser}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div class="card-footer saveNewGroup d-flex align-items-center justify-content-center">
+            <button class="btn btn-success">Salvar</button><span class="text-danger">*Em desenvolvimento</span>
+        </div>
+    </div>
+</div>
