@@ -108,7 +108,7 @@
                         </small>
                     </p>
                     <div>
-                        <small>publicado em {{this.createdDate}}</small>
+                        <small>publicado em {{this.dataFormatada}}</small>
                     </div>
                 </div>
             </div>
@@ -164,11 +164,6 @@
                 {{#each this.comentarios}}
                 <div class="CommentStyle">
                     <div class="userInfoComment">
-                        <a href="/user/infoConections/{{this.author._id}}" class="text-decoration-none text-dark">
-                            <div class="nameAuthorComment">
-                                <div>{{author.nameuser}}</div>
-                            </div>
-                        </a>
                         <div>
                             {{#if (eq author.profilePicture "/default-profile.png")}}
                             <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt=""
@@ -183,6 +178,17 @@
                         </div>
                     </div>
                     <div>
+                        <a href="/user/infoConections/{{this.author._id}}" class="text-decoration-none text-dark">
+                            <div class="nameAuthorComment">
+                                <div>
+                                    <strong>{{author.nameuser}}</strong>
+                                </div>
+                                <div class="dataComment">
+                                    <i>{{this.dataFormatada}}</i>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="separatorComment">
                         <div class="content">
                             {{text}}
                         </div>

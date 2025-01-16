@@ -1,14 +1,16 @@
 import { Router } from "express";
 const userRouter = Router()
 import User from "../../models/User.js";
+import moment from "moment";
 import nodemailer from 'nodemailer'
 import Post from "../../models/Post.js";
-import { marked, Marked } from "marked";
+import { marked, Marked, options } from "marked";
 import { isAuthenticated } from "../../config/auth.js";
 import dotenv from 'dotenv'
 dotenv.config()
 import Comentario from "../../models/Comments.js";
 
+moment.locale('pt-br')
 
 //Rota de home page da aplicação
 userRouter.get('/home', isAuthenticated, (req, res) => {
@@ -23,6 +25,7 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     .populate({
         path: 'comentarios',
         populate: {
+            options: {sort: {like: 1}},
             path: 'author',
             select: 'nameuser profilePicture biography'
         }
@@ -30,8 +33,14 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     .then((post) => {
         //Processamento do markdown para cada post
         const processedPost = post.map(post => ({
-            ...post.toObject(),
-            conteudo: marked(post.conteudo)
+            ...post.toJSON(),
+            conteudo: marked(post.conteudo),
+            dataFormatada: moment(post.createdDate).format('LLL'),
+            comentarios: post.comentarios.map((comentario) => ({
+                 ...comentario.toJSON(),
+                dataFormatada: moment(comentario.created).format('LLL')
+             }))
+                
         }))
         res.render('user/home', {
             layout: 'main',

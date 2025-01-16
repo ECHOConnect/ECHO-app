@@ -391,10 +391,7 @@ pre{
 img.imgUserComent:hover{
     border: 1px solid black;
 }
-.nameAuthorComment:hover {
-    border: 1px solid #3F51B5;
-    transition: .4s ease-in-out;
-}
+
 .commentsTools{
     position: absolute;
     right: 0;
@@ -422,12 +419,13 @@ img.imgUserComent:hover{
 .CommentStyle{
     position: relative;
     display: grid;
-    grid-template-columns: 17% 67% 1fr;
+    grid-template-columns: 10% 67% 1fr;
     align-items: center;
     background: #ddddff;
     color: #370037;
     border-radius: 15px;
     font-size: 1.7vw;
+    padding-bottom: 25px;
 }
 .userInfoComment{
     height: 100%;
@@ -439,10 +437,15 @@ img.imgUserComent:hover{
     padding: 8px;
 }
 .nameAuthorComment{
-    border: 1px solid #4a004a;
+    display: flex;
+    gap: 30px;
+    align-items: center;
     padding: 3px;
     border-radius: 5px;
     font-size: 1vw;
+}
+.dataComment{
+    font-size: 2.5vw;
 }
 .containerComments{
     width: 100%;
@@ -476,7 +479,14 @@ img.imgUserComent:hover{
 }
 .content{
     font-size: 1vw;
-    padding: 10px;
+    padding: 0 0 15px;
+}
+.dataComment{
+    font-size: 1vw;
+}
+.separatorComment{
+    margin: 0 0 10px;
+    width: 150px;
 }
 .likeBtnSmall{
     border: 0;
@@ -527,6 +537,10 @@ img.imgUserComent:hover{
     }
 }
 @media(max-width: 680px){
+    .separatorComment{
+        margin: 0 5px 5px !important;
+        width: 100px !important;
+    }
     .quantLikes{
         font-size: 2.5vw;
     }
@@ -548,12 +562,15 @@ img.imgUserComent:hover{
     }
     .nameAuthorComment{
         font-size: 3vw;
+        gap: 10px;
+        /* height: 10px; */
     }
     .form-comment{
         width: 100%;
     }
     .CommentStyle{
        font-size: 3vw;
+       grid-template-columns: 20% 67% 1fr;
     }
     .iconCloseComments{
         font-size: 10vw;
