@@ -50,16 +50,6 @@ document.querySelectorAll('.editar-btn').forEach((buttom) => {
     })
 })
 
-// Funcionalidades de estilo para posts
-    // Likes
-    // document.querySelectorAll('.likeIcon').forEach((like) => {
-    //     like.addEventListener('click', () => {
-    //         // Seleciona o contador relacionado ao botão clicado
-    //         const likeCount = like.closest('.actionBtn').querySelector('.like-counts');
-    //         like.classList.add('likeUp');
-    //     });
-    // });
-
 //Funcionalidade de atualização de likes
 addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.like').forEach((likeButtom) => {
@@ -88,7 +78,6 @@ addEventListener('DOMContentLoaded', () => {
         })
     })
 })
-
 //Funcionalidade ativar foto de perfil
 document.getElementById('change-picture-btn').addEventListener('click', () => {
     const input = document.createElement('input');

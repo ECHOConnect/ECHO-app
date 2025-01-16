@@ -1,6 +1,7 @@
 import express from 'express'
 import Comentario from '../../models/Comments.js'
 import Post from '../../models/Post.js'
+import mongoose from 'mongoose'
 const routeComments = express.Router()
 
 
@@ -90,6 +91,55 @@ routeComments.post('/home/comment', (req, res) => {
             console.log('[debug]: Erro: ', error)
             req.flash('error_msg', 'Erro ao tentar deletar comentário')
             res.redirect(req.headers.referer)
+        })
+    })
+
+//Rota para curtir comentários
+    routeComments.post('/likeComment/:commentId', (req, res) => {
+        const commentId = req.params.commentId
+        const userId = req.user._id
+        console.log('[debug]: id do usuário que deu like: ', userId)
+        Comentario.findById(commentId)
+        .populate('like', 'nameuser')
+        .then((comment) => {
+            //Validando a existência de comentários
+            if(!comment){
+                req.flash('error_msg', 'Comentário não encontrado')
+                return res.redirect(req.headers.referer)
+            }
+            //Verificando se o usuário já deu like no comentário
+            const hasLiked = comment.like.some(like => like._id.toString() === userId.toString())
+            console.log('[debug]: Like de Comentário: ', comment.like)
+            console.log('[debug]: Like de Comentário: ', comment)
+
+            //Verificando se o usuário já deu like no comentário
+            if(hasLiked){
+                comment.like.pull(userId)
+                comment.save()
+                .then((quantLikes) => {
+                    //Passando quantidade de likes para o cliente
+                    res.json({msg: 'Like removido', likeCount: quantLikes.like.length})
+                })
+                .catch((error) => {
+                    console.log('[debug]: Erro: ', error)
+                    res.json({ msg: 'Erro ao remover like' });
+                })
+            }
+            else{
+                comment.like.push(userId)
+                comment.save()
+                .then((quantLikes) => {
+                    res.json({msg: 'Like adicionado', likeCount: quantLikes.like.length})
+                })
+                .catch((error) => {
+                    console.log('[debug]: Erro: ', error)
+                    res.json({ msg: 'Erro ao adicionar like' });
+                })
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            res.json({ msg: 'Erro ao buscar o comentário' });
         })
     })
 

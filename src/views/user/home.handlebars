@@ -44,7 +44,6 @@
         </form>
     </div>
     {{#each post}}
-    {{this.nomeuser._id}}
     <div class="container contentPost p-3">
         <div class="card">
             <div class="card-header headerPublic card-publication">
@@ -159,7 +158,7 @@
                 keyboard_double_arrow_down
             </span>
         </button>
-        <div class="containerComments" onclick="quantCommentsPosts(this)">
+        <div class="containerComments">
             <div class="localComments">
                 {{#if this.comentarios.length}}
                 {{#each this.comentarios}}
@@ -167,7 +166,7 @@
                     <div class="userInfoComment">
                         <a href="/user/infoConections/{{this.author._id}}" class="text-decoration-none text-dark">
                             <div class="nameAuthorComment">
-                                {{author.nameuser}}
+                                <div>{{author.nameuser}}</div>
                             </div>
                         </a>
                         <div>
@@ -188,27 +187,39 @@
                             {{text}}
                         </div>
                     </div>
+                    {{!-- Ferramentas de comentários (editar, deletar, denunciar, curtir) --}}
                     <div class="commentsTools">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary btnToolsComments dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="material-symbols-outlined">
-                                more_horiz
-                            </span>
-                        </button>
-                        {{!-- {{this.author._id}} --}}
-                        {{#if (eq this.author._id ../../User._id)}}
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/user/editComment/{{this._id}}">Editar</a></li>
+                        {{!-- Botão de ferramentas (editar, deletar, denunciar) --}}
+                        <div class="dropdown tools">
+                            <button class="btn btn-secondary btnToolsComments dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="material-symbols-outlined">
+                                    more_horiz
+                                </span>
+                            </button>
+                            {{!-- Condição de ferramentas --}}
+                            {{#if (eq this.author._id ../../User._id)}}
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/user/editComment/{{this._id}}">Editar</a></li>
 
-                                <form action="/user/deleteComment/{{this._id}}" method="post">
-                                    <button type="submit" class="dropdown-item text-danger">Deletar</button>
-                                </form>
-                            </ul>
-                        {{else}}
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-danger" href="#">Denunciar usuário</a></li>
-                            </ul>
-                        {{/if}}
+                                    <form action="/user/deleteComment/{{this._id}}" method="post">
+                                        <button type="submit" class="dropdown-item text-danger">Deletar</button>
+                                    </form>
+                                </ul>
+                            {{else}}
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-danger" href="#">Denunciar usuário</a></li>
+                                </ul>
+                            {{/if}}
+                            {{!-- Botão de like do comentário --}}
+                            <div class="likeBtnComment d-flex align-items-center" id="like-comment-{{this._id}}">
+                                <button class="likeBtnSmall">
+                                    <span class="material-symbols-outlined likeComment">
+                                        thumb_up
+                                    </span>
+                                </button>
+                                <span class="quantLikes">{{this.like.length}}</span>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

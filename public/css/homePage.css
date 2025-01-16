@@ -400,6 +400,7 @@ img.imgUserComent:hover{
     right: 0;
     top: 0;
     margin: 5px;
+    height: 90%;
 }
 .btnToolsComments{
     border-radius: 50%;
@@ -420,15 +421,16 @@ img.imgUserComent:hover{
 }
 .CommentStyle{
     position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: 17% 67% 1fr;
     align-items: center;
-    gap: 20px;
     background: #ddddff;
     color: #370037;
     border-radius: 15px;
     font-size: 1.7vw;
 }
 .userInfoComment{
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -461,6 +463,32 @@ img.imgUserComent:hover{
 .dropdown-toggle::after{
     display: none;
 }
+.tools{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.quantLikes{
+    font-size: 1vw;
+    margin-left: 4px;
+}
+.content{
+    font-size: 1vw;
+    padding: 10px;
+}
+.likeBtnSmall{
+    border: 0;
+    background-color: transparent;
+}
+.likeBtnSmall:active{
+    transform: scale(1.3);
+}
+.likeComment{
+    opacity: .5;
+}
+
 .btnBanTool{
     cursor: pointer;
 }
@@ -499,6 +527,16 @@ img.imgUserComent:hover{
     }
 }
 @media(max-width: 680px){
+    .quantLikes{
+        font-size: 2.5vw;
+    }
+    .content{
+        font-size: 3vw;
+    }
+    .imgUserComent{
+        height: 11vw;
+        width: 11vw;
+    }
     .tagStyle{
         padding: 2px;
     }
