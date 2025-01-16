@@ -44,6 +44,53 @@ routeComments.post('/home/comment', (req, res) => {
     
 })
 
+//Página de edição de comentários
+    routeComments.get('/editComment/:commentId', (req, res) => {
+        const nomeuser = req.user
+        const commentId = req.params.commentId
 
+        Comentario.findById(commentId)
+        .then((comment) => {
+            res.render('PostCommentsTools/editComment', {
+                nomeuser: nomeuser,
+                comment: comment
+            })
+        })
+    })
+
+//Rota de salvamento de edição
+    routeComments.post('/editComment/:commentId', (req, res) => {
+        const commetId = req.params.commentId
+        const { text } = req.body
+
+        Comentario.findByIdAndUpdate(commetId, {
+            text: text
+        }, {new: true})
+        .then(() => {
+            req.flash('success_msg', 'Comentário editado com sucesso!')
+            res.redirect('/user/home')
+        })
+        .catch((error) => {
+            console.log('[debug]: Erro: ', error)
+            req.flash('error_msg', 'Erro ao tentar editar comentário')
+            res.redirect(req.headers.referer)
+        })
+    })
+
+//Rota para deletar comentário
+    routeComments.post('/deleteComment/:commentId', (req, res) => {
+        const commentId = req.params.commentId
+
+        Comentario.findByIdAndDelete(commentId)
+        .then(() => {
+            req.flash('success_msg', 'Comentário excluído com sucesso')
+            res.redirect(req.headers.referer)
+        })
+        .catch((error) => {
+            console.log('[debug]: Erro: ', error)
+            req.flash('error_msg', 'Erro ao tentar deletar comentário')
+            res.redirect(req.headers.referer)
+        })
+    })
 
 export default routeComments 

@@ -386,8 +386,40 @@ pre{
     width: 70px;
     object-fit: cover;
     border-radius: 50px;
+    transition: .4s ease-in-out;
+}
+img.imgUserComent:hover{
+    border: 1px solid black;
+}
+.nameAuthorComment:hover {
+    border: 1px solid #3F51B5;
+    transition: .4s ease-in-out;
+}
+.commentsTools{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px;
+}
+.btnToolsComments{
+    border-radius: 50%;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    background-color: #370037a1;
+}
+.btnToolsComments:hover{
+    background-color: #370037a1;
+    border: 1px solid #370037;
+}
+.btnToolsComments:active{
+    background-color: #370037c5 !important;
+}
+.contentEditComment{
+    height: 100vh;
 }
 .CommentStyle{
+    position: relative;
     display: flex;
     align-items: center;
     gap: 20px;

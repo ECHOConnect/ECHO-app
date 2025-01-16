@@ -1,0 +1,15 @@
+<div class="container contentEditComment mt-4">
+    <form action="/user/editComment/{{comment._id}}" method="post">
+        <div class="card">
+            <div class="card-body">
+                 <div class="mb-3">
+                    <label for="comment">Editar Comentário</label>
+                    <textarea name="text" class="form-control" id="comment">{{comment.text}}</textarea>
+                 </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Salvar alterações</button>
+            </div>
+        </div>
+    </form>
+</div>

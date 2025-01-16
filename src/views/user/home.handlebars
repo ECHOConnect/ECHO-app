@@ -165,23 +165,50 @@
                 {{#each this.comentarios}}
                 <div class="CommentStyle">
                     <div class="userInfoComment">
-                        <div class="nameAuthorComment">
-                            {{author.nameuser}}
-                        </div>
+                        <a href="/user/infoConections/{{this.author._id}}" class="text-decoration-none text-dark">
+                            <div class="nameAuthorComment">
+                                {{author.nameuser}}
+                            </div>
+                        </a>
                         <div>
                             {{#if (eq author.profilePicture "/default-profile.png")}}
                             <img src="https://drive.google.com/thumbnail?id=1NT1cawdfecDY3W-YTfFkiyHHAQItTwB9" alt=""
                                 class="imgUserComent">
                             {{else}}
-                            <img title="{{author.biography}}"
-                                src="https://drive.google.com/thumbnail?id={{author.profilePicture}}"
-                                class="imgUserComent" alt="">
+                            <a href="/user/infoConections/{{this.author._id}}">
+                                <img title="{{author.biography}}"
+                                    src="https://drive.google.com/thumbnail?id={{author.profilePicture}}"
+                                    class="imgUserComent" alt="">
+                            </a>
                             {{/if}}
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div class="content">
                             {{text}}
+                        </div>
+                    </div>
+                    <div class="commentsTools">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary btnToolsComments dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="material-symbols-outlined">
+                                more_horiz
+                            </span>
+                        </button>
+                        {{!-- {{this.author._id}} --}}
+                        {{#if (eq this.author._id ../../User._id)}}
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/user/editComment/{{this._id}}">Editar</a></li>
+
+                                <form action="/user/deleteComment/{{this._id}}" method="post">
+                                    <button type="submit" class="dropdown-item text-danger">Deletar</button>
+                                </form>
+                            </ul>
+                        {{else}}
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item text-danger" href="#">Denunciar usuário</a></li>
+                            </ul>
+                        {{/if}}
                         </div>
                     </div>
                 </div>
