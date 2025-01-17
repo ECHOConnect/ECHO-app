@@ -1,0 +1,77 @@
+.responseComments, .btnResponse, .btnInfoRes{
+    font-size: 1vw;
+    background-color: transparent;
+    border: transparent;
+}
+.btnRes{
+    border-bottom: 1px solid transparent;
+}
+.btnRes:hover{
+    transition: .2s;
+    border-bottom: 1px solid black;
+}
+.responsesArea{
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    margin-top: 7px;
+    gap: 5px;
+    align-items: center;
+}
+.btnInfoRes, .responseComments{
+    padding: 5px;
+    transition: .1s;
+}
+.btnInfoRes:hover, .responseComments:hover {
+    background-color: #6e6eff;
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+}
+.responsesArea.ativeAreaResponses{
+    height: 90px;
+    overflow: visible;
+}
+.responseTextarea{
+    width: 100%;
+}
+.imgResponseSmall{
+    height: 3vw;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transition: .4s ease-in-out;
+}
+.imgResponseSmall:hover{
+    border: 1px solid rgb(255, 140, 140);
+}
+#cancelResponse{
+    font-size: 1vw;
+}
+.btnCancelRes{
+    background-color: transparent;
+    border: transparent;
+}
+.area-resp{
+    height: 0;
+    overflow: hidden;
+}
+.area-resp.ativeAreaResp{
+    height: auto;
+    overflow: visible;
+}
+.responsesComment{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+@media(max-width: 680px){
+    .responseComments{
+        font-size: 2.9vw;
+    }
+    .btnRes, .btnInfoRes{
+        font-size: 3vw;
+    }
+    .imgResponseSmall{
+        height: 10vw;
+    }
+}

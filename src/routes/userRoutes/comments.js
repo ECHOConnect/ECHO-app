@@ -143,4 +143,25 @@ routeComments.post('/home/comment', (req, res) => {
         })
     })
 
+//Rota para responder comentário
+    routeComments.post('/addResponse/:idResp', (req, res) => {
+        const commentId = req.params.idResp
+        const { content, author } = req.body
+        Comentario.findById(commentId)
+        .then((comment) => {
+            comment.responses.push({
+                content: content,
+                author: author
+            })
+            return comment.save()
+        })
+        .then((resComment) => {
+            res.status(200).json({ message: 'Resposta adicionada com sucesso'});
+        })
+        .catch((error) => {
+            console.log('[debug]: Erro: ', error)
+        })
+
+    })
+
 export default routeComments 

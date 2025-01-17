@@ -21,6 +21,11 @@ const commentsPosts = new Schema({
     like: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    }],
+    responses: [{
+        author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        content: {type: String, required: true},
+        createDate: {type: Date, default: Date.now}
     }]
 })
 

@@ -470,8 +470,9 @@ img.imgUserComent:hover{
     display: flex;
     flex-direction: column;
     height: 100%;
+    gap: 10px;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .quantLikes{
     font-size: 1vw;
@@ -537,6 +538,9 @@ img.imgUserComent:hover{
     }
 }
 @media(max-width: 680px){
+    .dataComment{
+        font-size: 2.5vw;
+    }
     .separatorComment{
         margin: 0 5px 5px !important;
         width: 100px !important;

@@ -36,3 +36,17 @@ addEventListener('DOMContentLoaded', () => {
         })
     })
 })
+
+//Respostas de comentários de feed
+function ativeRes(id){
+    const idComment = id.getAttribute('data-id')
+    const btnAtive = document.getElementById(`responsesArea-${idComment}`)
+    btnAtive.classList.toggle('ativeAreaResponses')
+}
+
+//Área para visualizar respostas
+function ativeArea(id) {
+    const btnIdArea = id.getAttribute('data-id-Res')
+    const areaRes = document.getElementById(`area-resp-${btnIdArea}`)
+    areaRes.classList.toggle('ativeAreaResp')
+}

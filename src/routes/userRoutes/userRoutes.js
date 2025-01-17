@@ -24,12 +24,19 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     .populate('author', 'nameuser profilePicture role biography')
     .populate({
         path: 'comentarios',
-        populate: {
-            options: {sort: {like: 1}},
-            path: 'author',
-            select: 'nameuser profilePicture biography'
-        }
+        populate: [
+            {
+                options: {sort: {like: 1}},
+                path: 'author',
+                select: 'nameuser profilePicture biography'
+            },
+            {
+                path: 'responses.author',
+                select: 'nameuser profilePicture biography'
+            }
+        ]
     })
+    // .lean()
     .then((post) => {
         //Processamento do markdown para cada post
         const processedPost = post.map(post => ({
@@ -38,8 +45,12 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
             dataFormatada: moment(post.createdDate).format('LLL'),
             comentarios: post.comentarios.map((comentario) => ({
                  ...comentario.toJSON(),
-                dataFormatada: moment(comentario.created).format('LLL')
-             }))
+                dataFormatada: moment(comentario.created).format('LLL'),
+                respostas: comentario.responses.map((respostas) => ({
+                    ...respostas.toJSON(),
+                    dataFormatada: moment(respostas.createdDate).format('LLL')
+                }))
+            }))
                 
         }))
         res.render('user/home', {

@@ -192,6 +192,66 @@
                         <div class="content">
                             {{text}}
                         </div>
+                        <button class="responseComments" data-id="{{this._id}}" onclick="ativeRes(this)">
+                            <span class="res">Responder</span>
+                        </button>
+                        <div class="responsesArea" id="responsesArea-{{this._id}}">
+                            <div class="mb-3">
+                                <a href="/user/infoConections/{{../../User._id}}"><img class="imgResponseSmall" src="https://drive.google.com/thumbnail?id={{../../User.profilePicture}}" alt=""></a>
+                            </div>
+                            {{!-- Formulário de resposta de comentário --}}
+                            <form class="responseTextarea" action="/user/addResponse/{{this._id}}" method="post">
+                                <input type="hidden" value="{{../../User._id}}" name="author">
+                                <div>
+                                    <textarea name="content" placeholder="Adicione sua resposta..." class="form-control" id=""></textarea>
+                                    <div>
+                                        <button type="submit" class="btnResponse btnRes">
+                                            <small class="res">responder</small>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        {{!-- Área de informar respostas --}}
+                        <div>
+                            <button class="btnInfoRes" data-id-Res="{{this._id}}" onclick="ativeArea(this)">
+                                respostas
+                            </button>
+                            <div class="area-resp" id="area-resp-{{this._id}}">
+                                <hr>
+                                {{!-- Respostas --}}
+                                {{#each respostas}}
+                                    <div class="responsesComment">
+                                        <div class="authorIdent">
+                                            <div>
+                                                <a href="/user/infoConections/{{this.author._id}}">
+                                                    <img title="{{author.biography}}" src="https://drive.google.com/thumbnail?id={{author.profilePicture}}" alt="" class="imgResponseSmall">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <a class="text-decoration-none" href="/user/infoConections/{{this.author._id}}">
+                                                <div class="nameAuthorComment">
+                                                    <div>
+                                                        <strong>{{author.nameuser}}</strong>
+                                                    </div>
+                                                    <div class="dataComment">
+                                                        <strong><i>{{dataFormatada}}</i></strong>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <hr class="separatorComment"> 
+                                            <div class="content">
+                                                {{content}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {{else}}
+                                    <small>Não tem nenhuma resposta por aqui...🤔</small>
+                                {{/each}}
+                            </div>
+                        </div>
                     </div>
                     {{!-- Ferramentas de comentários (editar, deletar, denunciar, curtir) --}}
                     <div class="commentsTools">
