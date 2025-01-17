@@ -22,6 +22,7 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
     .sort({createdDate: -1})
     //Populando - pegando o nome do autor pela id do autor da postagem
     .populate('author', 'nameuser profilePicture role biography')
+    .populate('likes', 'nameuser role profilePicture')
     .populate({
         path: 'comentarios',
         populate: [
@@ -41,6 +42,8 @@ userRouter.get('/home', isAuthenticated, (req, res) => {
         //Processamento do markdown para cada post
         const processedPost = post.map(post => ({
             ...post.toJSON(),
+            previewLikes: post.likes.slice(0, 3),
+            totalLikes: post.likes.length,
             conteudo: marked(post.conteudo),
             dataFormatada: moment(post.createdDate).format('LLL'),
             comentarios: post.comentarios.map((comentario) => ({

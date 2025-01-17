@@ -124,7 +124,11 @@
                             thumb_up
                         </span>
                     </button>
-                    <span class="like-counts">{{this.likes.length}}</span>
+                    <span class="like-counts">
+                        {{#if totalLikes}}
+                            {{totalLikes}}
+                        {{/if}}
+                    </span>
                 </div>
                 <div class="coments">
                     <button data-post-id="{{this._id}}" onclick="openComments(this)" class="btnAtiveComments">
@@ -140,6 +144,31 @@
                         share
                     </span>
                     <span class="text-danger">*Em desenvolvimento</span>
+                </div>
+            </div>
+            {{!-- Preview de curtidas --}}
+            <div class="card-footer">
+                <div class="previewLikes">
+                    <strong class="smallText">Curtido por: </strong>
+                    {{#each previewLikes}}
+                        <div>
+                            {{#if (eq profilePicture "/uploads/default-profile.png")}}
+                                <a class="text-dark" href="/user/infoConections/{{this._id}}">
+                                    <span class="material-symbols-outlined imgIconNone">
+                                        account_circle
+                                    </span>
+                                </a>
+                            {{else}}
+                                <a href="/user/infoConections/{{this._id}}">
+                                    <img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" class="imgResponseSmall" alt="">
+                                </a>
+                            {{/if}}
+                        </div>
+                    {{/each}}
+                    <div>
+                        {{!-- Botão para abrir modal --}}
+                        <button data-posts-id="{{this._id}}" class="btn btn-link" onclick="openLikesInfo(this)">Ver todos</button>
+                    </div>
                 </div>
             </div>
             <div class="p-3">
@@ -360,6 +389,33 @@
             </div>
         </div>
     </div>
+    {{!-- Modal com lista de quem curtiu --}}
+    <div class="windowLikes" id="windowLikes-{{this._id}}"> 
+        <div class="dataLikes card" id="dataLikes">
+            <div class="card-header">
+                <button class="btnIcon">
+                    <span class="material-symbols-outlined closeWindowLikes" onclick="closeDataLikes()">
+                        cancel
+                    </span>
+                </button>
+            </div>
+            <div class="card-body contentLikes">
+                {{#each likes}}
+                    <a class="text-decoration-none text-dark" href="/user/infoConections/{{this._id}}">
+                        <div class="itemLikes">
+                            <div>
+                                <img src="https://drive.google.com/thumbnail?id={{this.profilePicture}}" alt="" class="imgUserComent">
+                            </div>
+                            <div>
+                                {{this.nameuser}}
+                            </div>
+                        </div>
+                    </a>
+                    <hr>
+                {{/each}}
+            </div>
+        </div>  
+    </div>
     {{else}}
     <p>Nenhum post</p>
     {{/each}}
@@ -383,6 +439,7 @@
         </form>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>

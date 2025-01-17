@@ -37,6 +37,8 @@
 }
 .imgResponseSmall{
     height: 3vw;
+    width: 3vw;
+    object-fit: cover;
     border-radius: 50%;
     border: 1px solid transparent;
     transition: .4s ease-in-out;
@@ -45,6 +47,9 @@
     border: 1px solid rgb(255, 140, 140);
 }
 #cancelResponse{
+    font-size: 1vw;
+}
+.smallText{
     font-size: 1vw;
 }
 .btnCancelRes{
@@ -64,7 +69,63 @@
     align-items: center;
     gap: 5px;
 }
+.imgIconNone{
+    font-size: 3vw;
+}
+.previewLikes{
+    display: flex;
+    align-items: center;
+    font-size: 2vw;
+}
+.windowLikes{
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 0;
+    bottom: 0;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: flex-end;
+    transition: .2s;
+    z-index: 9999;
+}
+.windowLikes.ativeDataLikes{
+    height: 100vh;
+    overflow: visible;
+}
+.dataLikes{
+    width: 90%;
+    padding: 10px;
+}
+.closeWindowLikes{
+    color: red;
+}
+.btnIcon{
+    border: none;
+    background-color: transparent;
+}
+.contentLikes{
+    overflow-y: scroll;
+    height: 0;
+    transition: .5s;
+}
+.windowLikes.ativeDataLikes .dataLikes .contentLikes{
+    height: 350px;
+}
+.itemLikes{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 @media(max-width: 680px){
+    .dataLikes{
+        width: 100%;
+        height: 55vh;
+    }
+    .imgIconNone{
+        font-size: 2vw;
+    }
     .responseComments{
         font-size: 2.9vw;
     }
@@ -73,5 +134,13 @@
     }
     .imgResponseSmall{
         height: 10vw;
+        object-fit: cover;
+        width: 10vw;
+    }
+    .imgIconNone{
+        font-size: 10vw;
+    }
+    .smallText{
+        font-size: 2.8vw;
     }
 }

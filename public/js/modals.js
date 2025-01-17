@@ -52,3 +52,20 @@ function closeWindowProfileToos(){
     const window = document.getElementById('window-profile-user-tools')
     window.classList.remove('active-window-profile-tools')
 }
+
+//Funcionalidade de dados de likes
+function openLikesInfo(id){
+    const btnId = id.getAttribute('data-posts-id')
+    const dataLikes = document.getElementById(`windowLikes-${btnId}`)
+    dataLikes.classList.add('ativeDataLikes')
+}
+function closeDataLikes(){
+    const closeDataLike = document.querySelectorAll('.closeWindowLikes')
+    closeDataLike.forEach((btnClose) => {
+        btnClose.addEventListener('click', () => {
+            document.querySelectorAll('.windowLikes').forEach(windows => {
+                windows.classList.remove('ativeDataLikes')
+            })
+        })
+    })
+}
