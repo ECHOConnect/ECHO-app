@@ -64,6 +64,24 @@
                                     </span>
                                 </button>
                             </a>
+                            {{!-- Projetos --}}
+                            <a href="/user/projects" class="text-decoration-none">
+                                <button class="btn btn-success w-100 btnProfileTools">
+                                    Explorar projetos
+                                    <span class="material-symbols-outlined">
+                                        code
+                                    </span>
+                                </button>
+                            </a>
+                            {{!-- Mais configurações --}}
+                            <a href="/user/settings/{{User._id}}" class="text-decoration-none">
+                                <button class="btn btn-success w-100 btnProfileTools">
+                                    Mais Configurações
+                                    <span class="material-symbols-outlined">
+                                        settings
+                                    </span>
+                                </button>
+                            </a>
                             {{!-- Botão de logout (users) --}}
                             <a href="/user/logout"><button class="btn btn-danger w-100">Sair</button></a>
                         {{else}}
@@ -108,6 +126,15 @@
                                     Explorar outros grupos de estudos
                                     <span class="material-symbols-outlined">
                                         tenancy
+                                    </span>
+                                </button>
+                            </a>
+                            {{!-- Projetos --}}
+                            <a href="/user/projects" class="text-decoration-none">
+                                <button class="btn btn-success w-100 btnProfileTools">
+                                    Explorar projetos
+                                    <span class="material-symbols-outlined">
+                                        code
                                     </span>
                                 </button>
                             </a>
