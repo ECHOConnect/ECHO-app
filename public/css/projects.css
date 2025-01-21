@@ -1,0 +1,30 @@
+.window-details-projects{
+    height: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: #00000029;
+    backdrop-filter: blur(1px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    transition: .2s ease-in-out;
+}
+.btnClose{
+    border: none;
+    background-color: transparent;
+}
+.window-details-projects.ativeDetailsProject{
+    height: 100vh;
+    overflow:hidden;
+}
+.details-projects{
+    width: 90%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}

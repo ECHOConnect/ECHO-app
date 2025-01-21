@@ -4,9 +4,14 @@
     </a>
     <div id="Options">
         <h3 class="Text_Options">Sobre</h3>
-        <h3 class="Text_Options">Recursos</h3>
+        <a href="/user/resources">
+            <h3 class="Text_Options">Recursos</h3>
+        </a>
         <a href="/user/contact">
             <h3 class="Text_Options">Contato</h3>
+        </a>
+        <a href="/user/projects">
+            <h3 class="Text_Options">Projetos</h3>
         </a>
         {{#if (eq nomeuser.role "admin")}}
             <button onclick="ativeProfileUserTools()" id="Login_signin_btn">

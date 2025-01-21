@@ -1,4 +1,14 @@
-<div class="jumbotron banner">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/css/swiper-bundle.min.css">
+</head>
+<body>
+    <div class="jumbotron banner">
     <div class="bannerPicture">
         <div>
             <h1 class="display-4">Seja bem vindo(a), {{nomeuser.nameuser}}!</h1>
@@ -8,13 +18,13 @@
     <hr class="my-4">
     <p>Que tal compartilhar algo incrível hoje?</p>
     <p class="lead">
-        <a href="/user/post">
-            <button class="btn btn-primary btnAddPost">Escrever Post
+        {{!-- <a href="/user/post"> --}}
+            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btnAddPost">Escrever Post
                 <span class="material-symbols-outlined">
                     notes
                 </span>
             </button>
-        </a>
+        {{!-- </a> --}}
     </p>
 </div>
 <div class="main-content">
@@ -42,6 +52,23 @@
                 <button type="submit" class="btn btn-success">Buscar</button>
             </div>
         </form>
+    </div>
+    <div>
+       <!-- Swiper -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide primary">
+            <img class="imgNotice" src="/assets/images/banners/Notice-Feature.png" height="100%" alt="">
+        </div>
+      <div class="swiper-slide">
+        <div class="btnInfo">
+            <a href="/user/resources"><button class="btn btn-light">Saiba mais</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
     </div>
     {{#each post}}
     <div class="container contentPost p-3">
@@ -230,6 +257,7 @@
                             </div>
                             {{!-- Formulário de resposta de comentário --}}
                             <form class="responseTextarea" action="/user/addResponse/{{this._id}}" method="post">
+                                <input type="hidden" class="idResp" id="idResp" value="{{this._id}}">
                                 <input type="hidden" value="{{../../User._id}}" name="author">
                                 <div>
                                     <textarea name="content" placeholder="Adicione sua resposta..." class="form-control" id=""></textarea>
@@ -392,12 +420,13 @@
     {{!-- Modal com lista de quem curtiu --}}
     <div class="windowLikes" id="windowLikes-{{this._id}}"> 
         <div class="dataLikes card" id="dataLikes">
-            <div class="card-header">
+            <div class="card-header header-list-likes">
                 <button class="btnIcon">
                     <span class="material-symbols-outlined closeWindowLikes" onclick="closeDataLikes()">
                         cancel
                     </span>
                 </button>
+                <h4>Curtido por:</h4>
             </div>
             <div class="card-body contentLikes">
                 {{#each likes}}
@@ -439,10 +468,23 @@
         </form>
     </div>
 </div>
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="/js/swiper-bundle.min.js"></script>
+<script src="/js/swiper.js"></script>
 
+{{!-- bootstrap --}}
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
+integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"></script>
+integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+crossorigin="anonymous"></script>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+  
+
+</body>
+</html>

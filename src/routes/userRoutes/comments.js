@@ -156,7 +156,8 @@ routeComments.post('/home/comment', (req, res) => {
             return comment.save()
         })
         .then((resComment) => {
-            res.status(200).json({ message: 'Resposta adicionada com sucesso'});
+            req.flash('success_msg', 'Resposta enviada!')
+            res.redirect(req.headers.referer)
         })
         .catch((error) => {
             console.log('[debug]: Erro: ', error)

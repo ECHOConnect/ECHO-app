@@ -1,0 +1,58 @@
+<div class="container contentBanner mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>Publique seu projeto</h4>
+        </div>
+        <form action="/user/postProject" method="post">
+        <input type="hidden" value="{{User._id}}" name="author">
+            <div class="card-body">
+                <div class="mb-3 mt-4">
+                    <label for="title">Título do projeto:</label>
+                    <input type="text" required class="form-control" name="title" id="title">
+                </div>
+                <div class="mb-3">
+                    <label for="description">Descrição:</label>
+                    <textarea name="description" required class="form-control" id="description"></textarea>
+                </div>
+                <div class="mb-3 mt-4">
+                    <label for="category">Categoria:</label>
+                    <select name="category" class="form-select" aria-label="Default select example" required id="category">
+                        <option selected>Selecione uma opção de Categoria</option>
+                        <option value="web">Web</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="ia">Inteligência artificial</option>
+                        <option value="other">outro</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="tecnologies">tecnologias utilizadas:</label>
+                    <input type="text" name="tecnologies" id="tecnologies" class="form-control" placeholder="Ex: React, Node.Js, Javascript...">
+                </div>
+                <div class="mb-3">
+                    <label for="status">Nível de conclusão:</label>
+                    <select name="status" class="form-select" aria-label="Default select example" required id="status">
+                        <option selected>Selecione uma opção de Categoria</option>
+                        <option value="in progress">Em andamento</option>
+                        <option value="completed">Concluído</option>
+                        <option value="paused">Pausado</option>
+                    </select>
+                </div>
+                <div class="mb-3 mt-4">
+                    <label for="repository">Link do repositório:</label>
+                    <input type="url" name="repository" id="repository" class="form-control" placeholder="https://github.com/usuario/projeto">
+                </div>
+                 <div class="mb-3">
+                    <label for="collaborators">Colaboradores: </label>
+                    <input type="text" class="form-control" name="collaborators" id="collaborators" placeholder="Nome ou E-mail dos colaboradores">
+                </div>
+                <div class="mb-3">
+                    <label for="tags">Tags: <small><i>Separadas por vírgula</i></small></label>
+                    <input type="text" placeholder="Ex: Front-end, Aprendizado, IA" class="form-control" name="tags" id="tags">
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Publicar projeto</button>
+            </div>
+        </form>
+    </div>
+</div>

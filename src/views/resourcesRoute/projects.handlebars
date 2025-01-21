@@ -1,0 +1,97 @@
+<div class="container mt-4 contentBanner">
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <!-- Card -->
+        {{#each project}}
+        <div class="col">
+            <div class="card h-100">
+                <div class="d-flex justify-content-center">
+                    <span class="material-symbols-outlined mark">
+                        code
+                    </span>
+                </div>
+                <hr>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <p>Projeto de:</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div>
+                            <a href="/user/infoConections/{{author._id}}">
+                                <img src="https://drive.google.com/thumbnail?id={{author.profilePicture}}"
+                                    class="imgUserComent" alt="">
+                            </a>
+                        </div>
+                        <div>
+                            <strong>{{author.nameuser}}</strong>
+                        </div>
+                    </div>
+                    <p class="card-text">{{this.description}}</p>
+                    <button data-id-project="{{this._id}}" onclick="openDetailsProject(this)"
+                        class="btn btn-primary">Ver detalhes</button>
+                </div>
+            </div>
+        </div>
+        {{!-- Janela de detalhes --}}
+        <div class="window-details-projects" id="window-details-projects-{{this._id}}">
+            <div class="details-projects" id="details-projects">
+                <div class="d-flex justify-content-end">
+                    <button class="btnClose" onclick="closeInfoProject()">
+                        <span class="material-symbols-outlined">
+                            cancel
+                        </span>
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Detalhes do projeto:</h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>Categoria do Projeto: </strong> {{this.category}}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Tecnologias: </strong>
+                                {{#each tecnologies}}
+                                {{this}}
+                                {{/each}}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Status: </strong> {{this.status}}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Repositório do projeto: </strong> <a target="_blank"
+                                    href="{{this.repository}}">{{this.repository}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Colaboradores: </strong> {{this.collaborators}}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Tags: </strong>
+                                {{#each this.tags}}
+                                <strong>{{this}}</strong>
+                                {{/each}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    function openDetailsProject(id) {
+        const btnId = id.getAttribute('data-id-project')
+        console.log(btnId)
+        const detailsProject = document.getElementById(`window-details-projects-${btnId}`)
+        console.log(detailsProject)
+        detailsProject.classList.add('ativeDetailsProject')
+    }
+    function closeInfoProject() {
+        document.querySelectorAll('.window-details-projects').forEach((window) => {
+            window.classList.remove('ativeDetailsProject')
+        })
+    }
+</script>

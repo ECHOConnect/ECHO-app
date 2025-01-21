@@ -118,7 +118,62 @@
     align-items: center;
     gap: 10px;
 }
+.header-list-likes{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.header-list-likes h4{
+    margin: 0;
+}
+/*Banner de notícias*/
+.mySwiper{
+    height: 400px;
+    margin-bottom: 100px;
+}
+.imgNotice{
+    width: 100%;
+    height: 100%;
+}
+.btnInfo{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/assets/images/logotipoECHODetails.png');
+    background-repeat: no-repeat;
+    background-color: #5C8296;
+}
+/*Recursos*/
+.contentBanner{
+    margin-bottom: 20%;
+}
+.mark{
+    font-size: 6vw;
+    background-color: white;
+}
+.itemResource{
+    padding-top: 100px;
+}
 @media(max-width: 680px){
+    .mark{
+        font-size: 10vw;
+    }
+    .mySwiper{
+        height: 300px;
+        margin-bottom: 50px;
+    }
+    .primary{
+        width: 500px !important;
+        display: flex;
+        align-items: center;
+        background-color: #5C8296;
+    }
+    .imgNotice{
+        height: 267px;
+        width: 500px;
+    }
     .dataLikes{
         width: 100%;
         height: 55vh;
