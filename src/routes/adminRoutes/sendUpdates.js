@@ -5,15 +5,20 @@ import dotenv from 'dotenv'
 dotenv.config()
 const sendRouter = Router()
 
+//Rota para envio de informações de atualizações
 sendRouter.get('/sendUpdate', (req, res) => {
     res.render('admin/updates')
 })
 
+//Processamento de dados do envio
 sendRouter.post('/sendUpdate', (req, res) => {
+    //Pegando os dados do formulário
     const {subject, message} = req.body
 
+    //Buscando todos os emails registrados no sistema
     User.find({}, 'useremail')
     .then((users) => {
+        //Preparando o transporte do email
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -21,6 +26,7 @@ sendRouter.post('/sendUpdate', (req, res) => {
                 pass: process.env.EMAIL_PASS
             }
         })
+        //Preparando os receptores do email
         for(const user of users){
             console.log(user.useremail)
             transporter.sendMail({

@@ -29,6 +29,25 @@
                     <button data-id-project="{{this._id}}" onclick="openDetailsProject(this)"
                         class="btn btn-primary">Ver detalhes</button>
                 </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btnLike">
+                            <span class="material-symbols-outlined">
+                                thumb_up
+                            </span>
+                        </button>
+                        <span>0
+                            {{this.likes.length}}
+                        </span>
+                    </div>
+                    <div>
+                        <button class="btnAtiveComments">
+                            <span class="material-symbols-outlined">
+                                comment
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         {{!-- Janela de detalhes --}}

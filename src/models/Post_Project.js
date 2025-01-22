@@ -30,7 +30,7 @@ const PostProject = new Schema({
     },
     repository: {
         type: String,
-        alidate: {
+        validate: {
             validator: function (v) {
                 return /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/.test(v);
             },
@@ -42,7 +42,16 @@ const PostProject = new Schema({
     },
     tags: {
         type: [String]
-    }
+    },
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    replies: [{
+        author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        content: {type: String, required: true},
+        createdDate: {type: Date, default: Date.now}
+    }]
 })
 
 export default mongoose.model('Project', PostProject)
