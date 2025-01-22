@@ -25,7 +25,7 @@
                             <strong>{{author.nameuser}}</strong>
                         </div>
                     </div>
-                    <p class="card-text">{{this.description}}</p>
+                    <p class="card-text">{{this.prevDescription}}...</p>
                     <button data-id-project="{{this._id}}" onclick="openDetailsProject(this)"
                         class="btn btn-primary">Ver detalhes</button>
                 </div>
@@ -47,6 +47,9 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>Sobre o projeto: </strong> {{this.description}}
+                            </li>
                             <li class="list-group-item">
                                 <strong>Categoria do Projeto: </strong> {{this.category}}
                             </li>

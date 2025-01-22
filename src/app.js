@@ -17,6 +17,8 @@
             import adminRoute from './routes/adminRoutes/mainRoute.js'
         //Rota de forúm
             import forumRouter from './routes/adminRoutes/forumRoute.js'
+        //Rota para envio de atualizações
+            import sendRouter from './routes/adminRoutes/sendUpdates.js'
 
 
     //Rotas de usuários
@@ -140,6 +142,8 @@
             app.use('/admin', adminRoute)
         //Rota de forúm
             app.use('/admin', forumRouter)
+        //Rota para envio de atualizações
+            app.use('/admin', sendRouter)
     
     //Rotas de usuários
         app.use('/', routerLanding)

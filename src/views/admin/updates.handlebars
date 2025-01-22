@@ -1,0 +1,22 @@
+<div class="contanier contentBanner mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>Mostre para os usuários o que há de novo no ECHO Connect!</h4>
+        </div>
+        <form action="/admin/sendUpdate" method="post">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="subject">Assunto:</label>
+                    <input type="text" class="form-control" name="subject" id="subject">
+                </div>
+                <div class="mb-3">
+                    <label for="message">Mensagem:</label>
+                    <textarea class="form-control" name="message" id="message"></textarea>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>

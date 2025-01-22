@@ -77,9 +77,13 @@ routeProjects.get('/projects', (req, res) => {
     Post_Project.find()
     .populate('author', 'nameuser profilePicture')
     .then((project) => {
+        const projectWithPreview = project.map((project) => ({
+            ...project._doc,
+            prevDescription: project.description.slice(0, 40)
+        }))
         res.render('resourcesRoute/projects', {
             nomeuser: nomeuser,
-            project: project
+            project: projectWithPreview,
         })
     })
 })
