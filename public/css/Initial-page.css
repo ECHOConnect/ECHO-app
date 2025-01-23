@@ -165,28 +165,28 @@ body{
 }
 
 .mySwiperLP{
+    height: 50%;
+    width: 30%;
+    
+}
+.swiper{
     position: absolute !important;
-    height: 400px;
-    right: 0;
-    width: 60%;
+    right: 230px !important;
 }
 .imgSliderLP{
     height: 100%;
     width: 100%;
-    border-radius: 10px 0 0 10px;
-}
+    border-radius: 10px 0 0 10px; 
+} 
 .effectImg, .effectText, .textDetails, .mySwiperLP{
     visibility: hidden;
 }
 .textDetails{
     width: 30%;
     color: rgb(255, 255, 255);
-    border: 2px solid #0b0b39;
     border-radius: 0px 10px 10px 0;
     padding: 10px;
-    box-shadow: 6px 5px 20px 0px #000000;
-    animation: animateShadow 2s infinite ease-in-out;
-    background-image: url('/assets/images/logotipoECHODetails.png');
+    margin-left: 20px;
 }
 
 @keyframes animateShadow {
@@ -210,33 +210,28 @@ body{
 }
 
 @media (max-width: 550px){
-    .contentText{
-        background-color: #0000006b;
-        backdrop-filter: blur(1px);
-        padding: 10px;
-        border-radius: 10px;
-    }
     #Descrition #img_desc {
         width: 70vw;
         height: auto;
     }
     #sliders{
         position: relative;
-        padding-top: 30px;
+        display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: center;
     }
     .textDetails{
         position: absolute;
         top: 0px;
         width: 95%;
-        margin-top: 20px;
+        margin-top: 60px;
+        margin-left: 0;
     }
     .mySwiperLP{
-        width: 100% !important;
-        height: 230px;
-        bottom: 100px;
-    }
+        width: 75% !important;
+        height: 300px;
+        right: 60px !important;
+    } 
     .NoLogin{
         width: 115px;
         font-size: 4vw;
