@@ -108,4 +108,13 @@ document.getElementById('change-picture-btn').addEventListener('click', () => {
     input.click();
   });
 
-  
+//Menu mobile da landing page
+
+
+function openMenuMob(){
+    const menuMob = document.getElementById('Options')
+    menuMob.classList.add('menuActivate')
+}
+function closeMob(){
+    document.getElementById('Options').classList.remove('menuActivate')
+}

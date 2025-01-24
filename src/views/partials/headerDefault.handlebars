@@ -3,6 +3,9 @@
         <div id="Logo"><img class="imglogoHome" src="/assets/images/logotipoECHO.png" alt=""></div>
     </a>
     <div id="Options">
+        <span onclick="closeMob()" class="material-symbols-outlined closeMob">
+            close
+        </span>
         <a href="/user/about">
             <h3 class="Text_Options">Sobre</h3>
         </a>
@@ -15,7 +18,14 @@
         <a href="/user/projects">
             <h3 class="Text_Options">Projetos</h3>
         </a>
+    </div>
+    <div>
         {{#if (eq nomeuser.role "admin")}}
+            <div class="menuMobile d-none">
+                <span onclick="openMenuMob()" class="material-symbols-outlined iconMenuMob">
+                    menu
+                </span>
+            </div>
             <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
                 {{#if User.profilePicture}}
                     <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt="">
@@ -25,6 +35,11 @@
             </button>
 
         {{else if (eq nomeuser.role "SUPER_ADMIN")}}
+            <div class="menuMobile d-none">
+                <span onclick="openMenuMob()" class="material-symbols-outlined iconMenuMob">
+                    menu
+                </span>
+            </div>
             <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
                 {{#if User.profilePicture}}
                     <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt="">
@@ -33,6 +48,11 @@
                 {{/if}}
             </button>
         {{else if (eq nomeuser.role "user")}}
+            <div class="menuMobile d-none">
+                <span onclick="openMenuMob()" class="material-symbols-outlined iconMenuMob">
+                    menu
+                </span>
+            </div>
             <button onclick="ativeProfileUserTools()" id="Login_signin_btn">
                 {{#if User.profilePicture}}
                     <img src="https://drive.google.com/thumbnail?id={{User.profilePicture}}" alt="">
@@ -44,4 +64,5 @@
             <a href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
         {{/if}}
     </div>
+
 </header>

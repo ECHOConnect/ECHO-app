@@ -9,7 +9,7 @@ body{
 }
 #Header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: auto;
     background-color: #035AA6;
     margin-bottom: 5px;
@@ -226,7 +226,16 @@ body{
     padding: 10px;
     margin-left: 20px;
 }
-
+/*Menu mobile*/
+.menuMobile{
+    display: none;
+    position: absolute;
+    right: 0;
+    padding: 20px;
+}
+.closeMob{
+    display: none;
+}
 @keyframes animateShadow {
     0%{
         box-shadow: 6px 5px 20px 0px #000000; 
@@ -248,8 +257,60 @@ body{
 }
 
 @media (max-width: 550px){
+    #Options{
+        position: fixed;
+        top: 0;
+        visibility: visible;
+        background-color: #035aa6ab;
+        backdrop-filter: blur(1px);
+        z-index: 9999;
+        border-left: 2px solid #7f267f;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 0;
+        align-items: center;
+        overflow: hidden;
+        visibility: hidden;
+        transition: .4s ease-in-out;
+    }
+    .closeMob{
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: red;
+        font-size: 10vw;
+    }
+    #Options.menuActivate{
+        position: fixed;
+        top: 0;
+        visibility: visible;
+        background-color: #035aa6ab;
+        backdrop-filter: blur(1px);
+        z-index: 9999;
+        border-left: 2px solid #7f267f;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 60vw;
+        align-items: center;
+        overflow: visible;
+    }
+    .menuMobile{
+        display: flex;
+    }
+    .iconMenuMob{
+        font-size: 10vw;
+        color: white;
+    }
     .btnRegisterLP{
         margin: 20% 0 20%;
+    }
+    .btnRegisterLP a{
+        width: 50%;
     }
     #sliders{
         align-items: flex-end;
@@ -284,9 +345,6 @@ body{
     }
     .NoLogin:hover{
         background-color: #035AA6;
-    }
-    #Options .Text_Options{
-        display: none;
     }
     #Logo{
         font: 7vw Solid;
@@ -351,6 +409,7 @@ body{
     }
     #header{
         align-items: center;
+        justify-content: space-between;
     }
     .NoLogin{
         width: 150px;
