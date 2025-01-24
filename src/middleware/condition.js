@@ -16,7 +16,8 @@ const conditionHeader = (app) => {
             '/user/explorerGroups',
             '/user/resources',
             '/user/postProject',
-            '/user/projects'
+            '/user/projects',
+            '/user/about'
         ]
     
         // Verifica se o caminho está na lista de rotas ou se corresponde ao padrão da rota dinâmica

@@ -1,0 +1,28 @@
+#bodyAbout{
+    background-color: #035aa6;
+}
+.topAbout{
+    background-color: #035aa6a2;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+}
+#features{
+    padding: 20px;
+    background-color: #035aa6c0;
+    color: white;
+}
+.localImgAbout{
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.localImgAbout img{
+    height: 100%;
+}
+@media(max-width: 680px){
+    .localImgAbout{
+        height: 200px;
+    }
+}
