@@ -13,6 +13,7 @@ body{
     width: auto;
     background-color: #035AA6;
     margin-bottom: 5px;
+    align-items: center;
     height: 15vh;
     position: sticky;
     top: 0;
@@ -231,6 +232,7 @@ body{
     display: none;
     position: absolute;
     right: 0;
+    top: 20;
     padding: 20px;
 }
 .closeMob{

@@ -18,6 +18,11 @@
         <a href="/user/projects">
             <h3 class="Text_Options">Projetos</h3>
         </a>
+        {{#if User}}
+            <a class="d-none" href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
+        {{else}}
+            <a class="d-flex" href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
+        {{/if}}
     </div>
     <div>
         {{#if (eq nomeuser.role "admin")}}
@@ -61,7 +66,11 @@
                 {{/if}}
             </button>
         {{else}}
-            <a href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
+        <div class="menuMobile">
+            <span onclick="openMenuMob()" class="material-symbols-outlined iconMenuMob">
+                menu
+            </span>
+        </div>
         {{/if}}
     </div>
 
