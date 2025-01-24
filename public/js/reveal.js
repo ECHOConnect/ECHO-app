@@ -22,5 +22,5 @@ efect.reveal('.textDetails',
 {
     origin: 'left',
     duration: 1000,
-    distance: '50px'
+    distance: '100px'
 })

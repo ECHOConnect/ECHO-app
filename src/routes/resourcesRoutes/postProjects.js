@@ -1,5 +1,6 @@
 import { Router } from "express"
 import Post_Project from "../../models/Post_Project.js"
+import { isAuthenticated } from "../../config/auth.js"
 
 const routeProjects = Router()
 
@@ -72,7 +73,7 @@ routeProjects.post('/postProject', (req, res) => {
     })
 })
 
-routeProjects.get('/projects', (req, res) => {
+routeProjects.get('/projects', isAuthenticated, (req, res) => {
     const nomeuser = req.user
     Post_Project.find()
     .populate('author', 'nameuser profilePicture')
