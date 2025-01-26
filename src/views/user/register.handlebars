@@ -1,4 +1,4 @@
-<div id="Central">
+{{!-- <div id="Central">
     <h1>Bem vindo ao ECHO, faça seu login para começar</h1>
     <div class="lines">
         <span id="frst-sp"></span>
@@ -43,4 +43,86 @@
     </form>
     <a href="/user/login"><button type="submit" class="btnL">Login</button></a>
     
-</div>
+</div> --}}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Register</title>
+</head>
+<body>
+    <div id="central" class="text-light">
+        <div class="content-login content-register">
+            <div id="loginArea">
+                <form action="/user/register" id="form-login" method="post">
+                    <div class="mb-3">
+                        <label for="name">Nome Completo:</label>
+                        <div class="localInput">
+                            <span class="material-symbols-outlined iconInput">
+                                person
+                            </span>
+                            <input type="text" name="username" id="nameuser" class="form-control inputL">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name-user">Nome de Usuário:</label>
+                        <div class="localInput">
+                            <span class="material-symbols-outlined iconInput">
+                                person
+                            </span>
+                            <input type="text" name="nameuser" id="nameuser" class="form-control inputL">
+                        </div>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="email">Email:</label>
+                        <div class="localInput"> 
+                            <span class="material-symbols-outlined iconInput">
+                                mail
+                            </span>
+                            <input type="email" name="useremail" id="mail" class="form-control inputL">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Senha:</label>
+                        <div class="localInput">
+                            <span class="material-symbols-outlined iconInput">
+                                lock
+                            </span>
+                            <input type="password" name="userpass" id="password" class="form-control inputL">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="repeat-pass">Repetir a senha:</label>
+                        <div class="localInput">
+                            <span class="material-symbols-outlined iconInput">
+                                lock
+                            </span>
+                            <input type="password" name="repeatPassword" id="rpt-pass" class="form-control inputL">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="birthday">Data de Nascimento:</label>
+                        <div class="localInput">
+                            <span class="material-symbols-outlined iconInput">
+                                calendar_month
+                            </span>
+                            <input type="date" name="birthdayuser" id="user-brth" class="form-control inputL">
+                        </div>
+                    </div>
+                
+                    <div id="btns">
+                        <a href="/user/login">
+                            <button type="button" class="btnL">Login</button>
+                        </a>
+                        <button type="submit" class="btnL">Criar Conta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

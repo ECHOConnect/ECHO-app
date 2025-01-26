@@ -1,30 +1,89 @@
-<div id="Central">
-        <h1>Bem vindo ao ECHO, faça seu login para começar</h1>
-        <div class="lines">
-            <span id="frst-sp"></span>
-            <span id="scnd-sp"></span>
-            <span id="thrd-sp"></span>
-        </div>
-        <form action="/user/login" id="form-login" method="post">
-            <label for="email">
-                <span class="spn-name">Email:</span>
-            </label>
-            <input type="email" name="useremail" id="mail" class="input-lgn">
+{{!-- <div id="Central">
+    <h1>Bem vindo ao ECHO, faça seu login para começar</h1>
+    <div class="lines">
+        <span id="frst-sp"></span>
+        <span id="scnd-sp"></span>
+        <span id="thrd-sp"></span>
+    </div>
+    <form action="/user/login" id="form-login" method="post">
+        <label for="email">
+            <span class="spn-name">Email:</span>
+        </label>
+        <input type="email" name="useremail" id="mail" class="input-lgn">
 
-            <label for="password">
-                <span class="spn-name">Senha:</span>
-            </label>
-            <input type="password" name="userpass" id="password" class="input-lgn">
-            <a href="/user/resetPassword" id="forgort-pass">Esqueci a senha</a>
-            <div id="btns">
-                <button type="submit" class="btnL">Login</button>
+        <label for="password">
+            <span class="spn-name">Senha:</span>
+        </label>
+        <input type="password" name="userpass" id="password" class="input-lgn">
+        <a href="/user/resetPassword" id="forgort-pass">Esqueci a senha</a>
+        <div id="btns">
+            <button type="submit" class="btnL">Login</button>
+        </div>
+    </form>
+    <a href="/user/register"><button class="btnL">Criar Conta</button></a>
+    <div>
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+    </div>
+</div> --}}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Cadastro</title>
+    <link rel="stylesheet" href="/css/Login.css">
+</head>
+<body>
+    <div id="central" class="text-light">
+        <div class="content-login">
+            <div id="assetsLogin">
+                <div id="textToLogin">
+                    <h4>Bem vindo ao ECHO, faça seu login para começar!</h4>
+                </div>
+               <img id="blob" src="/assets/images/backgrounds/blob (3).svg" alt="">
+               <img id="logoInAsset" src="/assets/images/logotipoECHO.png" alt="">
             </div>
-        </form>
-        <a href="/user/register"><button class="btnL">Criar Conta</button></a>
-        <div>
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
+            <div id="loginArea">
+                <div class="assetsMob d-none">
+                    <div class="localLogoL d-none">
+                        <img id="blob" src="/assets/images/backgrounds/blob (3).svg" alt="">
+                        <img id="logoInAsset" src="/assets/images/logotipoECHO.png" alt="">
+                    </div>
+                </div>
+                <div id="textToLogin" class="d-none">
+                    <h4>Bem vindo ao ECHO, faça seu login para começar!</h4>
+                </div>
+                <form action="/user/login" id="form-login" method="post">
+                    <div class="mb-3">
+                        <label for="email">Email:</label>
+                        <div class="localInput"> 
+                            <span class="material-symbols-outlined iconInput">
+                                mail
+                            </span>
+                            <input type="email" name="useremail" id="mail" class="form-control inputL">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Senha:</label>
+                        <div class="localInput">
+                            <span class="material-symbols-outlined iconInput">
+                                lock
+                            </span>
+                            <input type="password" name="userpass" id="password" class="form-control inputL">
+                        </div>
+                    </div>
+                    <a href="/user/resetPassword" id="forgort-pass">Esqueci a senha</a>
+                    <div id="btns">
+                        <button type="submit" class="btnL">Login</button>
+                        <a href="/user/register" class="text-decoration-none">
+                            <button type="button" class="btnL">Criar Conta</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    
+</body>
+</html>

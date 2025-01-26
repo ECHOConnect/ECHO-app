@@ -1,11 +1,15 @@
 <header id="Header">
+    {{!-- Logo --}}
     <a href="/user/home">
         <div id="Logo"><img class="imglogoHome" src="/assets/images/logotipoECHO.png" alt=""></div>
     </a>
+    {{!-- Links do menu de navegação --}}
     <div id="Options">
+        {{!-- Botão de fechamento do menu em dispositivos móveis --}}
         <span onclick="closeMob()" class="material-symbols-outlined closeMob">
             close
         </span>
+        {{!-- Links --}}
         <a href="/user/about">
             <h3 class="Text_Options">Sobre</h3>
         </a>
@@ -18,12 +22,14 @@
         <a href="/user/projects">
             <h3 class="Text_Options">Projetos</h3>
         </a>
+        {{!-- Condição de botão para login e cadastro --}}
         {{#if User}}
             <a class="d-none" href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
         {{else}}
             <a class="d-flex" href="/user/login"><button class="NoLogin">Login/Sign in</button></a>
         {{/if}}
     </div>
+    {{!-- Perfil de usuário --}}
     <div>
         {{#if (eq nomeuser.role "admin")}}
             <div class="menuMobile d-none">
